@@ -23,42 +23,43 @@ class File extends Model
     public int        $userId   = 0;
     public string     $fkey     = '';
     public int        $fid      = 0;
-    public string     $path     = '';
+    public string     $filename = '';
     public int        $bytes    = 0;
     public string     $mime     = '';
     public string     $label    = '';
     public string     $notes    = '';
     public bool       $selected = false;
     public string     $hash     = '';
-    public ?\DateTime $created  = null;
+
+    public \DateTimeImmutable $created;
 
 
     public function __construct()
     {
-        $this->_CreatedTrait();
+        $this->created = new \DateTimeImmutable();
     }
 
     /**
      * Create a File object form an existing file path
      * Only the relative path from the system data path is stored
      *
-     * @param string $file Full/Relative data path to a valid file
+     * @param string $filename Full/Relative data path to a valid file
      */
-    public static function create(string $file, ?Model $model = null, int $userId = 0): self
+    public static function create(string $filename, ?Model $model = null, int $userId = 0): self
     {
-        if (empty($file)) {
+        if (empty($filename)) {
             throw new Exception('Invalid file path.');
         }
 
         $obj = new self();
 
-        $obj->path = $file;
+        $obj->filename = $filename;
         $dataPath = Config::makePath(Config::getDataPath());
-        if (str_starts_with($file, $dataPath)) {
-            $obj->path = str_replace($dataPath, '', $file);
+        if (str_starts_with($filename, $dataPath)) {
+            $obj->filename = str_replace($dataPath, '', $filename);
         }
 
-        $obj->label = \Tk\FileUtil::removeExtension(basename($file));
+        $obj->label = \Tk\FileUtil::removeExtension(basename($filename));
         if ($model) {
             $obj->setDbModel($model);
         }
@@ -100,19 +101,19 @@ class File extends Model
     {
         if (is_file($this->getFullPath())) {
             unlink($this->getFullPath());
-            Log::alert('File deleted: ' . $this->path);
+            Log::alert('File deleted: ' . $this->filename);
         }
         return (false !== Db::delete('file', ['file_id' => $this->fileId]));
     }
 
     public function getFullPath(): string
     {
-        return Config::makePath(Config::getDataPath() . $this->path);
+        return Config::makePath(Config::getDataPath() . $this->filename);
     }
 
     public function getUrl(): Uri
     {
-        return Uri::create(Config::makeUrl(Config::getDataPath() . $this->path));
+        return Uri::create(Config::makeUrl(Config::getDataPath() . $this->filename));
     }
 
     public function isImage(): bool
@@ -124,7 +125,7 @@ class File extends Model
     {
         $errors = [];
 
-        if (!$this->path) {
+        if (!$this->filename) {
             $errors['path'] = 'Please enter a valid path';
         }
         if (!$this->bytes) {
@@ -168,9 +169,9 @@ class File extends Model
         return self::findFiltered(['hash' => $hash])[0] ?? null;
     }
 
-    public static function findByPath(string $path): ?self
+    public static function findByFilename(string $filename): ?self
     {
-        return self::findFiltered(['path' => $path])[0] ?? null;
+        return self::findFiltered(['filename' => $filename])[0] ?? null;
     }
 
     public static function findFiltered(array|Filter $filter): array
@@ -180,7 +181,7 @@ class File extends Model
         if (!empty($filter['search'])) {
             $filter['search'] = '%' . $filter['search'] . '%';
             $w  = 'LOWER(a.file_id) LIKE LOWER(:search) OR ';
-            $w .= 'LOWER(a.path) LIKE LOWER(:search) OR ';
+            $w .= 'LOWER(a.filename) LIKE LOWER(:search) OR ';
             $w .= 'LOWER(a.mime) LIKE LOWER(:search) OR ';
             $filter->appendWhere('(%s) AND ', substr($w, 0, -3));
         }
@@ -211,8 +212,8 @@ class File extends Model
             $filter->appendWhere('a.selected = :selected AND ');
         }
 
-        if (!empty($filter['path'])) {
-            $filter->appendWhere('a.path = :path AND ');
+        if (!empty($filter['filename'])) {
+            $filter->appendWhere('a.filename = :filename AND ');
         }
         if (!empty($filter['hash'])) {
             $filter->appendWhere('a.hash = :hash AND ');

@@ -36,12 +36,13 @@ class Notify extends Model
     public bool       $isNotified    = false;
     public int        $ttlMins       = 0;
     public ?\DateTime $expiry        = null;
-    public \DateTime  $created;
+
+    public \DateTimeImmutable $created;
 
 
     public function __construct()
     {
-        $this->_CreatedTrait();
+        $this->created = new \DateTimeImmutable();
     }
 
     public function save(): void

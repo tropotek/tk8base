@@ -25,7 +25,7 @@ class Manager extends ControllerAdmin
 
         // Get the form template
         $this->table = new File();
-        $this->table->setOrderBy('path');
+        $this->table->setOrderBy('filename');
         $this->table->setLimit(25);
         $this->table->setFkey($this->fkey);
         $this->table->execute();
