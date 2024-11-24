@@ -18,8 +18,6 @@ class File extends \Tk\Form\Field\File
      */
     protected Model $model;
 
-    protected bool $enableSelect = false;
-
 
     public function __construct(string $name, Model $model = null)
     {

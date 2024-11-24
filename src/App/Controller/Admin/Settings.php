@@ -127,7 +127,7 @@ class Settings extends ControllerAdmin
 
     public function onSubmit(Form $form, SubmitExit $action): void
     {
-        $values = $form->getFieldValues();
+        $values = $form->getFieldValues('/^[^_]/');
         Registry::instance()->replace($values);
 
         if (strlen($values['site.name'] ?? '') < 3) {

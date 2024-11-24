@@ -44,7 +44,7 @@ class Manager extends ControllerAdmin
         }
 
         // init the user table
-        $this->table = new \Bs\Mvc\Table();
+        $this->table = new Table();
         $this->table->setOrderBy('username');
         $this->table->setLimit(25);
 
@@ -120,23 +120,24 @@ class Manager extends ControllerAdmin
         $list = ['-- All Users --' => '', 'Active' => 'y', 'Disabled' => 'n'];
         $this->table->getForm()->appendField(new Select('active', $list))->setValue('y');
 
-        // init filter fields for actions to access to the filter values
-        $this->table->initForm();
 
         // Add Table actions
-        $this->table->appendAction(\Tk\Table\Action\Select::create($rowSelect, 'disable', 'fa fa-fw fa-times')
-            ->setConfirmStr('Disable the selected users?')
-            ->addOnSelect(function(\Tk\Table\Action\Select $action, array $selected) {
-                foreach ($selected as $userId) {
-                    $u = User::find($userId);
+        $this->table->appendAction(\Tk\Table\Action\Select::create('Active Status', 'fa fa-fw fa-times')
+            ->setActions(['Active' => 'active', 'Disable' => 'disable'])
+            ->setConfirmStr('Toggle active/disable on the selected rows?')
+            ->addOnGetSelected([$rowSelect, 'getSelected'])
+            ->addOnSelect(function(\Tk\Table\Action\Select $action, array $selected, string $value) {
+                foreach ($selected as $id) {
+                    $u = User::find($id);
                     $a = $u->getAuth();
-                    $a->active = false;
+                    $a->active = (strtolower($value) == 'active');
                     $a->save();
                 }
             })
         );
 
-        $this->table->appendAction(Csv::create($rowSelect)
+        $this->table->appendAction(Csv::create()
+            ->addOnGetSelected([$rowSelect, 'getSelected'])
             ->addOnCsv(function(Csv $action, array $selected) {
                 $action->setExcluded(['id', 'actions', 'permissions']);
                 $this->table->getCell('username')->getOnValue()->reset();
