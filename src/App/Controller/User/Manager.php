@@ -117,7 +117,7 @@ class Manager extends ControllerAdmin
         $this->table->getForm()->appendField(new Input('search'))
             ->setAttr('placeholder', 'Search: uid, name, email, username');
 
-        $list = ['-- All Users --' => '', 'Active' => 'y', 'Disabled' => 'n'];
+        $list = ['' => '-- All Users --', 'y' => 'Active', 'n' => 'Disabled'];
         $this->table->getForm()->appendField(new Select('active', $list))->setValue('y');
 
 
