@@ -30,8 +30,8 @@ CREATE TABLE IF NOT EXISTS notify (
   read_at DATETIME NULL,        -- Date user read notification in browser
   notified_at DATETIME NULL,    -- Date message was sent as browser notification
   ttl_mins INT NOT NULL DEFAULT 1440,
-  created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   expiry DATETIME GENERATED ALWAYS AS (created + INTERVAL ttl_mins MINUTE) VIRTUAL,
+  created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   KEY (user_id),
   CONSTRAINT fk_notify__user_id FOREIGN KEY (user_id) REFERENCES user (user_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
