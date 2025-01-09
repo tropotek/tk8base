@@ -21,7 +21,11 @@ class Factory extends \Bs\Factory
     {
         // So we can change the mintion template from the settings page
         if (str_contains($templatePath, '/minton/')) {
-            $templatePath = Config::makePath($this->getRegistry()->get('minton.template', '/html/minton/sn-admin.html'));
+            $templatePath = $this->getRegistry()->get('minton.template');
+            if (empty($templatePath)) {
+                $templatePath = '/html/minton/sn-admin.html';
+            }
+            $templatePath = Config::makePath($templatePath);
         }
         return new Page($templatePath);
     }

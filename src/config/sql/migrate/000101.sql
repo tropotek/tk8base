@@ -27,8 +27,8 @@ CREATE TABLE IF NOT EXISTS notify (
   message TEXT,
   url VARCHAR(250) NOT NULL DEFAULT '',
   icon BLOB NOT NULL DEFAULT '',
-  read_on DATETIME NULL,        -- Date user read notification in browser
-  notified_on DATETIME NULL,    -- Date message was sent as browser notification
+  read_at DATETIME NULL,        -- Date user read notification in browser
+  notified_at DATETIME NULL,    -- Date message was sent as browser notification
   ttl_mins INT NOT NULL DEFAULT 1440,
   created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   expiry DATETIME GENERATED ALWAYS AS (created + INTERVAL ttl_mins MINUTE) VIRTUAL,
@@ -39,11 +39,11 @@ CREATE TABLE IF NOT EXISTS notify (
 CREATE TABLE IF NOT EXISTS file
 (
   file_id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-  user_id INT UNSIGNED NOT NULL DEFAULT 0,  -- uploader
+  user_id INT UNSIGNED NOT NULL DEFAULT 0,
   fkey VARCHAR(64) DEFAULT '' NOT NULL,
   fid INT DEFAULT 0 NOT NULL DEFAULT 0,
   label VARCHAR(128) NOT NULL DEFAULT '',
-  `path` VARCHAR(512) NOT NULL DEFAULT '',
+  filename VARCHAR(255) NOT NULL DEFAULT '',              -- the files relative path from site root
   bytes INT UNSIGNED NOT NULL DEFAULT 0,
   mime VARCHAR(255) NOT NULL DEFAULT '',
   notes TEXT NULL,

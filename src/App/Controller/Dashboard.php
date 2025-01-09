@@ -5,6 +5,7 @@ use App\Db\Notify;
 use App\Db\User;
 use Bs\Auth;
 use Bs\Mvc\ControllerAdmin;
+use Bs\Ui\Breadcrumbs;
 use Dom\Template;
 use Tk\Alert;
 use Tk\Date;
@@ -16,8 +17,8 @@ class Dashboard extends ControllerAdmin
 
     public function doDefault(): void
     {
+        Breadcrumbs::reset();
         $this->getPage()->setTitle('Dashboard');
-        $this->getCrumbs()->reset();
 
         if (!Auth::getAuthUser()) {
             Alert::addWarning('You do not have permission to access the page: <b>' . Uri::create()->getRelativePath() . '</b>');

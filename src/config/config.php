@@ -69,9 +69,6 @@ return function (Config $config) {
     //$config['auth.password.strict'] = false;
 
 
-
-
-
     /**
      * Whitelist URLS:
      *   - https://domain.com/_ssi  <- main oauth uri

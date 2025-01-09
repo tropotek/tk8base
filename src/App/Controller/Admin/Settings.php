@@ -7,6 +7,7 @@ use Bs\Auth;
 use Bs\Mvc\ControllerAdmin;
 use Bs\Mvc\Form;
 use Bs\Registry;
+use Bs\Ui\Breadcrumbs;
 use Dom\Template;
 use Tk\Alert;
 use Tk\Form\Action\Link;
@@ -24,12 +25,12 @@ class Settings extends ControllerAdmin
 
     public function doDefault(): void
     {
+        Breadcrumbs::reset();
         $this->getPage()->setTitle('Edit Settings');
 
         $this->setAccess(User::PERM_SYSADMIN);
 
         Factory::instance()->getRegistry()->save();
-        $this->getCrumbs()->reset();
 
         $this->templateSelect = str_contains($this->getPage()->getTemplatePath(), '/minton/');
 
@@ -49,7 +50,7 @@ class Settings extends ControllerAdmin
             ->setGroup($tab);
 
         if ($this->templateSelect) {
-            $list = ['Side Menu' => '/html/minton/sn-admin.html', 'Top Menu' => '/html/minton/tn-admin.html'];
+            $list = ['/html/minton/sn-admin.html' => 'Side Menu', '/html/minton/tn-admin.html' => 'Top Menu'];
             $this->form->appendField(new \Tk\Form\Field\Select('minton.template', $list))
                 ->setLabel('Template Layout')
                 ->setNotes('Select Side-menu or top-menu template layout')

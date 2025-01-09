@@ -4,6 +4,7 @@ namespace App\Controller;
 use Bs\Mvc\ControllerPublic;
 use Bs\Mvc\Form;
 use Bs\Registry;
+use Bs\Ui\Breadcrumbs;
 use Dom\Template;
 use Tk\Alert;
 use Tk\Form\Action\Link;
@@ -29,9 +30,11 @@ class Contact extends ControllerPublic
 
     public function doDefault(): void
     {
+        Breadcrumbs::reset();
         $this->getPage()->setTitle('Contact Us');
 
         $this->form = new Form();
+        $this->form->setCsrfTtl(\Tk\Form::DEFAULT_CSRF_TTL);
 
         $this->form->appendField(new Input('name'))->setRequired();
         $this->form->appendField(new Input('email'))->setRequired()->setType('email');

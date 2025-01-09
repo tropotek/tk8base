@@ -31,7 +31,6 @@ class Component extends ControllerAdmin
         //$rsp = new FileResponse(Config::makePath('/data/tmp/dst-bak.sql'));
         //$rsp->setContentDisposition(Response::DISPOSITION_ATTACHMENT, 'dst-bak2222.sql');
         //$rsp->prepare();
-        //vd($rsp->__toString());
         //$rsp->send();
         //exit;
 

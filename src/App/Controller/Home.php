@@ -3,6 +3,7 @@ namespace App\Controller;
 
 use Bs\Auth;
 use Bs\Mvc\ControllerPublic;
+use Bs\Ui\Breadcrumbs;
 use Dom\Template;
 use Tk\Alert;
 use Tk\Exception;
@@ -13,6 +14,7 @@ class Home extends ControllerPublic
 
     public function doDefault(): void
     {
+        Breadcrumbs::reset();
         $this->getPage()->setTitle('Home');
 
         if (isset($_GET['e'])){

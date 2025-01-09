@@ -38,7 +38,7 @@ class Manager extends ControllerAdmin
         $rows = \App\Db\File::findFiltered($filter);
         $this->table->setRows($rows, Db::getLastStatement()->getTotalRows());
 
-        // setup the upload file form
+        // set up the upload file form
         $this->form = new Form('upload');
         $this->form->appendField(new \App\Form\Field\File('file', Auth::getAuthUser()))->setLabel('Create File');
         $this->form->appendField(new Form\Action\Submit('save', [$this, 'onSubmit']));
