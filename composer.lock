@@ -2142,12 +2142,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/tropotek/tk-base.git",
-                "reference": "49fc9e861ba964d3059094e22ba8605f296ede4d"
+                "reference": "8273c1db1e415a886cc735fcb9750bdc848976e9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tropotek/tk-base/zipball/49fc9e861ba964d3059094e22ba8605f296ede4d",
-                "reference": "49fc9e861ba964d3059094e22ba8605f296ede4d",
+                "url": "https://api.github.com/repos/tropotek/tk-base/zipball/8273c1db1e415a886cc735fcb9750bdc848976e9",
+                "reference": "8273c1db1e415a886cc735fcb9750bdc848976e9",
                 "shasum": ""
             },
             "require": {
@@ -2311,12 +2311,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/tropotek/tk-framework.git",
-                "reference": "1f3c30064f7be3fa3a5a90e5f10e40da9568fdfe"
+                "reference": "c618d8327ec236feb4516aba8c184ff3a70acb1c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tropotek/tk-framework/zipball/1f3c30064f7be3fa3a5a90e5f10e40da9568fdfe",
-                "reference": "1f3c30064f7be3fa3a5a90e5f10e40da9568fdfe",
+                "url": "https://api.github.com/repos/tropotek/tk-framework/zipball/c618d8327ec236feb4516aba8c184ff3a70acb1c",
+                "reference": "c618d8327ec236feb4516aba8c184ff3a70acb1c",
                 "shasum": ""
             },
             "require": {
@@ -2377,12 +2377,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/tropotek/tk-installers.git",
-                "reference": "d5d6bfa8dce8cbfd948b3f9c3cbffa7f77f1b28d"
+                "reference": "756a8efe0431f02ba92440f995e0bcf6d2fbcbb0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tropotek/tk-installers/zipball/d5d6bfa8dce8cbfd948b3f9c3cbffa7f77f1b28d",
-                "reference": "d5d6bfa8dce8cbfd948b3f9c3cbffa7f77f1b28d",
+                "url": "https://api.github.com/repos/tropotek/tk-installers/zipball/756a8efe0431f02ba92440f995e0bcf6d2fbcbb0",
+                "reference": "756a8efe0431f02ba92440f995e0bcf6d2fbcbb0",
                 "shasum": ""
             },
             "require": {
