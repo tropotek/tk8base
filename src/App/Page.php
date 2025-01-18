@@ -122,8 +122,6 @@ JS;
 
     protected function showMintonParams(Template $template): void
     {
-        //$this->getFactory()->getCrumbs()->setCssList()->addCss('m-0');
-
         $nav = new Nav();
         if (basename($this->getTemplatePath()) == 'sn-admin.html') {
             $nav->setAttr('id', 'side-nav');
@@ -176,22 +174,6 @@ HTML;
             $this->getTemplate()->prependTemplate('container', $template);
         }
     }
-
-//    protected function showCrumbs(): void
-//    {
-//        $crumbs = $this->getFactory()->getCrumbs();
-//        if (!($crumbs && $crumbs->isVisible())) return;
-//
-//        if (!$template = $crumbs->show()) {
-//            return;
-//        }
-//
-//        if ($this->getTemplate()->hasVar('crumbs')) {
-//            $this->getTemplate()->insertTemplate('crumbs', $template);
-//        } else {
-//            $this->getTemplate()->prependTemplate('container', $template);
-//        }
-//    }
 
     protected function showAlert(): void
     {
