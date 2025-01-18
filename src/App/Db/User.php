@@ -315,6 +315,11 @@ class User extends Model implements UserInterface
             $filter->appendWhere('active = :active AND ');
         }
 
+        if (is_bool(truefalse($filter['active'] ?? null))) {
+            $filter['active'] = truefalse($filter['active']);
+            $filter->appendWhere('a.active = :active AND ');
+        }
+
         return Db::query("
             SELECT *
             FROM v_user a

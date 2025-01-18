@@ -8,7 +8,6 @@ use Tk\Db\Filter;
 use Tk\Db\Model;
 use Tk\Exception;
 
-
 /**
  * A notify message gets displayed in the users notifications menu and executes a browser notification
  * if the user has granted it permission to do so.
@@ -98,8 +97,8 @@ class Notify extends Model
         return false !== Db::execute("
             UPDATE notify SET notified_at = NOW()
             WHERE notify_id IN :notifyIds",
-            compact('notifyIds')
-        );
+                compact('notifyIds')
+            );
     }
 
     public static function find(int $notifyId): ?self
@@ -131,8 +130,8 @@ class Notify extends Model
         return false !== Db::execute("
             UPDATE notify SET read_at = NOW()
             WHERE user_id = :userId",
-            compact('userId')
-        );
+                compact('userId')
+            );
     }
 
     /**
@@ -168,20 +167,14 @@ class Notify extends Model
             $filter->appendWhere('a.user_id = :userId AND ');
         }
 
-        if (is_bool($filter['isRead'] ?? '')) {
-            if ($filter['isRead']) {
-                $filter->appendWhere('a.is_read AND ');
-            } else {
-                $filter->appendWhere('NOT a.is_read AND ');
-            }
+        if (is_bool(truefalse($filter['isRead'] ?? null))) {
+            $filter['isRead'] = truefalse($filter['isRead']);
+            $filter->appendWhere('a.is_read = :isRead AND ');
         }
 
-        if (is_bool($filter['isNotified'] ?? '')) {
-            if ($filter['isNotified']) {
-                $filter->appendWhere('a.is_notified AND ');
-            } else {
-                $filter->appendWhere('NOT a.is_notified AND ');
-            }
+        if (is_bool(truefalse($filter['isNotified'] ?? null))) {
+            $filter['isNotified'] = truefalse($filter['isNotified']);
+            $filter->appendWhere('a.is_notified = :isNotified AND ');
         }
 
         return Db::query("
