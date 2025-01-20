@@ -1,4 +1,26 @@
+
+
+.htmx-request
+{
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.card.page-actions .btn {
+  margin-right: 0.5em;
+}
+
 /*********** B O O T S T R A P *************/
+.modal-header-success .modal-title,
+.modal-header-warning .modal-title,
+.modal-header-danger .modal-title,
+.modal-header-info .modal-title,
+.modal-header-primary .modal-title
+{
+  color: #fff;
+  font-size: 1.125rem;
+}
+
 .modal-header-success {
   color:#fff;
   border-bottom:1px solid #eee;
@@ -25,16 +47,6 @@
   background-color: #428bca;
 }
 
-/*********** T I N Y M C E *************/
-/* Remove promotion button */
-.tox .tox-promotion {
-  display: none;
-}
-/* Add disabled state */
-.mce .disabled,
-.mce-min .disabled {
-  background-color: #E9ECEF;
-}
 
 /*********** T I N Y M C E *************/
 /* Remove promotion button */
@@ -52,17 +64,15 @@
 form textarea {
   height: 150px;
 }
-form label {
-  font-weight: 500;
-}
-form .form-check-label {
-  font-weight: normal;
+.tk-form .fld-checkbox .form-check:first-of-type {
+  margin-top: .5rem !important;
 }
 .tk-form .fld .invalid-feedback {
   color: var(--bs-danger);
 }
+.form-control:read-only:not([type=file]),
 .form-control:disabled,
-.form-control:read-only:not([type=file]) {
+.form-control.disabled {
   pointer-events: none;
   background-color: #EEE;
 }
@@ -71,7 +81,28 @@ form .form-check-label {
 .tk-form select:invalid {
   background: #FDFDDA !important;
 }
-
+.form-select:disabled,
+.form-control:disabled,
+.form-control[readonly] {
+  pointer-events: none;
+  background-color: #EEE !important;
+}
+.btn-outline-field {
+  --bs-btn-color: var(--bs-body-color);
+  --bs-btn-border-color: var(--bs-border-color);
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #6c757d;
+  --bs-btn-hover-border-color: #6c757d;
+  --bs-btn-focus-shadow-rgb: 108,117,125;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #6c757d;
+  --bs-btn-active-border-color: #6c757d;
+  --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+  --bs-btn-disabled-color: #6c757d;
+  --bs-btn-disabled-bg: transparent;
+  --bs-btn-disabled-border-color: #6c757d;
+  --bs-gradient: none;
+}
 
 /***************** T A B L E ******************/
 .tk-form-inline {
@@ -87,18 +118,37 @@ form .form-check-label {
   --bs-btn-padding-x: .4rem;
   --bs-btn-font-size: .75rem;
 }
+.tk-table-sm {
+  font-size: 0.75rem;
+}
+.table > :not(caption) > * > * {
+  padding: .55rem;
+}
+.tk-table-sm.table > :not(caption) > * > * {
+  padding: 0.5rem;
+}
 .tk-table .tk-actions {
   padding-bottom: 0.75rem;
 }
 .tk-table .tk-actions .btn {
   margin-right: 0.5rem;
 }
-.tk-table table td a.btn {
+.tk-table table td .btn {
   display: inline;
   --bs-btn-padding-y: .2rem;
   --bs-btn-padding-x: .4rem;
   --bs-btn-font-size: .75rem;
 }
+.tk-table .max-width {
+  width: 100%;
+}
+.tk-sortable .drag {
+  cursor: ns-resize;
+}
+.tk-table tr.task-closed {
+  opacity: 0.8;
+}
+
 
 /* Header OrderBy Arrows */
 th
@@ -113,27 +163,27 @@ td a {
   width: 100%;
 }
 th a {
-  padding-right: 18px;
+  padding-right: 1.5rem;
   /*position: relative;*/
 }
 th a:before,
 th a:after {
-  border: 4px solid transparent;
+  border: 0.3rem solid transparent;
   content: "";
   display: block;
   height: 0;
-  right: 5px;
+  right: 0.3rem;
   top: 50%;
   position: absolute;
   width: 0;
 }
 th a.desc:before {
   border-bottom-color: #666;
-  margin-top: -9px;
+  margin-top: -0.5rem;
 }
 th a.asc:after {
   border-top-color: #666;
-  margin-top: 1px;
+  margin-top: 0.0rem;
 }
 
 
