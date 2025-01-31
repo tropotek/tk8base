@@ -16,11 +16,7 @@ class Component extends ControllerAdmin
     public function doDefault(): void
     {
         $this->getPage()->setTitle('Component Test');
-
-        if (!Auth::getAuthUser()) {
-            Alert::addWarning('You do not have permission to access the page: <b>' . Uri::create()->getRelativePath() . '</b>');
-            Uri::create('/')->redirect();
-        }
+        $this->setUserAccess();
 
         $this->com1 = new Test();
 

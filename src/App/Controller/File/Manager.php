@@ -21,7 +21,7 @@ class Manager extends ControllerAdmin
     public function doDefault(): void
     {
         $this->getPage()->setTitle('File Manager');
-        $this->setAccess(Auth::PERM_ADMIN);
+        $this->setUserAccess(Auth::PERM_ADMIN);
 
         // Get the form template
         $this->table = new File();

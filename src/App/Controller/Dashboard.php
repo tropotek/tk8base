@@ -20,10 +20,7 @@ class Dashboard extends ControllerAdmin
         Breadcrumbs::reset();
         $this->getPage()->setTitle('Dashboard');
 
-        if (!Auth::getAuthUser()) {
-            Alert::addWarning('You do not have permission to access the page: <b>' . Uri::create()->getRelativePath() . '</b>');
-            Uri::create('/')->redirect();
-        }
+        $this->setUserAccess();
 
         if (isset($_GET['e'])){
             throw new Exception('This is a test exception...', 500);
