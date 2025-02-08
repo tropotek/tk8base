@@ -10,26 +10,11 @@ use Tk\Uri;
 
 class Component extends ControllerAdmin
 {
-    protected ?Test $com1 = null;
-
 
     public function doDefault(): void
     {
         $this->getPage()->setTitle('Component Test');
         $this->setUserAccess();
-
-        $this->com1 = new Test();
-
-
-
-
-        //$rsp = new Response('this is a test');
-        //$rsp = new FileResponse(Config::makePath('/data/tmp/dst-bak.sql'));
-        //$rsp->setContentDisposition(Response::DISPOSITION_ATTACHMENT, 'dst-bak2222.sql');
-        //$rsp->prepare();
-        //$rsp->send();
-        //exit;
-
 
     }
 
@@ -37,9 +22,6 @@ class Component extends ControllerAdmin
     {
         $template = $this->getTemplate();
         $template->setText('title', $this->getPage()->getTitle());
-
-        $html = $this->com1->doDefault();
-        $template->appendHtml('components', $html);
 
         return $template;
     }
@@ -57,7 +39,9 @@ class Component extends ControllerAdmin
         </div>
     </div>
     <div class="col-4" var="components">
-
+        <div hx-get="/component/test" hx-trigger="load" hx-swap="outerHTML" var="component">
+          <p class="text-center mt-4"><i class="fa fa-fw fa-spin fa-spinner fa-3x"></i><br>Loading...</p>
+        </div>
     </div>
 </div>
 HTML;
