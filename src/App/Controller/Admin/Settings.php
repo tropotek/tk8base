@@ -97,11 +97,13 @@ class Settings extends ControllerAdmin
             ->setGroup($tab);
 
         $tab = 'Maintenance';
-        $this->form->appendField(new Checkbox('system.maintenance.enabled'))
+        $this->form->appendField((new Checkbox('system.maintenance.enabled', ['1' => 'Maintenance Mode Enabled']))
             ->addCss('check-enable')
-            ->setLabel('Maintenance Mode Enabled')
+            ->setSwitch(true)
+            ->setLabel('')
             ->setNotes('Enable maintenance mode. Admin users will still have access to the site.')
-            ->setGroup($tab);
+            ->setGroup($tab)
+        );
 
         $this->form->appendField(new Textarea('system.maintenance.message'))
             ->addCss('mce-min')
