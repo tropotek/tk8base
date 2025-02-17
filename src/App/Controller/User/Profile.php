@@ -28,11 +28,15 @@ class Profile extends ControllerAdmin
 
     protected ?Form $form = null;
     protected ?User $user = null;
+    protected bool  $templateSelectEnabled = false;
 
 
     public function doDefault(): void
     {
         $this->getPage()->setTitle('My Profile');
+        $this->setUserAccess();
+
+        $this->templateSelectEnabled = str_contains($this->getPage()->getTemplatePath(), '/minton/');
 
         if (!Auth::getAuthUser()) {
             Alert::addError('You do not have access to this page.');
@@ -44,7 +48,8 @@ class Profile extends ControllerAdmin
         $this->form = new Form($this->user);
 
         $tab = 'Details';
-        $this->form->appendField(new Hidden('userId'))->setReadonly();
+        $this->form->appendField(new Hidden('userId'))
+            ->setReadonly();
 
         $list = Collection::listCombine(User::TITLE_LIST);
         $this->form->appendField((new Select('title', $list))->prependOption('', ''))
@@ -58,15 +63,27 @@ class Profile extends ControllerAdmin
         $this->form->appendField(new Input('familyName'))
             ->setGroup($tab);
 
-        $this->form->appendField(new Input('username'))->setGroup($tab)
+        $this->form->appendField(new Input('username'))
+            ->setGroup($tab)
             ->setDisabled()
             ->setReadonly()
             ->setRequired();
 
-        $this->form->appendField(new Input('email'))->setGroup($tab)
+        $this->form->appendField(new Input('email'))
+            ->setGroup($tab)
             ->setDisabled()
             ->setReadonly()
             ->setRequired();
+
+        if ($this->templateSelectEnabled) {
+            $list = ['sn-admin' => 'Side Menu', 'tn-admin' => 'Top Menu'];
+            $this->form->appendField((new \Tk\Form\Field\Select('template', $list))
+                ->setGroup($tab)
+                ->prependOption('-- Site Default --', '')
+                ->setLabel('Template Layout')
+                ->setNotes('Select a side-menu or top-menu template as the default site layout.')
+            );
+        }
 
         if ($this->user->isType(User::TYPE_STAFF)) {
             $list = User::PERMISSION_LIST;
@@ -78,13 +95,16 @@ class Profile extends ControllerAdmin
 
         if (Config::instance()->get('auth.profile.password')) {
             $tab = 'Password';
-            $this->form->appendField(new Password('currentPass'))->setGroup($tab)
+            $this->form->appendField(new Password('currentPass'))
+                ->setGroup($tab)
                 ->setLabel('Current Password')
                 ->setAttr('autocomplete', 'new-password');
-            $this->form->appendField(new Password('newPass'))->setGroup($tab)
+            $this->form->appendField(new Password('newPass'))
+                ->setGroup($tab)
                 ->setLabel('New Password')
                 ->setAttr('autocomplete', 'new-password');
-            $this->form->appendField(new Password('confPass'))->setGroup($tab)
+            $this->form->appendField(new Password('confPass'))
+                ->setGroup($tab)
                 ->setLabel('Confirm Password')
                 ->setAttr('autocomplete', 'new-password');
         }

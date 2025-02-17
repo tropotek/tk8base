@@ -20,7 +20,7 @@ use Tk\Uri;
 class Settings extends ControllerAdmin
 {
     protected ?Form $form   = null;
-    protected bool  $templateSelect = false;
+    protected bool  $templateSelectEnabled = false;
 
 
     public function doDefault(): void
@@ -32,7 +32,7 @@ class Settings extends ControllerAdmin
 
         Factory::instance()->getRegistry()->save();
 
-        $this->templateSelect = str_contains($this->getPage()->getTemplatePath(), '/minton/');
+        $this->templateSelectEnabled = str_contains($this->getPage()->getTemplatePath(), '/minton/');
 
         $this->form = new Form();
 
@@ -49,14 +49,6 @@ class Settings extends ControllerAdmin
             ->setRequired()
             ->setGroup($tab);
 
-        if ($this->templateSelect) {
-            $list = ['/html/minton/sn-admin.html' => 'Side Menu', '/html/minton/tn-admin.html' => 'Top Menu'];
-            $this->form->appendField(new \Tk\Form\Field\Select('minton.template', $list))
-                ->setLabel('Template Layout')
-                ->setNotes('Select Side-menu or top-menu template layout')
-                ->setGroup($tab);
-        }
-
         $this->form->appendField(new Input('site.email'))
             ->setLabel('Site Email')
             ->setRequired()
@@ -70,7 +62,16 @@ class Settings extends ControllerAdmin
             ->setGroup($tab);
 
 
-        $tab = 'Metadata';
+        $tab = 'Page Content';
+
+        if ($this->templateSelectEnabled) {
+            $list = ['' => '-- Default --', 'sn-admin' => 'Side Menu', 'tn-admin' => 'Top Menu'];
+            $this->form->appendField(new \Tk\Form\Field\Select('minton.template', $list))
+                ->setLabel('Template Layout')
+                ->setNotes('Select a side-menu or top-menu template as the default site layout. Users can customise their own selection.')
+                ->setGroup($tab);
+        }
+
         $this->form->appendField(new Input('system.meta.keywords'))
             ->setLabel('Metadata Keywords')
             ->setNotes('Set meta tag SEO keywords for this site. ')
@@ -104,7 +105,7 @@ class Settings extends ControllerAdmin
 
         $this->form->appendField(new Textarea('system.maintenance.message'))
             ->addCss('mce-min')
-            ->setLabel('Message')
+            ->setLabel('Maintenance Message')
             ->setNotes('Set the message public users will see when in maintenance mode.')
             ->setGroup($tab);
 
@@ -136,6 +137,10 @@ class Settings extends ControllerAdmin
         }
         if (!filter_var($values['site.email'] ?? '', \FILTER_VALIDATE_EMAIL)) {
             $form->addFieldError('site.email', 'Please enter a valid email address');
+        }
+        $list = ['sn-admin', 'tn-admin'];
+        if (($values['site.template'] ?? '') && !in_array($values['site.template'] ?? '', $list)) {
+            $form->addFieldError('template', 'Invalid template selected');
         }
 
         if ($form->hasErrors()) return;

@@ -1,6 +1,7 @@
 <?php
 namespace App;
 
+use App\Db\User;
 use Bs\Mvc\PageDomInterface;
 use Symfony\Component\Console\Application;
 use Symfony\Component\EventDispatcher\EventDispatcher;
@@ -21,11 +22,15 @@ class Factory extends \Bs\Factory
     {
         // So we can change the mintion template from the settings page
         if (str_contains($templatePath, '/minton/')) {
-            $templatePath = $this->getRegistry()->get('minton.template');
-            if (empty($templatePath)) {
-                $templatePath = '/html/minton/sn-admin.html';
+            $selected = $this->getRegistry()->get('minton.template', 'sn-admin');
+            if (User::getAuthUser()->template) {
+                $selected = User::getAuthUser()->template;
             }
+            $templatePath = sprintf('/html/minton/%s.html', preg_replace('|[^0-9a-z_-]|i', '', $selected));
             $templatePath = Config::makePath($templatePath);
+            if (!is_file($templatePath)) {
+                $templatePath = Config::makePath('/html/minton/sn-admin.html');
+            }
         }
         return new Page($templatePath);
     }
