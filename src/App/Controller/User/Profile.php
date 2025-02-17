@@ -167,7 +167,7 @@ class Profile extends ControllerAdmin
         Alert::addSuccess('Form save successfully.');
         $action->setRedirect(Uri::create('/profile'));
         if ($form->getTriggeredAction()->isExit()) {
-            $action->setRedirect(Uri::create('/'));
+            $action->setRedirect($this->getBackUrl());
         }
     }
 
