@@ -8,7 +8,30 @@
 
 .card.page-actions .btn {
   margin-right: 0.5em;
+  margin-top: 0.5em;
 }
+
+#sidebar-menu > ul > li ul {
+  padding-left: 14px;
+}
+
+.select2-container--default .select2-selection--single {
+  border-color: var(--bs-border-color);
+}
+.select2-container--default .select2-selection--single .select2-selection__rendered
+{
+  color: var(--bs-body-color);
+}
+
+.info-dropdown .dropdown-item {
+  margin: 0;
+}
+.info-dropdown .dropdown-item .d-inline-block {
+  width: 4.5em;
+}
+
+
+
 
 /*********** B O O T S T R A P *************/
 .modal-header-success .modal-title,

@@ -2,7 +2,6 @@
 namespace App\Db;
 
 use Bs\Auth;
-use Bs\Traits\CreatedTrait;
 use Bs\Traits\ForeignModelTrait;
 use Bs\Traits\SystemTrait;
 use Tk\Config;
@@ -17,7 +16,6 @@ class File extends Model
 {
     use SystemTrait;
     use ForeignModelTrait;
-    use CreatedTrait;
 
     public int        $fileId   = 0;
     public int        $userId   = 0;
