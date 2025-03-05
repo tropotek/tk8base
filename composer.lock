@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "31aff452e7a7e75bb9d68deef7987843",
+    "content-hash": "cb0dadb49909418bd77ec02e13b835bf",
     "packages": [
         {
             "name": "components/font-awesome",
@@ -182,6 +182,15 @@
                 "source": "https://github.com/components/jqueryui/tree/master"
             },
             "time": "2016-09-16T05:47:55+00:00"
+        },
+        {
+            "name": "htmx/htmx",
+            "version": "2.0.4",
+            "dist": {
+                "type": "file",
+                "url": "https://unpkg.com/htmx.org/dist/htmx.min.js"
+            },
+            "type": "library"
         },
         {
             "name": "phpmailer/phpmailer",
