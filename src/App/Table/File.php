@@ -68,21 +68,16 @@ class File extends Table
             })
         );
 
-        $this->appendAction(Csv::create()
-            ->addOnGetSelected([$rowSelect, 'getSelected'])
-            ->addOnCsv(function(Csv $action, array $selected) {
-                $action->setExcluded(['id', 'actions', 'permissions']);
-                $this->getCell('username')?->getOnValue()->reset();
-                $filter = $this->getDbFilter();
-                if (count($selected)) {
-                    $filter['fileId'] = $selected;
-                    $rows = \App\Db\File::findFiltered($filter);
-                } else {
-                    $rows = \App\Db\File::findFiltered($filter->resetLimits());
+        $this->table->appendAction(Csv::create()
+            ->addOnCsv(function(Csv $action) {
+                $action->setExcluded(['actions', 'permissions']);
+                if (!$this->table->getCell(\App\Db\File::getPrimaryProperty())) {
+                    $this->table->prependCell(\App\Db\File::getPrimaryProperty())->setHeader('id');
                 }
-                return $rows;
-            })
-        );
+                $this->table->getCell('username')->getOnValue()->reset();
+                $filter = $this->table->getDbFilter()->resetLimits();
+                return \App\Db\File::findFiltered($filter);
+            }));
 
         return $this;
     }

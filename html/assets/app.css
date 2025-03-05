@@ -6,11 +6,6 @@
   pointer-events: none;
 }
 
-.card.page-actions .btn {
-  margin-right: 0.5em;
-  margin-top: 0.5em;
-}
-
 #sidebar-menu > ul > li ul {
   padding-left: 14px;
 }
@@ -23,6 +18,10 @@
   color: var(--bs-body-color);
 }
 
+.card.page-actions .btn {
+  margin-right: 0.5em;
+  margin-top: 0.5em;
+}
 .info-dropdown .dropdown-item {
   margin: 0;
 }
@@ -30,7 +29,9 @@
   width: 4.5em;
 }
 
-
+table.tk-table-sm tr.inactive {
+  opacity: 0.5 !important;
+}
 
 
 /*********** B O O T S T R A P *************/
