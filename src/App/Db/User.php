@@ -163,6 +163,14 @@ class User extends Model implements UserInterface
         return $this->getAuth()->hasPermission($permission);
     }
 
+    public function canChangePermissions(string $type): bool
+    {
+        if ($this->hasPermission(self::PERM_SYSADMIN)) return true;
+        if ($type == self::TYPE_STAFF && $this->hasPermission(self::PERM_MANAGE_STAFF)) return true;
+        if ($type == self::TYPE_MEMBER && $this->hasPermission(self::PERM_MANAGE_MEMBERS)) return true;
+        return false;
+    }
+
     /**
      * Validate this object's current state and return an array
      * with error messages. This will be useful for validating

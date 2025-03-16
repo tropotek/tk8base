@@ -173,7 +173,7 @@ class Edit extends ControllerAdmin
     public function onSubmit(Form $form, SubmitExit $action): void
     {
         // non admin cannot change permissions
-        if (!Auth::getAuthUser()->isAdmin()) {
+        if (!User::getAuthUser()->canChangePermissions($this->type)) {
             $form->removeField('perm');
         }
 
