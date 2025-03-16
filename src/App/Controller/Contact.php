@@ -12,6 +12,7 @@ use Tk\Form\Action\Submit;
 use Tk\Form\Field\Hidden;
 use Tk\Form\Field\Input;
 use Tk\Form\Field\Textarea;
+use Tk\Mail\Mailer;
 use Tk\Uri;
 
 /**
@@ -31,7 +32,7 @@ class Contact extends ControllerPublic
     public function doDefault(): void
     {
         Breadcrumbs::reset();
-        $this->getPage()->setTitle('Contact Us');
+        $this->getPage()->setTitle('Contact Us', 'fa fa-envelope');
 
         $this->form = new Form();
         $this->form->setCsrfTtl(\Tk\Form::DEFAULT_CSRF_TTL);
@@ -65,7 +66,7 @@ class Contact extends ControllerPublic
 
         if ($form->hasErrors()) return;
 
-        $message = $this->getFactory()->createMessage();
+        $message = $this->getFactory()->createMailMessage();
         $message->addTo($form->getFieldValue('email'));
         $message->setSubject(Registry::instance()->getSiteName() . ' Contact Request');
         $content = <<<HTML
@@ -82,7 +83,7 @@ Phone: {phone}<br/>
 HTML;
         $message->setContent($content);
         $message->replace($form->getFieldValues());
-        $this->getFactory()->getMailGateway()->send($message);
+        Mailer::instance()->send($message);
 
         Alert::addSuccess('Message Sent successfully');
         $action->setRedirect(Uri::create());
@@ -92,6 +93,7 @@ HTML;
     {
         $template = $this->getTemplate();
         $template->appendText('title', $this->getPage()->getTitle());
+        $template->addCss('icon', $this->getPage()->getIcon());
 
         $this->form->getRenderer()->addFieldCss('mb-3');
         $template->appendTemplate('content', $this->form->show());
@@ -104,7 +106,7 @@ HTML;
         $html = <<<HTML
 <div>
   <div class="card mb-3">
-    <div class="card-header" var="title"><i class="fa fa-envelope"></i> </div>
+    <div class="card-header"><i var="icon"></i> <span var="title"></span></div>
     <div class="card-body" var="content"></div>
   </div>
 </div>

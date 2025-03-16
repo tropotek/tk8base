@@ -10,6 +10,7 @@ use Bs\Mvc\Form;
 use Dom\Template;
 use Tk\Alert;
 use Tk\Collection;
+use Tk\Date;
 use Tk\Exception;
 use Tk\Form\Action\Link;
 use Tk\Form\Action\SubmitExit;
@@ -34,7 +35,7 @@ class Edit extends ControllerAdmin
 
     public function doDefault(mixed $request, string $type): void
     {
-        $this->getPage()->setTitle('Edit ' . ucfirst($type));
+        $this->getPage()->setTitle('Edit ' . ucfirst($type), 'fa fa-users');
 
         $userId  = intval($_GET['userId'] ?? 0);
         $newType = trim($_GET['cv'] ?? '');
@@ -82,22 +83,27 @@ class Edit extends ControllerAdmin
         $this->form->appendField((new Select('title', $list))
             ->setGroup($group)
             ->prependOption('', '')
+            ->addFieldCss('col-md-1')
         );
 
         $this->form->appendField(new Input('givenName'))
             ->setGroup($group)
-            ->setRequired();
+            ->setRequired()
+            ->addFieldCss('col-md-5');
 
         $this->form->appendField(new Input('familyName'))
-            ->setGroup($group);
+            ->setGroup($group)
+            ->addFieldCss('col-md-6');
 
         $l1 = $this->form->appendField(new Input('username'))
             ->setGroup($group)
-            ->setRequired();
+            ->setRequired()
+            ->addFieldCss('col-md-6');
 
         $l2 = $this->form->appendField(new Input('email'))
             ->setGroup($group)
-            ->setRequired();
+            ->setRequired()
+            ->addFieldCss('col-md-6');
 
         // Only input lock existing user
         if ($this->user->userId) {
@@ -136,7 +142,7 @@ class Edit extends ControllerAdmin
         $this->form->appendField(new SubmitExit('save', [$this, 'onSubmit']));
         $this->form->appendField(new Link('cancel', $this->getBackUrl()));
 
-        $load = $this->form->unmapModel($this->user);
+        $load = $this->user->unmapForm();
         if ($this->type == User::TYPE_STAFF) {
             $load['perm'] = array_keys(
                 array_filter(
@@ -172,8 +178,9 @@ class Edit extends ControllerAdmin
         }
 
         // set object values from fields
-        $form->mapModel($this->user);
-        $form->mapModel($this->auth);
+        $values = $form->getFieldValues();
+        $this->user->mapForm($values);
+        $this->auth->mapForm($values);
 
         if ($form->getField('perm')) {
             $this->auth->permissions = array_sum($form->getFieldValue('perm') ?? []);
@@ -216,7 +223,8 @@ class Edit extends ControllerAdmin
     public function show(): ?Template
     {
         $template = $this->getTemplate();
-        $template->setAttr('back', 'href', $this->getBackUrl());
+        $template->setText('title', $this->getPage()->getTitle());
+        $template->addCss('icon', $this->getPage()->getIcon());
 
         if ($this->user->userId) {
             $template->setVisible('edit');
@@ -236,7 +244,6 @@ class Edit extends ControllerAdmin
             }
         }
 
-        $template->appendText('title', $this->getPage()->getTitle());
         if (!$this->user->userId) {
             $template->setVisible('new-user');
         }
@@ -251,13 +258,6 @@ class Edit extends ControllerAdmin
             $template->setAttr('reset', 'href', $url);
             $template->setVisible('reset');
         }
-
-        $this->form->getField('title')->addFieldCss('col-1');
-        $this->form->getField('givenName')->addFieldCss('col-5');
-        $this->form->getField('familyName')->addFieldCss('col-6');
-
-        $this->form->getField('username')->addFieldCss('col-6');
-        $this->form->getField('email')->addFieldCss('col-6');
 
         $renderer = $this->form->getRenderer();
         $renderer->addFieldCss('mb-3');
@@ -289,9 +289,7 @@ class Edit extends ControllerAdmin
         $html = <<<HTML
 <div>
   <div class="page-actions card mb-3">
-    <div class="card-header"><i class="fa fa-cogs"></i> Actions</div>
     <div class="card-body" var="actions">
-      <a href="/" title="Back" class="btn btn-outline-secondary" var="back"><i class="fa fa-arrow-left"></i> Back</a>
       <a href="/" title="Masquerade" data-confirm="Masquerade as this user" class="btn btn-outline-secondary" choice="msq"><i class="fa fa-user-secret"></i> Masquerade</a>
       <a href="/" title="Convert user to staff" data-confirm="Convert this user to staff" class="btn btn-outline-secondary" choice="to-staff"><i class="fa fa-retweet"></i> Convert To Staff</a>
       <a href="/" title="Convert user to member" data-confirm="Convert this user to member" class="btn btn-outline-secondary" choice="to-member"><i class="fa fa-retweet"></i> Convert To Member</a>
@@ -299,7 +297,7 @@ class Edit extends ControllerAdmin
     </div>
   </div>
   <div class="card mb-3">
-    <div class="card-header" var="title">
+    <div class="card-header">
       <div class="info-dropdown dropdown float-end" title="Details" choice="edit">
         <a href="#" class="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown" aria-expanded="false"><i class="mdi mdi-dots-vertical"></i></a>
         <div class="dropdown-menu dropdown-menu-end">
@@ -307,7 +305,7 @@ class Edit extends ControllerAdmin
           <p class="dropdown-item"><span class="d-inline-block">Created:</span> <span var="created">...</span></p>
         </div>
       </div>
-      <i class="fa fa-users"></i> <span var="title"></span>
+      <i var="icon"></i> <span var="title"></span>
     </div>
     <div class="card-body" var="content">
       <p choice="new-user"><b>NOTE:</b> New users will be sent an email requesting them to activate their account and create a new password.</p>

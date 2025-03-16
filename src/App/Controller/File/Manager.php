@@ -20,7 +20,7 @@ class Manager extends ControllerAdmin
 
     public function doDefault(): void
     {
-        $this->getPage()->setTitle('File Manager');
+        $this->getPage()->setTitle('File Manager', 'fa fa-cogs');
         $this->setUserAccess(Auth::PERM_ADMIN);
 
         // Get the form template
@@ -67,7 +67,7 @@ class Manager extends ControllerAdmin
     {
         $template = $this->getTemplate();
         $template->appendText('title', $this->getPage()->getTitle());
-        $template->setAttr('back', 'href', $this->getBackUrl());
+        $template->addCss('icon', $this->getPage()->getIcon());
 
         $renderer = new Form\Renderer\Dom\Renderer($this->form);
         $this->form->addCss('mb-5');
@@ -81,19 +81,11 @@ class Manager extends ControllerAdmin
     public function __makeTemplate(): ?Template
     {
         $html = <<<HTML
-<div>
-  <div class="page-actions card mb-3">
-    <div class="card-header"><i class="fa fa-cogs"></i> Actions</div>
-    <div class="card-body" var="actions">
-      <a href="/" title="Back" class="btn btn-outline-secondary" var="back"><i class="fa fa-arrow-left"></i> Back</a>
-    </div>
-  </div>
-  <div class="card mb-3">
-    <div class="card-header" var="title"><i class="fa fa-cogs"></i> </div>
-    <div class="card-body">
-      <div var="upload"></div>
-      <div var="content"></div>
-    </div>
+<div class="card mb-3">
+  <div class="card-header"><i var="icon"></i> <span var="title"></span></div>
+  <div class="card-body">
+    <div var="upload"></div>
+    <div var="content"></div>
   </div>
 </div>
 HTML;

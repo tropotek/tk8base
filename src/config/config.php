@@ -58,6 +58,14 @@ return function (Config $config) {
      */
     //$config['auth.password.strict'] = false;
 
+    /**
+     * The site developer information
+     * Use this for online support contact forms and copyright
+     */
+    $config['developer.name']  = 'Tropotek';
+    $config['developer.web']   = 'https://tropotek.com.au/';
+    $config['developer.email'] = 'apd-support@tropotek.com.au';
+
 
     /**
      * Whitelist URLS:

@@ -10,6 +10,7 @@ use Dom\Template;
 use Tk\Alert;
 use Tk\Collection;
 use Tk\Config;
+use Tk\Date;
 use Tk\Form\Action\Link;
 use Tk\Form\Action\SubmitExit;
 use Tk\Form\Field\Checkbox;
@@ -33,7 +34,7 @@ class Profile extends ControllerAdmin
 
     public function doDefault(): void
     {
-        $this->getPage()->setTitle('My Profile');
+        $this->getPage()->setTitle('My Profile', 'fa fa-user');
         $this->setUserAccess();
 
         $this->templateSelectEnabled = str_contains($this->getPage()->getTemplatePath(), '/minton/');
@@ -54,26 +55,31 @@ class Profile extends ControllerAdmin
         $list = Collection::listCombine(User::TITLE_LIST);
         $this->form->appendField((new Select('title', $list))->prependOption('', ''))
             ->setGroup($tab)
-            ->setLabel('Title');
+            ->setLabel('Title')
+            ->addFieldCss('col-md-1');
 
         $this->form->appendField(new Input('givenName'))
             ->setGroup($tab)
-            ->setRequired();
+            ->setRequired()
+            ->addFieldCss('col-md-5');
 
         $this->form->appendField(new Input('familyName'))
-            ->setGroup($tab);
+            ->setGroup($tab)
+            ->addFieldCss('col-md-6');
 
         $this->form->appendField(new Input('username'))
             ->setGroup($tab)
             ->setDisabled()
             ->setReadonly()
-            ->setRequired();
+            ->setRequired()
+            ->addFieldCss('col-md-6');
 
         $this->form->appendField(new Input('email'))
             ->setGroup($tab)
             ->setDisabled()
             ->setReadonly()
-            ->setRequired();
+            ->setRequired()
+            ->addFieldCss('col-md-6');
 
         if ($this->templateSelectEnabled) {
             $list = ['sn-admin' => 'Side Menu', 'tn-admin' => 'Top Menu'];
@@ -113,7 +119,7 @@ class Profile extends ControllerAdmin
         $this->form->appendField(new Link('cancel', Factory::instance()->getBackUrl()));
 
         // Load form with object values
-        $load = $this->form->unmapModel($this->user);
+        $load = $this->user->unmapForm();
         $load['perm'] = array_keys(
             array_filter(
                 User::PERMISSION_LIST,
@@ -130,8 +136,9 @@ class Profile extends ControllerAdmin
     public function onSubmit(Form $form, SubmitExit $action): void
     {
         // set object values from fields
-        $form->mapModel($this->user);
-        $form->mapModel($this->user->getAuth());
+        $values = $form->getFieldValues();
+        $this->user->mapForm($values);
+        $this->user->getAuth()->mapForm($values);
 
         if ($form->getField('currentPass') && $form->getFieldValue('currentPass')) {
             if (!password_verify($form->getFieldValue('currentPass'), $this->user->getAuth()->password)) {
@@ -174,15 +181,15 @@ class Profile extends ControllerAdmin
     public function show(): ?Template
     {
         $template = $this->getTemplate();
-        $template->appendText('title', $this->getPage()->getTitle());
-        $template->setAttr('back', 'href', $this->getBackUrl());
+        $template->setText('title', $this->getPage()->getTitle());
+        $template->addCss('icon', $this->getPage()->getIcon());
 
-        $this->form->getField('title')->addFieldCss('col-1');
-        $this->form->getField('givenName')->addFieldCss('col-5');
-        $this->form->getField('familyName')->addFieldCss('col-6');
+        if ($this->user->userId) {
+            $template->setVisible('edit');
+            $template->setText('modified', $this->user->modified->format(Date::FORMAT_LONG_DATETIME));
+            $template->setText('created', $this->user->created->format(Date::FORMAT_LONG_DATETIME));
+        }
 
-        $this->form->getField('username')->addFieldCss('col-6');
-        $this->form->getField('email')->addFieldCss('col-6');
         $this->form->getRenderer()->addFieldCss('mb-3');
         $template->appendTemplate('content', $this->form->show());
 
@@ -192,17 +199,18 @@ class Profile extends ControllerAdmin
     public function __makeTemplate(): ?Template
     {
         $html = <<<HTML
-<div>
-  <div class="card mb-3">
-    <div class="card-header"><i class="fa fa-cogs"></i> Actions</div>
-    <div class="card-body" var="actions">
-      <a href="/" title="Back" class="btn btn-outline-secondary" var="back"><i class="fa fa-arrow-left"></i> Back</a>
+<div class="card mb-3">
+  <div class="card-header">
+    <div class="info-dropdown dropdown float-end" title="Details" choice="edit">
+      <a href="#" class="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown" aria-expanded="false"><i class="mdi mdi-dots-vertical"></i></a>
+      <div class="dropdown-menu dropdown-menu-end">
+        <p class="dropdown-item"><span class="d-inline-block">Modified:</span> <span var="modified">...</span></p>
+        <p class="dropdown-item"><span class="d-inline-block">Created:</span> <span var="created">...</span></p>
+      </div>
     </div>
+    <i var="icon"></i> <span var="title"></span>
   </div>
-  <div class="card mb-3">
-    <div class="card-header" var="title"><i class="fa fa-user"></i> </div>
-    <div class="card-body" var="content"></div>
-  </div>
+  <div class="card-body" var="content"></div>
 </div>
 HTML;
         return $this->loadTemplate($html);

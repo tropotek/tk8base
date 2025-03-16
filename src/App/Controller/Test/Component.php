@@ -13,7 +13,7 @@ class Component extends ControllerAdmin
 
     public function doDefault(): void
     {
-        $this->getPage()->setTitle('Component Test');
+        $this->getPage()->setTitle('Component Test', 'fa fa-cogs');
         $this->setUserAccess();
 
     }
@@ -21,7 +21,8 @@ class Component extends ControllerAdmin
     public function show(): ?Template
     {
         $template = $this->getTemplate();
-        $template->setText('title', $this->getPage()->getTitle());
+        $template->appendText('title', $this->getPage()->getTitle());
+        $template->addCss('icon', $this->getPage()->getIcon());
 
         return $template;
     }
@@ -32,7 +33,7 @@ class Component extends ControllerAdmin
 <div class="row">
     <div class="col-8">
         <div class="card mb-3">
-            <div class="card-header"><i class="fas fa-cogs"></i> <span var="title"></span></div>
+            <div class="card-header"><i var="icon"></i> <span var="title"></span></div>
             <div class="card-body" var="content">
                 <p>Main Content</p>
             </div>
