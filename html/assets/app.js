@@ -51,6 +51,22 @@ let app = function () {
       }
     });
 
+    $('.notify-click').on('mouseup', function(e) {
+      let href = $(this).attr('href');
+      let notifyId = $(this).data('notifyId');
+      if (!href || !notifyId) return true;
+      $.post(tkConfig.baseUrl + '/api/notify/markRead', {notifyId: notifyId})
+        .always(function() {
+          if (e.which === 2) {
+            location.reload();
+            return;
+          }
+          location.href = href;
+        });
+
+      return false;
+    });
+
     if (Notification.permission !== 'granted') {
       return;
     }
@@ -65,33 +81,39 @@ let app = function () {
     function getNotification() {
       if (Notification.permission !== 'granted') return;
       $.post(tkConfig.baseUrl + '/api/notify/getNotifications', {})
-      .done(function(data) {
-        let notices = data.notices;
-        if (notices === undefined || notices.length) {
-          for(let note of notices) {
-            let notification = new Notification(
-              note.title,
-              {
-                icon: note.icon,
-                body: note.message
+        .done(function(data) {
+          let notices = data.notices;
+          if (notices === undefined || notices.length) {
+            for(let note of notices) {
+
+              let notification = new Notification(
+                note.title,
+                {
+                  icon: note.icon,
+                  body: note.message
+                }
+              );
+              notification.notifyId = note.notifyId;
+
+              if (note.url !== '') {
+                notification.onclick = function () {
+                  $.post(tkConfig.baseUrl + '/api/notify/markRead', {notifyId: notification.notifyId});
+                  window.open(note.url);
+                  notification.close();
+                };
               }
-            );
-            if (note.url !== '') {
-              notification.onclick = function () {
-                window.open(note.url);
+              setTimeout(function(){
                 notification.close();
-              };
+              }, 5000);
+
             }
-            setTimeout(function(){
-              notification.close();
-            }, 5000);
           }
-        }
-      })
-      .fail(function(data) {
-        console.warn(arguments);
-      });
+        })
+        .fail(function(data) {
+          console.warn(arguments);
+        });
     }
+
   }; // end initNotifications()
 
 
