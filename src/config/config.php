@@ -1,6 +1,8 @@
 <?php
 /**
  * application configuration parameters
+ *
+ * DO NOT ADD PRIVATE DATA TO THIS FILE!!!
  */
 use Tk\Config;
 
