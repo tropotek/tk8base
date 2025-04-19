@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "123712c91e5c96e853498eff37855e46",
+    "content-hash": "79ec2eb9b042004a2d61bd1972582bf9",
     "packages": [
         {
             "name": "components/font-awesome",
@@ -2153,12 +2153,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/tropotek/tk-base.git",
-                "reference": "668f00b81f17184ce7ec3540769110293dc27ca8"
+                "reference": "024135fb34cf1610d8a7f96f3d072b9413ceff29"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tropotek/tk-base/zipball/668f00b81f17184ce7ec3540769110293dc27ca8",
-                "reference": "668f00b81f17184ce7ec3540769110293dc27ca8",
+                "url": "https://api.github.com/repos/tropotek/tk-base/zipball/024135fb34cf1610d8a7f96f3d072b9413ceff29",
+                "reference": "024135fb34cf1610d8a7f96f3d072b9413ceff29",
                 "shasum": ""
             },
             "require": {
@@ -2214,12 +2214,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/tropotek/tk-domtemplate.git",
-                "reference": "6388eed2f4383381105dcc1a1bfb2b548e316fbd"
+                "reference": "1f9173a6462ea7ae6d07882ef118aea2265afdbb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tropotek/tk-domtemplate/zipball/6388eed2f4383381105dcc1a1bfb2b548e316fbd",
-                "reference": "6388eed2f4383381105dcc1a1bfb2b548e316fbd",
+                "url": "https://api.github.com/repos/tropotek/tk-domtemplate/zipball/1f9173a6462ea7ae6d07882ef118aea2265afdbb",
+                "reference": "1f9173a6462ea7ae6d07882ef118aea2265afdbb",
                 "shasum": ""
             },
             "require": {
@@ -2273,12 +2273,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/tropotek/tk-form.git",
-                "reference": "1d9690f2dad897bc40e2842cdf8b316aecb33bb0"
+                "reference": "bd1cd22b465671ec55cd63753605b30909a6db8d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tropotek/tk-form/zipball/1d9690f2dad897bc40e2842cdf8b316aecb33bb0",
-                "reference": "1d9690f2dad897bc40e2842cdf8b316aecb33bb0",
+                "url": "https://api.github.com/repos/tropotek/tk-form/zipball/bd1cd22b465671ec55cd63753605b30909a6db8d",
+                "reference": "bd1cd22b465671ec55cd63753605b30909a6db8d",
                 "shasum": ""
             },
             "require": {
@@ -2322,12 +2322,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/tropotek/tk-framework.git",
-                "reference": "a60193c7fabe2ea82de14e0555e0f8dd443d0645"
+                "reference": "cb964932d2cceec27ffbcb748474fa20f3dd9be9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tropotek/tk-framework/zipball/a60193c7fabe2ea82de14e0555e0f8dd443d0645",
-                "reference": "a60193c7fabe2ea82de14e0555e0f8dd443d0645",
+                "url": "https://api.github.com/repos/tropotek/tk-framework/zipball/cb964932d2cceec27ffbcb748474fa20f3dd9be9",
+                "reference": "cb964932d2cceec27ffbcb748474fa20f3dd9be9",
                 "shasum": ""
             },
             "require": {
@@ -2388,12 +2388,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/tropotek/tk-installers.git",
-                "reference": "169e7bce4dd07faa940f0c959b282797d0472984"
+                "reference": "a15889956a0651e5b275e62af4d35a21a9eb5b1e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tropotek/tk-installers/zipball/169e7bce4dd07faa940f0c959b282797d0472984",
-                "reference": "169e7bce4dd07faa940f0c959b282797d0472984",
+                "url": "https://api.github.com/repos/tropotek/tk-installers/zipball/a15889956a0651e5b275e62af4d35a21a9eb5b1e",
+                "reference": "a15889956a0651e5b275e62af4d35a21a9eb5b1e",
                 "shasum": ""
             },
             "require": {
@@ -2446,12 +2446,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/tropotek/tk-table.git",
-                "reference": "881378da938b3f4445630788aeedb7969a0ec01a"
+                "reference": "a301a6bb4486f1cc89649e7ab19399ee8d832a94"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tropotek/tk-table/zipball/881378da938b3f4445630788aeedb7969a0ec01a",
-                "reference": "881378da938b3f4445630788aeedb7969a0ec01a",
+                "url": "https://api.github.com/repos/tropotek/tk-table/zipball/a301a6bb4486f1cc89649e7ab19399ee8d832a94",
+                "reference": "a301a6bb4486f1cc89649e7ab19399ee8d832a94",
                 "shasum": ""
             },
             "require": {
@@ -3338,65 +3338,6 @@
             "time": "2024-11-28T04:54:44+00:00"
         },
         {
-            "name": "phpstan/phpstan",
-            "version": "2.1.x-dev",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "488b65f61d8c9c8f055c47da62134553aaac6428"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/488b65f61d8c9c8f055c47da62134553aaac6428",
-                "reference": "488b65f61d8c9c8f055c47da62134553aaac6428",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.4|^8.0"
-            },
-            "conflict": {
-                "phpstan/phpstan-shim": "*"
-            },
-            "default-branch": true,
-            "bin": [
-                "phpstan",
-                "phpstan.phar"
-            ],
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "bootstrap.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "PHPStan - PHP Static Analysis Tool",
-            "keywords": [
-                "dev",
-                "static analysis"
-            ],
-            "support": {
-                "docs": "https://phpstan.org/user-guide/getting-started",
-                "forum": "https://github.com/phpstan/phpstan/discussions",
-                "issues": "https://github.com/phpstan/phpstan/issues",
-                "security": "https://github.com/phpstan/phpstan/security/policy",
-                "source": "https://github.com/phpstan/phpstan-src"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/ondrejmirtes",
-                    "type": "github"
-                },
-                {
-                    "url": "https://github.com/phpstan",
-                    "type": "github"
-                }
-            ],
-            "time": "2025-04-18T13:33:23+00:00"
-        },
-        {
             "name": "react/promise",
             "version": "3.x-dev",
             "source": {
@@ -4073,9 +4014,7 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "phpstan/phpstan": 20
-    },
+    "stability-flags": {},
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
