@@ -17,7 +17,7 @@ SELECT
   IFNULL(a.session_id, '') AS session_id,
   a.last_login,
   MD5(CONCAT(a.auth_id, 'Auth')) AS hash,
-  CONCAT('/app/', u.type, '/' , u.user_id, '/data') AS data_path
+  CONCAT('/app/', u.type, '/' , u.user_id) AS data_path
 FROM user u
        LEFT JOIN auth a ON (a.fkey = 'App\\Db\\User' AND a.fid = (u.user_id))
 ;

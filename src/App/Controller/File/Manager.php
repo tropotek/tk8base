@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller\File;
 
+use App\Db\User;
 use Bs\Auth;
 use Bs\Mvc\ControllerAdmin;
 use App\Table\File;
@@ -40,7 +41,8 @@ class Manager extends ControllerAdmin
 
         // set up the upload file form
         $this->form = new Form('upload');
-        $this->form->appendField(new \App\Form\Field\File('file', Auth::getAuthUser()))->setLabel('Create File');
+        // This will put the file in '/data/app/[staff|member]/{userId}
+        $this->form->appendField(new \App\Form\Field\File('file', User::getAuthUser()))->setLabel('Create File');
         $this->form->appendField(new Form\Action\Submit('save', [$this, 'onSubmit']));
         $this->form->execute($_POST);
 

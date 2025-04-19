@@ -1,9 +1,11 @@
 <?php
 namespace App\Table;
 
+use App\Db\User;
 use Bs\Mvc\Table;
 use Dom\Template;
 use Tk\Alert;
+use Tk\FileUtil;
 use Tk\Uri;
 use Tk\Db;
 use Tk\Table\Action\Csv;
@@ -34,27 +36,39 @@ class File extends Table
             });
 
         $this->appendCell('filename')
-            ->addHeaderCss('max-width')
+            ->addHeaderCss('text-start max-width')
             ->setSortable(true)
             ->addOnValue(function(\App\Db\File $file, Cell $cell) {
                 return sprintf('<a href="%s" target="_blank">%s</a>', $file->getUrl(), $file->filename);
             });
 
         $this->appendCell('userId')
-            ->setSortable(true);
-        $this->appendCell('fkey')->setHeader('Key')
-            ->setSortable(true);
-        $this->appendCell('fid')->setHeader('Key ID')
-            ->setSortable(true);
+            ->setSortable(true)
+            ->addOnValue(function(\App\Db\File $file, Cell $cell) {
+                $user = User::find($file->userId);
+                return $user->nameShort ?? '';
+            });
+
+//        $this->appendCell('fkey')->setHeader('Key')
+//            ->setSortable(true);
+//        $this->appendCell('fid')->setHeader('Key ID')
+//            ->setSortable(true);
+
         $this->appendCell('bytes')
-            ->setSortable(true);
+            ->setSortable(true)
+            ->addCss('text-nowrap text-end')
+            ->addOnValue(function(\App\Db\File $file, Cell $cell) {
+                return FileUtil::bytes2String($file->bytes);
+            });
 
         $this->appendCell('selected')
             ->setSortable(true)
+            ->addCss('text-center')
             ->addOnValue('\Tk\Table\Type\Boolean::onValue');
 
         $this->appendCell('created')
             ->setSortable(true)
+            ->addCss('text-nowrap')
             ->addOnValue('\Tk\Table\Type\DateFmt::onValue');
 
 
