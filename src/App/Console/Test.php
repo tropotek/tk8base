@@ -41,7 +41,7 @@ class Test extends Console
 
         //$result = $moodle->get_all_recent_quizzes(90);
 
-        vd($result);
+        //vd($result);
         //vd(date_default_timezone_get());
 
 

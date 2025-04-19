@@ -19,7 +19,7 @@ class File extends \Tk\Form\Field\File
     protected Model $model;
 
 
-    public function __construct(string $name, Model $model = null)
+    public function __construct(string $name, ?Model $model = null)
     {
         parent::__construct($name);
         $this->model = $model;
@@ -29,7 +29,7 @@ class File extends \Tk\Form\Field\File
         //$this->addCss('tk-multiinput');
     }
 
-    public static function create(string $name, Model $model): self
+    public static function create(string $name, ?Model $model = null): self
     {
         return new self($name, $model);
     }

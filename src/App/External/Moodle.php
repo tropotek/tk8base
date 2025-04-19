@@ -126,9 +126,6 @@ class Moodle
 	}
 
 
-    /**
-     * @return array<int,\stdClass>
-     */
 	public function getMoodleSiteInfo(): ?\stdClass
 	{
 		return $this->post('core_webservice_get_site_info');
@@ -150,25 +147,6 @@ class Moodle
 		$this->post('local_oumcategory_set_visible', compact('id', 'visible'));
         return true;
 	}
-
-    /**
-     * @return array<int,\stdClass>
-     */
-    public function getCategoryByIdnumber(string $idnumber): ?\stdClass
-    {
-        // use the standard moodle api call
-//        $rows = $this->post('core_course_get_categories', [
-//            'criteria' => [
-//                [
-//                    'key' => 'idnumber',
-//                    'value' => $idnumber
-//                ]
-//            ]
-//        ]);
-//        return $rows[0] ?? null;
-
-        //return $this->post('local_oumcategory_get_by_idnumber', compact('idnumber'));
-    }
 
 	public function get_all_recent_quizzes(int $lookback): array
 	{
@@ -223,7 +201,6 @@ class Moodle
      *   profileimageurl
      *   profileimageurlsmall
      *
-     * @return array<int,/stdClass>
      */
     public function getAllUsers(): array
     {
