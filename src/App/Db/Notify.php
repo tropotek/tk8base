@@ -13,7 +13,6 @@ use Tk\Exception;
  *
  * See the `events.sql` to view the `evt_delete_expired_notify` event that clears notify records after their ttl.
  *
- * @todo Create a page to view and manage user notifications
  * @see https://webdamn.com/build-push-notification-system-with-php-mysql/#google_vignette
  */
 class Notify extends Model

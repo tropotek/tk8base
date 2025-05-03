@@ -13,7 +13,7 @@ return function (Config $config) {
     $config['db.mysql'] = '{db.mysql}';
 
     /**
-     * System hostname
+     * System hostname, used for command line scripts (cron)
      */
     //$config['hostname'] = '';
 

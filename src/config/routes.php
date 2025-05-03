@@ -61,6 +61,8 @@ return function (CollectionConfigurator $routes) {
 
 
     // Component test page
+    $routes->add('com-notify-nav', '/component/notify')
+        ->controller([\App\Component\Notify::class, 'doDefault']);
     $routes->add('test-component', '/componentTest')
         ->controller([\App\Controller\Test\Component::class, 'doDefault']);
     $routes->add('component-test', '/component/test')

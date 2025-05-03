@@ -66,9 +66,6 @@ class Page extends \Bs\Mvc\Page
         $this->showLogoutDialog();
         $this->showAbout();
 
-        $notify = new Notify();
-        $template->replaceTemplate('tk-notify', $notify->show(), false);
-
         return $template;
     }
 
