@@ -66,9 +66,6 @@ class Contact extends ControllerPublic
 
         if ($form->hasErrors()) return;
 
-        $message = $this->getFactory()->createMailMessage();
-        $message->addTo($form->getFieldValue('email'));
-        $message->setSubject(Registry::instance()->getSiteName() . ' Contact Request');
         $content = <<<HTML
 <p>
 Dear {name},
@@ -81,7 +78,9 @@ Phone: {phone}<br/>
   {message}
 </p>
 HTML;
-        $message->setContent($content);
+        $message = $this->getFactory()->createMailMessage($content);
+        $message->addTo($form->getFieldValue('email'));
+        $message->setSubject(Registry::instance()->getSiteName() . ' Contact Request');
         $message->replace($form->getFieldValues());
         Mailer::instance()->send($message);
 

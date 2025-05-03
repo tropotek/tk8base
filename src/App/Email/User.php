@@ -5,6 +5,7 @@ use Bs\Db\GuestToken;
 use Bs\Factory;
 use Tk\Config;
 use Bs\Registry;
+use Tk\Mail\Mailer;
 use Tk\Uri;
 
 class User
@@ -24,8 +25,7 @@ class User
             <p><small>Note: If you did not initiate this account creation you can safely disregard this message.</small></p>
         HTML;
 
-        $message = Factory::instance()->createMailMessage();
-        $message->set('content', $content);
+        $message = Factory::instance()->createMailMessage($content);
         $message->setSubject(Registry::instance()->getSiteName() . ' Account Registration');
         $message->addTo($user->email);
         $message->set('name', $user->nameShort);
@@ -37,7 +37,7 @@ class User
         ], 60);
         $message->set('activate-url', $gt->getUrl()->toString());
 
-        return Factory::instance()->getMailGateway()->send($message);
+        return Mailer::instance()->send($message);
     }
 
 
@@ -57,8 +57,7 @@ class User
             <p><small>Note: If you did not initiate this email, you can safely disregard this message.</small></p>
         HTML;
 
-        $message = Factory::instance()->createMailMessage();
-        $message->set('content', $content);
+        $message = Factory::instance()->createMailMessage($content);
         $message->setSubject($config->get('site.title') . ' Password Recovery');
         $message->addTo($user->email);
         $message->set('name', $user->nameShort);
@@ -70,7 +69,7 @@ class User
         ], 20);
         $message->set('activate-url', $gt->getUrl()->toString());
 
-        return Factory::instance()->getMailGateway()->send($message);
+        return Mailer::instance()->send($message);
     }
 
 }
