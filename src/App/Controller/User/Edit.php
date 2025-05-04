@@ -247,7 +247,7 @@ class Edit extends ControllerAdmin
         if (!$this->user->userId) {
             $template->setVisible('new-user');
         }
-        if (Masquerade::canMasqueradeAs(Auth::getAuthUser(), $this->user->getAuth())) {
+        if ($this->user->userId && Masquerade::canMasqueradeAs(Auth::getAuthUser(), $this->user->getAuth())) {
             $msqUrl = Uri::create()->set(Masquerade::QUERY_MSQ, $this->user->userId);
             $template->setAttr('msq', 'href', $msqUrl);
             $template->setVisible('msq');
