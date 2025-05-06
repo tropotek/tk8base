@@ -54,25 +54,25 @@ class Home extends ControllerPublic
     {
         $html = <<<HTML
 <div>
-  <div class="card mb-3">
-    <div class="card-header" var="title"><i class="fa fa-envelope"></i> </div>
-    <div class="card-body" var="content">
-        <div>
-            <h3 var="title">Welcome Home</h3>
-            <p var="content"></p>
+    <div class="card mb-3">
+        <div class="card-header" var="title"><i class="fa fa-envelope"></i> </div>
+        <div class="card-body" var="content">
+            <div>
+                <h3 var="title">Welcome Home</h3>
+                <p var="content"></p>
 
-            <p choice="auth">Status: You are logged in!</p>
-            <p  choice="no-auth">Status You are not logged in</p>
+                <p choice="auth">Status: You are logged in!</p>
+                <p choice="no-auth">Status You are not logged in</p>
 
-            <ul>
-              <li><a href="#?e" var="eurl">Test Exception</a></li>
-              <li><a href="/info" title="Confirmation Dialog Test" data-confirm="<p><em>Are you sure?</em></p>" data-cancel="Nuh!!">Confirm Test</a></li>
-              <li><a href="#?a" var="aurl">Alert Test</a></li>
-            </ul>
-            <p>&nbsp;</p>
+                <ul>
+                    <li><a href="#?e" var="eurl">Test Exception</a></li>
+                    <li><a href="/info" title="Confirmation Dialog Test" data-confirm="<p><em>Are you sure?</em></p>" data-cancel="Nuh!!">Confirm Test</a></li>
+                    <li><a href="#?a" var="aurl">Alert Test</a></li>
+                </ul>
+                <p>&nbsp;</p>
+            </div>
         </div>
     </div>
-  </div>
 </div>
 HTML;
         return $this->loadTemplate($html);

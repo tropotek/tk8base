@@ -288,7 +288,7 @@ class Edit extends ControllerAdmin
     {
         $html = <<<HTML
 <div>
-  <div class="page-actions card mb-3">
+  <div class="page-actions card mb-3" choice="edit">
     <div class="card-body" var="actions">
       <a href="/" title="Masquerade" data-confirm="Masquerade as this user" class="btn btn-outline-secondary" choice="msq"><i class="fa fa-user-secret"></i> Masquerade</a>
       <a href="/" title="Convert user to staff" data-confirm="Convert this user to staff" class="btn btn-outline-secondary" choice="to-staff"><i class="fa fa-retweet"></i> Convert To Staff</a>

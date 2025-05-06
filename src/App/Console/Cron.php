@@ -33,7 +33,7 @@ class Cron extends Console
 
 
 
-        $this->writeComment('Completed!!!');
+
         $this->release();   // release lock
         return self::SUCCESS;
     }
