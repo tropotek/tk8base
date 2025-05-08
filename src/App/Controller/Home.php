@@ -70,9 +70,21 @@ class Home extends ControllerPublic
                     <li><a href="#?a" var="aurl">Alert Test</a></li>
                 </ul>
                 <p>&nbsp;</p>
+
+                <p>jquery UI Test:</p>
+                <div id="datepicker"></div>
+                <p>&nbsp;</p>
             </div>
         </div>
     </div>
+
+<script>
+jQuery(function($) {
+    $( "#datepicker" ).datepicker({
+        inline: true
+    });
+});
+</script>
 </div>
 HTML;
         return $this->loadTemplate($html);

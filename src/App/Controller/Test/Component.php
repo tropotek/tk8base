@@ -24,6 +24,9 @@ class Component extends ControllerAdmin
         $template->appendText('title', $this->getPage()->getTitle());
         $template->addCss('icon', $this->getPage()->getIcon());
 
+        // (test) comment out, for primary panel full width
+        $template->setVisible('components');
+
         return $template;
     }
 
@@ -31,7 +34,7 @@ class Component extends ControllerAdmin
     {
         $html = <<<HTML
 <div class="row">
-    <div class="col-8">
+    <div class="col">
         <div class="card mb-3">
             <div class="card-header"><i var="icon"></i> <span var="title"></span></div>
             <div class="card-body" var="content">
@@ -39,7 +42,7 @@ class Component extends ControllerAdmin
             </div>
         </div>
     </div>
-    <div class="col-4" var="components">
+    <div class="col-4" choice="components">
         <div hx-get="/component/test" hx-trigger="load" hx-swap="outerHTML" var="component">
           <p class="text-center mt-4"><i class="fa fa-fw fa-spin fa-spinner fa-3x"></i><br>Loading...</p>
         </div>

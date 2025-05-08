@@ -13,5 +13,4 @@ $composer = include __DIR__ . '/vendor/autoload.php';
 $config  = \Tk\Config::instance();
 $factory = \App\Factory::instance();
 $factory->set('composerLoader', $composer);
-
 \Bs\Factory::instance()->getBootstrap()->init();

@@ -83,15 +83,28 @@ class Dashboard extends ControllerAdmin
           <a href="#?e" class="btn btn-outline-dark" var="eurl">Test Exception</a>
           <a href="/info" class="btn btn-outline-dark" title="Confirmation Dialog Test" data-confirm="<p><em>Are you sure?</em></p>" data-cancel="Nuh!!">Confirm Test</a>
           <a href="#?a" class="btn btn-outline-dark" var="aurl">Alert Test</a>
+          <a href="/" class="btn btn-outline-dark">Landing Page</a>
         </p>
 
         <p>
           <a href="#?n" class="btn btn-outline-dark" var="nurl">Test Notify Message</a>
         </p>
 
+        <p>jquery UI Test:</p>
+        <div id="datepicker"></div>
+        <p>&nbsp;</p>
+
         <p><b>Name:</b> <span var="user-name"></span></p>
     </div>
   </div>
+
+<script>
+jQuery(function($) {
+    $( "#datepicker" ).datepicker({
+        inline: true
+    });
+});
+</script>
 </div>
 HTML;
         return $this->loadTemplate($html);
