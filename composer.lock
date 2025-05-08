@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4e3b11aea00e5da9e2a485f610d7a255",
+    "content-hash": "ea324869895570c2b8d5f519b5e9c96f",
     "packages": [
         {
             "name": "htmx/htmx",
@@ -416,16 +416,16 @@
         },
         {
             "name": "select2/select2",
-            "version": "4.1.0-rc.0",
+            "version": "4.0.13",
             "source": {
                 "type": "git",
                 "url": "https://github.com/select2/select2.git",
-                "reference": "9ce61fd297fd2922fe771debea8b24dfd219a49a"
+                "reference": "45f2b83ceed5231afa7b3d5b12b58ad335edd82e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/select2/select2/zipball/9ce61fd297fd2922fe771debea8b24dfd219a49a",
-                "reference": "9ce61fd297fd2922fe771debea8b24dfd219a49a",
+                "url": "https://api.github.com/repos/select2/select2/zipball/45f2b83ceed5231afa7b3d5b12b58ad335edd82e",
+                "reference": "45f2b83ceed5231afa7b3d5b12b58ad335edd82e",
                 "shasum": ""
             },
             "type": "component",
@@ -452,32 +452,22 @@
             "homepage": "https://select2.org/",
             "support": {
                 "issues": "https://github.com/select2/select2/issues",
-                "source": "https://github.com/select2/select2/tree/4.1.0-rc.0"
+                "source": "https://github.com/select2/select2/tree/4.0.13"
             },
-            "funding": [
-                {
-                    "url": "https://github.com/kevin-brown",
-                    "type": "github"
-                },
-                {
-                    "url": "https://opencollective.com/select2",
-                    "type": "open_collective"
-                }
-            ],
-            "time": "2021-01-23T04:36:25+00:00"
+            "time": "2020-01-28T05:01:22+00:00"
         },
         {
             "name": "studio-42/elfinder",
-            "version": "2.1.x-dev",
+            "version": "2.1.65",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Studio-42/elFinder.git",
-                "reference": "2f97105f101c90b23dda5b1f7a2d75303ac1d056"
+                "reference": "5535a8677558c44a20c19ff9b97ec37702f9c44d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Studio-42/elFinder/zipball/2f97105f101c90b23dda5b1f7a2d75303ac1d056",
-                "reference": "2f97105f101c90b23dda5b1f7a2d75303ac1d056",
+                "url": "https://api.github.com/repos/Studio-42/elFinder/zipball/5535a8677558c44a20c19ff9b97ec37702f9c44d",
+                "reference": "5535a8677558c44a20c19ff9b97ec37702f9c44d",
                 "shasum": ""
             },
             "require": {
@@ -524,7 +514,7 @@
             "homepage": "http://elfinder.org",
             "support": {
                 "issues": "https://github.com/Studio-42/elFinder/issues",
-                "source": "https://github.com/Studio-42/elFinder/tree/2.1"
+                "source": "https://github.com/Studio-42/elFinder/tree/2.1.65"
             },
             "funding": [
                 {
@@ -532,7 +522,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-12-05T13:15:32+00:00"
+            "time": "2024-01-05T05:01:39+00:00"
         },
         {
             "name": "symfony/console",
@@ -2003,12 +1993,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/tropotek/tk-base.git",
-                "reference": "220c79b7913a50c75beb27ef0be4fdf64e93682b"
+                "reference": "d94177f431246f704533a720eb2afcd4e610c49b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tropotek/tk-base/zipball/220c79b7913a50c75beb27ef0be4fdf64e93682b",
-                "reference": "220c79b7913a50c75beb27ef0be4fdf64e93682b",
+                "url": "https://api.github.com/repos/tropotek/tk-base/zipball/d94177f431246f704533a720eb2afcd4e610c49b",
+                "reference": "d94177f431246f704533a720eb2afcd4e610c49b",
                 "shasum": ""
             },
             "require": {
@@ -2123,12 +2113,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/tropotek/tk-form.git",
-                "reference": "e47200d96f8ab3303038cd268b6a8fd59d9391b7"
+                "reference": "17faf07ae8933d674022ae510caaf20f3f986d7a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tropotek/tk-form/zipball/e47200d96f8ab3303038cd268b6a8fd59d9391b7",
-                "reference": "e47200d96f8ab3303038cd268b6a8fd59d9391b7",
+                "url": "https://api.github.com/repos/tropotek/tk-form/zipball/17faf07ae8933d674022ae510caaf20f3f986d7a",
+                "reference": "17faf07ae8933d674022ae510caaf20f3f986d7a",
                 "shasum": ""
             },
             "require": {
@@ -2164,7 +2154,7 @@
                 "issues": "https://github.com/tropotek/tk-form/issues",
                 "source": "https://github.com/tropotek/tk-form/tree/8.0"
             },
-            "time": "2022-10-23T00:00:00+00:00"
+            "time": "2025-05-08T00:00:00+00:00"
         },
         {
             "name": "ttek/tk-framework",
@@ -2172,12 +2162,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/tropotek/tk-framework.git",
-                "reference": "c5d7ca9b621513f86aa44444805cdf4c47c7a193"
+                "reference": "824b9e00a43ee16e6b2414e0fe865cfe0f9dda81"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tropotek/tk-framework/zipball/c5d7ca9b621513f86aa44444805cdf4c47c7a193",
-                "reference": "c5d7ca9b621513f86aa44444805cdf4c47c7a193",
+                "url": "https://api.github.com/repos/tropotek/tk-framework/zipball/824b9e00a43ee16e6b2414e0fe865cfe0f9dda81",
+                "reference": "824b9e00a43ee16e6b2414e0fe865cfe0f9dda81",
                 "shasum": ""
             },
             "require": {
@@ -2238,12 +2228,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/tropotek/tk-installers.git",
-                "reference": "453704d6e3f42eece3dd2dac76c3ed302ac3ad5b"
+                "reference": "abad011909e3a16ec92ff5ebd7d93f4299fd13a9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tropotek/tk-installers/zipball/453704d6e3f42eece3dd2dac76c3ed302ac3ad5b",
-                "reference": "453704d6e3f42eece3dd2dac76c3ed302ac3ad5b",
+                "url": "https://api.github.com/repos/tropotek/tk-installers/zipball/abad011909e3a16ec92ff5ebd7d93f4299fd13a9",
+                "reference": "abad011909e3a16ec92ff5ebd7d93f4299fd13a9",
                 "shasum": ""
             },
             "require": {
@@ -2296,12 +2286,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/tropotek/tk-table.git",
-                "reference": "382cab0a3b27b6e9e8d991c1affe23b3cea35ec7"
+                "reference": "191313797cd2a6e94f72a5cf3b3b447c667a62de"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tropotek/tk-table/zipball/382cab0a3b27b6e9e8d991c1affe23b3cea35ec7",
-                "reference": "382cab0a3b27b6e9e8d991c1affe23b3cea35ec7",
+                "url": "https://api.github.com/repos/tropotek/tk-table/zipball/191313797cd2a6e94f72a5cf3b3b447c667a62de",
+                "reference": "191313797cd2a6e94f72a5cf3b3b447c667a62de",
                 "shasum": ""
             },
             "require": {
@@ -2337,7 +2327,7 @@
                 "issues": "https://github.com/tropotek/tk-table/issues",
                 "source": "https://github.com/tropotek/tk-table/tree/8.0"
             },
-            "time": "2022-10-23T00:00:00+00:00"
+            "time": "2025-05-08T00:00:00+00:00"
         },
         {
             "name": "twbs/bootstrap",
@@ -3864,7 +3854,10 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {},
+    "stability-flags": {
+        "select2/select2": 0,
+        "studio-42/elfinder": 0
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

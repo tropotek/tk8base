@@ -19,6 +19,7 @@ if (!\Tk\Config::isDebug() || \Tk\Config::isProd()) {
 $user = \App\Db\User::find(1);
 if (is_null($user)) {
 
+    // TODO: remove for new sites, create a new system first user `admin` for example.
     \Tk\Log::debug("Adding new users to site.");
     $sql = <<<SQL
         SET FOREIGN_KEY_CHECKS = 0;
