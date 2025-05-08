@@ -33,10 +33,6 @@ body .htmx-request
   width: 4.5em;
 }
 
-table.tk-table-sm tr.inactive {
-  opacity: 0.5 !important;
-}
-
 .page-title-box .breadcrumb {
   padding: 0;
   margin: 0;
@@ -185,10 +181,10 @@ form textarea {
 .tk-sortable .drag {
   cursor: ns-resize;
 }
-.tk-table tr.task-closed {
-  opacity: 0.8;
+table.tk-table-sm tr.inactive,
+.tk-table tbody tr.table-muted {
+    opacity: 0.5 !important;
 }
-
 
 /* Header OrderBy Arrows */
 th
