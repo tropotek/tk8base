@@ -1975,12 +1975,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/tropotek/tk-base.git",
-                "reference": "351d751453c06de81d364e41d7e8d03603f58129"
+                "reference": "8eaeb298bdd3ccd4bfae0ce84ac4f99cf59bbaec"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tropotek/tk-base/zipball/351d751453c06de81d364e41d7e8d03603f58129",
-                "reference": "351d751453c06de81d364e41d7e8d03603f58129",
+                "url": "https://api.github.com/repos/tropotek/tk-base/zipball/8eaeb298bdd3ccd4bfae0ce84ac4f99cf59bbaec",
+                "reference": "8eaeb298bdd3ccd4bfae0ce84ac4f99cf59bbaec",
                 "shasum": ""
             },
             "require": {
@@ -2020,7 +2020,7 @@
                     "homepage": "http://www.tropotek.com/"
                 }
             ],
-            "description": "Tk8 Lib: Tk Lib base MVC framework the implements the base Symfony framework",
+            "description": "Tk8 Lib: Tk Lib MVC framework using low-level Symfony framework objects",
             "keywords": [
                 "mvc",
                 "tropotek"
