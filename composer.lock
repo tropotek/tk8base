@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ea324869895570c2b8d5f519b5e9c96f",
+    "content-hash": "42ea2cde51a3cab8de6391ca56534207",
     "packages": [
         {
             "name": "htmx/htmx",
@@ -21,24 +21,6 @@
             "dist": {
                 "type": "file",
                 "url": "https://code.jquery.com/jquery-3.7.1.min.js"
-            },
-            "type": "library"
-        },
-        {
-            "name": "jquery/jqueryui",
-            "version": "1.14.1",
-            "dist": {
-                "type": "file",
-                "url": "https://code.jquery.com/ui/1.14.1/jquery-ui.min.js"
-            },
-            "type": "library"
-        },
-        {
-            "name": "jquery/smoothness",
-            "version": "1.14.1",
-            "dist": {
-                "type": "file",
-                "url": "https://code.jquery.com/ui/1.14.1/themes/smoothness/jquery-ui.min.css"
             },
             "type": "library"
         },
@@ -1993,12 +1975,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/tropotek/tk-base.git",
-                "reference": "ecc5e5c3d86c02143661b9a6d9c99b3f9d66babf"
+                "reference": "d51a4669d3813c2c0defd04fe13b22386fbda994"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tropotek/tk-base/zipball/ecc5e5c3d86c02143661b9a6d9c99b3f9d66babf",
-                "reference": "ecc5e5c3d86c02143661b9a6d9c99b3f9d66babf",
+                "url": "https://api.github.com/repos/tropotek/tk-base/zipball/d51a4669d3813c2c0defd04fe13b22386fbda994",
+                "reference": "d51a4669d3813c2c0defd04fe13b22386fbda994",
                 "shasum": ""
             },
             "require": {
