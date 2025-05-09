@@ -1975,12 +1975,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/tropotek/tk-base.git",
-                "reference": "d51a4669d3813c2c0defd04fe13b22386fbda994"
+                "reference": "82844fb85b16e89bc8278b5e3358f1ad974df7a5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tropotek/tk-base/zipball/d51a4669d3813c2c0defd04fe13b22386fbda994",
-                "reference": "d51a4669d3813c2c0defd04fe13b22386fbda994",
+                "url": "https://api.github.com/repos/tropotek/tk-base/zipball/82844fb85b16e89bc8278b5e3358f1ad974df7a5",
+                "reference": "82844fb85b16e89bc8278b5e3358f1ad974df7a5",
                 "shasum": ""
             },
             "require": {
