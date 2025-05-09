@@ -1975,12 +1975,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/tropotek/tk-base.git",
-                "reference": "7bd77b214b07ec2dd53e89d3ae9652810a22b867"
+                "reference": "351d751453c06de81d364e41d7e8d03603f58129"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tropotek/tk-base/zipball/7bd77b214b07ec2dd53e89d3ae9652810a22b867",
-                "reference": "7bd77b214b07ec2dd53e89d3ae9652810a22b867",
+                "url": "https://api.github.com/repos/tropotek/tk-base/zipball/351d751453c06de81d364e41d7e8d03603f58129",
+                "reference": "351d751453c06de81d364e41d7e8d03603f58129",
                 "shasum": ""
             },
             "require": {
@@ -2020,8 +2020,9 @@
                     "homepage": "http://www.tropotek.com/"
                 }
             ],
-            "description": "Base site library for the Au lib",
+            "description": "Tk8 Lib: Tk Lib base MVC framework the implements the base Symfony framework",
             "keywords": [
+                "mvc",
                 "tropotek"
             ],
             "support": {
@@ -2036,12 +2037,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/tropotek/tk-domtemplate.git",
-                "reference": "aee5c09249df12b39a8128956b82f92996a0bf95"
+                "reference": "4919c600c3fccb0524764d649de9706d5f753dd5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tropotek/tk-domtemplate/zipball/aee5c09249df12b39a8128956b82f92996a0bf95",
-                "reference": "aee5c09249df12b39a8128956b82f92996a0bf95",
+                "url": "https://api.github.com/repos/tropotek/tk-domtemplate/zipball/4919c600c3fccb0524764d649de9706d5f753dd5",
+                "reference": "4919c600c3fccb0524764d649de9706d5f753dd5",
                 "shasum": ""
             },
             "require": {
@@ -2071,7 +2072,7 @@
                     "homepage": "http://www.tropotek.com/"
                 }
             ],
-            "description": "A PHP DOM Template library using XML/HTML files for templates",
+            "description": "Tk8 Lib: PHP DOM Template library with inline SCSS file compiler",
             "keywords": [
                 "dom",
                 "dom-template",
@@ -2095,12 +2096,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/tropotek/tk-form.git",
-                "reference": "17faf07ae8933d674022ae510caaf20f3f986d7a"
+                "reference": "88955702e543f4b7a2df6104e2d00f1cea5bc9b0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tropotek/tk-form/zipball/17faf07ae8933d674022ae510caaf20f3f986d7a",
-                "reference": "17faf07ae8933d674022ae510caaf20f3f986d7a",
+                "url": "https://api.github.com/repos/tropotek/tk-form/zipball/88955702e543f4b7a2df6104e2d00f1cea5bc9b0",
+                "reference": "88955702e543f4b7a2df6104e2d00f1cea5bc9b0",
                 "shasum": ""
             },
             "require": {
@@ -2127,7 +2128,7 @@
                     "homepage": "http://www.tropotek.com/"
                 }
             ],
-            "description": "Create dynamic forms easily with the Tk framework",
+            "description": "Tk8 Lib: Form rendering with DOM and PHP templates",
             "keywords": [
                 "form",
                 "tropotek"
@@ -2144,12 +2145,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/tropotek/tk-framework.git",
-                "reference": "ee45cef6b3d75f99c4d41b801e8d587ce7b1b65d"
+                "reference": "9217fc2fb7801a50907f4c504707bce696f9d129"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tropotek/tk-framework/zipball/ee45cef6b3d75f99c4d41b801e8d587ce7b1b65d",
-                "reference": "ee45cef6b3d75f99c4d41b801e8d587ce7b1b65d",
+                "url": "https://api.github.com/repos/tropotek/tk-framework/zipball/9217fc2fb7801a50907f4c504707bce696f9d129",
+                "reference": "9217fc2fb7801a50907f4c504707bce696f9d129",
                 "shasum": ""
             },
             "require": {
@@ -2186,7 +2187,7 @@
                     "homepage": "http://www.tropotek.com/"
                 }
             ],
-            "description": "Tropotek Framework",
+            "description": "Tk8 Lib: Tropotek Framework Library",
             "keywords": [
                 "Tk",
                 "framework",
@@ -2210,12 +2211,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/tropotek/tk-installers.git",
-                "reference": "c11e38b5f6f8d89041423065172838a27635d2cf"
+                "reference": "fd588e64b9705db844193cd5c158dab278b80368"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tropotek/tk-installers/zipball/c11e38b5f6f8d89041423065172838a27635d2cf",
-                "reference": "c11e38b5f6f8d89041423065172838a27635d2cf",
+                "url": "https://api.github.com/repos/tropotek/tk-installers/zipball/fd588e64b9705db844193cd5c158dab278b80368",
+                "reference": "fd588e64b9705db844193cd5c158dab278b80368",
                 "shasum": ""
             },
             "require": {
@@ -2251,7 +2252,7 @@
                     "homepage": "http://www.tropotek.com/"
                 }
             ],
-            "description": "Tropotek composer installer plugin",
+            "description": "Tk8 Lib: composer install/update plugin for the Tk Lib framework",
             "keywords": [
                 "installers",
                 "tropotek"
@@ -2268,12 +2269,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/tropotek/tk-table.git",
-                "reference": "191313797cd2a6e94f72a5cf3b3b447c667a62de"
+                "reference": "464a83dbf93c0668c3d5de005a125bf9134159da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tropotek/tk-table/zipball/191313797cd2a6e94f72a5cf3b3b447c667a62de",
-                "reference": "191313797cd2a6e94f72a5cf3b3b447c667a62de",
+                "url": "https://api.github.com/repos/tropotek/tk-table/zipball/464a83dbf93c0668c3d5de005a125bf9134159da",
+                "reference": "464a83dbf93c0668c3d5de005a125bf9134159da",
                 "shasum": ""
             },
             "require": {
@@ -2300,7 +2301,7 @@
                     "homepage": "http://www.tropotek.com/"
                 }
             ],
-            "description": "A dynamic table lib to manage table rendering",
+            "description": "Tk8 Lib: Table rendering with DOM and PHP templates",
             "keywords": [
                 "table",
                 "tropotek"
