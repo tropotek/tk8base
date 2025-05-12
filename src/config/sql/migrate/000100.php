@@ -6,7 +6,7 @@ $registry->set('site.name.short', 'TkBase');
 $registry->set('site.email', 'site@email.com');
 $registry->set('site.email.sig', '');
 $registry->set('system.maintenance.enabled', '');
-$registry->set('system.maintenance.message', '');
+$registry->set('system.maintenance.message', 'Site is currently undergoing maintenance. PLease try again later.');
 $registry->set('system.global.css', '');
 $registry->set('system.global.js', '');
 $registry->set('system.meta.description', 'A base development project site for the TK libs');
