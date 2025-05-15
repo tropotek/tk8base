@@ -156,10 +156,10 @@ class Notify extends Model
         $filter->appendFrom('v_notify a');
 
         if (!empty($filter['search'])) {
-            $filter['lSearch'] = '%' . $filter['search'] . '%';
-            $w  = 'LOWER(a.title) LIKE LOWER(:lSearch)';
-            $w .= 'OR a.notify_id = :search OR ';
-            $filter->appendWhere('AND (%s)', $w);
+            $filter['lSearch'] = '%' . strtolower($filter['search']) . '%';
+            $w  = "a.notify_id = :search ";
+            $w .= "OR LOWER(CONCAT_WS(' ', a.title)) LIKE :lSearch ";
+            if ($w) $filter->appendWhere('AND (%s)', $w);
         }
 
         if (!empty($filter['id'])) {

@@ -282,13 +282,10 @@ class User extends Model implements UserInterface
         $filter->appendFrom('v_user a');
 
         if (!empty($filter['search'])) {
-            $filter['lSearch'] = '%' . $filter['search'] . '%';
-            $w  = 'LOWER(a.given_name) LIKE LOWER(:lSearch)';
-            $w .= 'OR LOWER(a.family_name) LIKE LOWER(:lSearch)';
-            $w .= 'OR LOWER(a.email) LIKE LOWER(:lSearch)';
-            $w .= 'OR LOWER(a.uid) LIKE LOWER(:lSearch)';
-            $w .= 'OR a.user_id LIKE :search';
-            $filter->appendWhere('AND (%s)', $w);
+            $filter['lSearch'] = '%' . strtolower($filter['search']) . '%';
+            $w  = "a.user_id = :search ";
+            $w .= "OR LOWER(CONCAT_WS(' ', a.given_name, a.family_name, a.email, a.uid)) LIKE :lSearch ";
+            if ($w) $filter->appendWhere('AND (%s)', $w);
         }
 
         if (!empty($filter['id'])) {

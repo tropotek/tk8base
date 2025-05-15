@@ -178,11 +178,10 @@ class File extends Model
         $filter->appendFrom('v_file a');
 
         if (!empty($filter['search'])) {
-            $filter['lSearch'] = '%' . $filter['search'] . '%';
-            $w  = 'LOWER(a.filename) LIKE LOWER(:lSearch)';
-            $w .= 'OR LOWER(a.mime) LIKE LOWER(:lSearch)';
-            $w .= 'OR a.file_id = :search';
-            $filter->appendWhere('AND (%s)', $w);
+            $filter['lSearch'] = '%' . strtolower($filter['search']) . '%';
+            $w  = "a.file_id = :search ";
+            $w .= "OR LOWER(CONCAT_WS(' ', a.filename, a.mime)) LIKE :lSearch ";
+            if ($w) $filter->appendWhere('AND (%s)', $w);
         }
 
         if (!empty($filter['id'])) {
