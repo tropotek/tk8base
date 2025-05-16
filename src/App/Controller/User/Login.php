@@ -72,8 +72,7 @@ class Login extends ControllerAdmin
     {
         $values = $form->getFieldValues();
 
-        $factory = Factory::instance();
-        $result = $factory->getAuthController()->authenticate($factory->getAuthAdapter());
+        $result = Factory::instance()->getAuthController()->authenticate(Factory::instance()->getAuthAdapter());
         if ($result->getCode() != Result::SUCCESS) {
             Log::debug($result->getMessage());
             $form->addError('Invalid login details.');

@@ -80,7 +80,7 @@ class User extends Model implements UserInterface
 
     public function __construct()
     {
-        $this->timezone = Config::instance()->get('php.date.timezone');
+        $this->timezone = Config::getValue('php.date.timezone');
         $this->modified = new \DateTimeImmutable();
         $this->created  = new \DateTimeImmutable();
     }

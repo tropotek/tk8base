@@ -27,8 +27,6 @@ class Home extends ControllerPublic
             Alert::addError('This is a error alert', '', 'fa-solid fa-circle-exclamation');
             Uri::create()->remove('a')->redirect();
         }
-        $reg = $this->getFactory()->getRegistry();
-        $reg->save();
 
 
     }

@@ -3,9 +3,11 @@ namespace App;
 
 use App\Db\User;
 use Bs\Mvc\PageDomInterface;
+use Bs\Registry;
 use Symfony\Component\Console\Application;
 use Symfony\Component\EventDispatcher\EventDispatcher;
 use Tk\Config;
+use Tk\Path;
 
 class Factory extends \Bs\Factory
 {
@@ -22,15 +24,17 @@ class Factory extends \Bs\Factory
     {
         // So we can change the mintion template from the settings page
         if (str_contains($templatePath, '/minton/')) {
-            $selected = $this->getRegistry()->get('minton.template', 'sn-admin');
+            $selected = Registry::getValue('minton.template', 'sn-admin');
             if (User::getAuthUser()->template) {
                 $selected = User::getAuthUser()->template;
             }
-            $templatePath = sprintf('/html/minton/%s.html', preg_replace('|[^0-9a-z_-]|i', '', $selected));
-            $templatePath = Config::makePath($templatePath);
-            if (!is_file($templatePath)) {
-                $templatePath = Config::makePath('/html/minton/sn-admin.html');
+            $cleanName = preg_replace('|[^0-9a-z_-]|i', '', $selected);
+            $tplPath = Path::createTemplatePath(sprintf('/minton/%s.html', $cleanName));
+
+            if (!is_file($tplPath)) {
+                $tplPath = Path::createTemplatePath('/minton/sn-admin.html');
             }
+            $templatePath = $tplPath->toString();
         }
         return new Page($templatePath);
     }

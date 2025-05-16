@@ -3,10 +3,8 @@ namespace App\Db;
 
 use Bs\Auth;
 use Bs\Traits\ForeignModelTrait;
-use Bs\Traits\SystemTrait;
-use Tk\Config;
-use Tk\Exception;
 use Tk\Log;
+use Tk\Path;
 use Tk\Uri;
 use Tk\Db;
 use Tk\Db\Filter;
@@ -14,7 +12,6 @@ use Tk\Db\Model;
 
 class File extends Model
 {
-    use SystemTrait;
     use ForeignModelTrait;
 
     public int        $fileId   = 0;
@@ -40,22 +37,11 @@ class File extends Model
     /**
      * Create a File object form an existing file path
      * Only the relative path from the system data path is stored
-     *
-     * @param string $filename Full/Relative data path to a valid file
      */
-    public static function create(string $filename, ?Model $model = null, int $userId = 0): self
+    public static function create(Path $filename, ?Model $model = null, int $userId = 0): self
     {
-        if (empty($filename)) {
-            throw new Exception('Invalid file path.');
-        }
-
         $obj = new self();
-
-        $obj->filename = $filename;
-        $dataPath = Config::makePath(Config::getDataPath());
-        if (str_starts_with($filename, $dataPath)) {
-            $obj->filename = str_replace($dataPath, '', $filename);
-        }
+        $obj->filename = $filename->getPath();
 
         $obj->label = \Tk\FileUtil::removeExtension(basename($filename));
         if ($model) {
@@ -104,14 +90,14 @@ class File extends Model
         return (false !== Db::delete('file', ['file_id' => $this->fileId]));
     }
 
-    public function getFullPath(): string
+    public function getFullPath(): Path
     {
-        return Config::makePath(Config::getDataPath() . $this->filename);
+        return Path::createDataPath($this->filename);
     }
 
     public function getUrl(): Uri
     {
-        return Uri::create(Config::makeUrl(Config::getDataPath() . $this->filename));
+        return Uri::createDataUri($this->filename);
     }
 
     public function isImage(): bool

@@ -6,6 +6,9 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Bs\Console\Console;
 use Tk\Config;
+use Tk\FileUtil;
+use Tk\Path;
+use Tk\Uri;
 
 class Test extends Console
 {
@@ -18,7 +21,7 @@ class Test extends Console
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        if (!Config::isDebug()) {
+        if (!Config::isDev()) {
             $this->writeError('Error: Only run this command in a debug environment.');
             return self::FAILURE;
         }
@@ -33,9 +36,9 @@ class Test extends Console
         //$result = $moodle->setCategoryVisible(1, true);
         //$result = $moodle->get_curriculum_managers(1);
 
-        $start = (new \DateTime())->add(new \DateInterval('P1W'));
-        $end = (new \DateTime())->add(new \DateInterval('P2M'));
-        vd($start->format('Y-m-d H:i:s'), $end->format('Y-m-d H:i:s'));
+//        $start = (new \DateTime())->add(new \DateInterval('P1W'));
+//        $end = (new \DateTime())->add(new \DateInterval('P2M'));
+//        vd($start->format('Y-m-d H:i:s'), $end->format('Y-m-d H:i:s'));
         //$result = $moodle->set_course_dates(2, $start->format('Y-m-d H:i:s'), $end->format('Y-m-d H:i:s'));
         //$result = $moodle->set_course_dates(2, $start->format('Y-m-d H:i:s'));
 
@@ -44,8 +47,14 @@ class Test extends Console
         //vd($result);
         //vd(date_default_timezone_get());
 
+        //vd(FileUtil::getMimeArray());
 
-
+//        vd(Path::createDataPath('/home/godar/public_html/Projects/tk8base/data/test/test1.txt')->toString());
+//        vd(basename('/text2.txt'));
+//        vd(Uri::createDataUri('/data/test/data.txt')->getDataPath());
+//        vd(Uri::createTemplateUri('/html/js/data.js')->getRelativePath());
+//        vd(Uri::createTemplateUri('/js/data2.js')->toString());
+//        vd(Uri::createDataUri('/')->getPath());
 
 //        $gt = GuestToken::create([
 //            Uri::create('/login')->getPath()

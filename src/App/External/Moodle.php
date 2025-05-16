@@ -26,10 +26,10 @@ class Moodle
     public static function create(?string $apiUrl = null, ?string $token = null): Moodle
     {
         if (is_null($apiUrl)) {
-            $apiUrl = Config::instance()->get('moodle.api.url', '');
+            $apiUrl = Config::getValue('moodle.api.url', '');
         }
         if (is_null($token)) {
-            $token = Config::instance()->get('moodle.api.token', '');
+            $token = Config::getValue('moodle.api.token', '');
         }
         return new self($apiUrl, $token);
     }

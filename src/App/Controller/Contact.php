@@ -80,7 +80,7 @@ Phone: {phone}<br/>
 HTML;
         $message = $this->getFactory()->createMailMessage($content);
         $message->addTo($form->getFieldValue('email'));
-        $message->setSubject(Registry::instance()->getSiteName() . ' Contact Request');
+        $message->setSubject(Registry::getSiteName() . ' Contact Request');
         $message->replace($form->getFieldValues());
         Mailer::instance()->send($message);
 

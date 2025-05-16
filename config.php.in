@@ -33,4 +33,41 @@ return function (Config $config) {
      */
     $config['php.date.timezone'] = 'Australia/Melbourne';
 
+
+
+    // site environment type
+    $config['env.type'] = Config::ENV_DEVELOPMENT;
+
+    // Setup dev environment
+    if ($config->isDev()) {
+        // Send all emails to the debug address
+        $config['system.debug.email'] = 'user@example.net';
+
+        // DB mirror src site (site root path)
+        $config['db.mirror.secret'] = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx';
+        $config['db.mirror.url'] = 'https://localhost/';
+
+        $config['auth.password.strict'] = false;
+
+        error_reporting(-1);
+        $config['php.display_errors'] = 'On';
+        $config['php.error_log'] = '/var/logs/error.log';
+        $config['log.logLevel'] = \Psr\Log\LogLevel::DEBUG;
+        //$config['log.logLevel'] = \Psr\Log\LogLevel::WARNING;
+
+        // force logging with NO_LOG links
+        //$config['log.enableNoLog'] = false;
+
+        // customise request log info
+        $config['site.log.params'] = 0
+            // | StartupHandler::SITE_NAME
+            // | StartupHandler::REQUEST_URI
+            // | StartupHandler::CLIENT_IP
+            // | StartupHandler::CLIENT_AGENT
+            // | StartupHandler::SESSION_ID
+            // | StartupHandler::PHP_VER
+            // | StartupHandler::CONTROLLER
+            // | StartupHandler::METRICS
+        ;
+    }
 };

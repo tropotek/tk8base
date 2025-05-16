@@ -21,15 +21,15 @@ class Page extends \Bs\Mvc\Page
     {
         $template = parent::show();
 
-        if (Registry::instance()->get('system.meta.keywords')) {
-            $template->appendMetaTag('keywords', Registry::instance()->get('system.meta.keywords', ''));
+        if (Registry::getValue('system.meta.keywords')) {
+            $template->appendMetaTag('keywords', Registry::getValue('system.meta.keywords', ''));
         }
-        if (Registry::instance()->get('system.meta.description')) {
-            $template->appendMetaTag('description', Registry::instance()->get('system.meta.description', ''));
+        if (Registry::getValue('system.meta.description')) {
+            $template->appendMetaTag('description', Registry::getValue('system.meta.description', ''));
         }
 
-        $template->appendJs(Registry::instance()->get('system.global.js', ''));
-        $template->appendCss(Registry::instance()->get('system.global.css', ''));
+        $template->appendJs(Registry::getValue('system.global.js', ''));
+        $template->appendCss(Registry::getValue('system.global.css', ''));
 
         if (str_contains($this->getTemplatePath(), '/minton/')) {
             $this->showMintonParams($template);
@@ -223,7 +223,7 @@ HTML;
 HTML;
         $template = $this->loadTemplate($html);
 
-        $template->setText('site-name', Registry::instance()->getSiteName());
+        $template->setText('site-name', Registry::getSiteName());
         $template->setText('year', date('Y'));
         $template->setText('version', System::getVersion());
         $template->setText('released', System::getReleaseDate()->format(Date::FORMAT_LONG_DATETIME));

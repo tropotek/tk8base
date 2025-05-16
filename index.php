@@ -6,10 +6,9 @@
 try {
     require_once __DIR__ . '/_prepend.php';
 
-    $factory  = \Bs\Factory::instance();
-    $response = $factory->getFrontController()->handle($factory->getRequest());
+    $response = \Bs\Factory::instance()->getFrontController()->handle(\Bs\Factory::instance()->getRequest());
     $response->send();
-    $factory->getFrontController()->terminate($factory->getRequest(), $response);
+    \Bs\Factory::instance()->getFrontController()->terminate(\Bs\Factory::instance()->getRequest(), $response);
 } catch (\Exception $e) {
     error_log($e->__toString());
 }
