@@ -31,7 +31,7 @@ class Manager extends ControllerAdmin
 
     public function doDefault(): void
     {
-        $this->getPage()->setTitle(ucwords($this->type) . ' Manager');
+        $this->getPage()->setTitle(ucwords($this->type) . ' Manager', 'fa fa-users');
 
         if ($this->type == User::TYPE_STAFF) {
             $this->setUserAccess(User::PERM_MANAGE_STAFF);
@@ -168,8 +168,8 @@ class Manager extends ControllerAdmin
     public function show(): ?Template
     {
         $template = $this->getTemplate();
-        $template->appendText('title', $this->getPage()->getTitle());
-        $template->setAttr('back', 'href', Breadcrumbs::getBackUrl());
+        $template->setText('title', $this->getPage()->getTitle());
+        $template->addCss('icon', $this->getPage()->getIcon());
 
         if ($this->type == User::TYPE_STAFF) {
             $template->setAttr('create-staff', 'href', Uri::create('/user/staffEdit'));
@@ -192,13 +192,12 @@ class Manager extends ControllerAdmin
   <div class="page-actions card mb-3">
     <div class="card-header"><i class="fa fa-cogs"></i> Actions</div>
     <div class="card-body" var="actions">
-      <a href="/" title="Back" class="btn btn-outline-secondary" var="back"><i class="fa fa-arrow-left"></i> Back</a>
       <a href="/" title="Create Staff" class="btn btn-outline-secondary" choice="create-staff"><i class="fa fa-user"></i> Create Staff</a>
       <a href="/" title="Create Member" class="btn btn-outline-secondary" choice="create-member"><i class="fa fa-user"></i> Create Member</a>
     </div>
   </div>
   <div class="card mb-3">
-    <div class="card-header" var="title"><i class="fa fa-users"></i> </div>
+    <div class="card-header"><i var="icon"></i> <span var="title"></span></div>
     <div class="card-body" var="content"></div>
   </div>
 </div>
