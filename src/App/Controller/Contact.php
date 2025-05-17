@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller;
 
+use App\Factory;
 use Bs\Mvc\ControllerPublic;
 use Bs\Mvc\Form;
 use Bs\Registry;
@@ -78,7 +79,7 @@ Phone: {phone}<br/>
   {message}
 </p>
 HTML;
-        $message = $this->getFactory()->createMailMessage($content);
+        $message = Factory::instance()->createMailMessage($content);
         $message->addTo($form->getFieldValue('email'));
         $message->setSubject(Registry::getSiteName() . ' Contact Request');
         $message->replace($form->getFieldValues());
