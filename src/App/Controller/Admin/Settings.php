@@ -152,7 +152,7 @@ class Settings extends ControllerAdmin
         Alert::addSuccess('Site settings saved successfully.');
         $action->setRedirect(Uri::create());
         if ($form->getTriggeredAction()->isExit()) {
-            $action->setRedirect($this->getBackUrl());
+            $action->setRedirect(Breadcrumbs::getBackUrl());
         }
     }
 

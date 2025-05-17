@@ -141,7 +141,7 @@ class Edit extends ControllerAdmin
 
         // Form Actions
         $this->form->appendField(new SubmitExit('save', [$this, 'onSubmit']));
-        $this->form->appendField(new Link('cancel', $this->getBackUrl()));
+        $this->form->appendField(new Link('cancel', Breadcrumbs::getBackUrl()));
 
         $load = $this->user->unmapForm();
         if ($this->type == User::TYPE_STAFF) {
