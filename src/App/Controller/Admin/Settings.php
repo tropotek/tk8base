@@ -2,7 +2,6 @@
 namespace App\Controller\Admin;
 
 use App\Db\User;
-use App\Factory;
 use Bs\Auth;
 use Bs\Mvc\ControllerAdmin;
 use Bs\Mvc\Form;

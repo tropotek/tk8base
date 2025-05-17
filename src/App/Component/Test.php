@@ -3,8 +3,6 @@ namespace App\Component;
 
 use Bs\Auth;
 use Dom\Template;
-use Tk\System;
-use Tk\Uri;
 
 class Test extends \Dom\Renderer\Renderer implements \Dom\Renderer\DisplayInterface
 {
@@ -56,9 +54,9 @@ class Test extends \Dom\Renderer\Renderer implements \Dom\Renderer\DisplayInterf
 <script>
     jQuery(function($) {
         const container = '#{$this->getContainerId()}';
-        
+
         $('.card-body', container).append('<p>Javascript Text</p>');
-        
+
     });
 </script>
 <style>

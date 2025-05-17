@@ -2,7 +2,6 @@
 
 namespace App\Ui;
 
-use Bs\Auth;
 use App\Db\User;
 use Dom\Template;
 use Tk\Config;
