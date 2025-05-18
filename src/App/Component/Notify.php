@@ -100,7 +100,7 @@ class Notify extends \Dom\Renderer\Renderer
             }
             $item->appendRepeat();
         }
-        
+
         return $template;
     }
 
