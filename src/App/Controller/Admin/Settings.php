@@ -181,8 +181,8 @@ class Settings extends ControllerAdmin
   <div class="page-actions card mb-3">
     <div class="card-body" var="actions">
       <a href="/sessions" title="View Active Sessions" class="btn btn-outline-secondary" choice="admin"><i class="fa fa-fw fa-server"></i> Sessions</a>
-      <a href="/user/staffManager" title="Manage Staff" class="btn btn-outline-secondary" choice="staff"><i class="fa fa-fw fa-users"></i> Staff</a>
-      <a href="/user/memberManager" title="Manage Members" class="btn btn-outline-secondary" choice="member"><i class="fa fa-fw fa-users"></i> Members</a>
+<!--      <a href="/user/staffManager" title="Manage Staff" class="btn btn-outline-secondary" choice="staff"><i class="fa fa-fw fa-users"></i> Staff</a>-->
+<!--      <a href="/user/memberManager" title="Manage Members" class="btn btn-outline-secondary" choice="member"><i class="fa fa-fw fa-users"></i> Members</a>-->
     </div>
   </div>
   <div class="card mb-3">

@@ -19,41 +19,56 @@ class Nav
                 'visible' => fn($i) => (bool)$this->getUser(),
                 'url' => '/dashboard',
             ],
-            'Site Settings' => [
+
+            'Component Test' => [
+                'icon' => 'ri-bug-line',
+                'url' => '/componentTest',
+                'visible' => fn($i) => (bool)$this->getUser(),
+            ],
+            'File Manager' => [
+                'icon' => 'ri-archive-drawer-line',
+                'visible' => fn($i) => $this->getUser()?->hasPermission(User::PERM_ADMIN),
+                'url' => '/fileManager'
+            ],
+
+            'Admin' => [
                 'icon' => 'ri-settings-2-line',
                 'visible' => fn($i) => $this->getUser()?->hasPermission(User::PERM_SYSADMIN),
-                'url' => '/settings'
-            ],
-            'Application' => [
-                'icon' => 'ri-apps-2-fill',
-                'File Manager' => [
-                    'icon' => 'ri-archive-drawer-line',
-                    'visible' => fn($i) => $this->getUser()?->hasPermission(User::PERM_ADMIN),
-                    'url' => '/fileManager'
+                'Site Settings' => [
+                    'icon' => 'ri-settings-2-fill',
+                    'visible' => fn($i) => $this->getUser()?->hasPermission(User::PERM_SYSADMIN),
+                    'url' => '/settings',
+                ],
+                'Staff' => [
+                    'icon' => 'fas fa-users',
+                    'visible' => fn($i) => $this->getUser()?->hasPermission(User::PERM_SYSADMIN),
+                    'url' => '/user/staffManager',
+                ],
+                'Members' => [
+                    'icon' => 'fas fa-users',
+                    'visible' => fn($i) => $this->getUser()?->hasPermission(User::PERM_SYSADMIN),
+                    'url' => '/user/memberManager',
                 ],
             ],
+
             'Dev' => [
                 'icon' => 'ri-bug-line',
                 'visible' => fn($i) => Config::isDev() && $this->getUser()->isStaff(),
-                'Component Test' => [
-                    'icon' => 'ri-bug-line',
-                    'url' => '/componentTest'
-                ],
                 'PHP Info' => [
                     'icon' => 'ri-information-line',
-                    'url' => '/info'
+                    'url' => '/info',
                 ],
                 'Tail Log' => [
                     'icon' => 'ri-terminal-box-fill',
-                    'url' => '/tailLog'
+                    'url' => '/tailLog',
                 ],
                 'Inline Image' => [
                     'icon' => 'fas fa-image',
-                    'url' => '/util/inlineImage'
+                    'url' => '/util/inlineImage',
                 ],
                 'DB Search' => [
                     'icon' => 'fas fa-database',
-                    'url' => '/util/dbSearch'
+                    'url' => '/util/dbSearch',
                 ],
             ],
 

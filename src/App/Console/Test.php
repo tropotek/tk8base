@@ -41,17 +41,9 @@ class Test extends Console
 
         //$result = $moodle->get_all_recent_quizzes(90);
 
-        //vd($result);
-        //vd(date_default_timezone_get());
 
-        //vd(FileUtil::getMimeArray());
 
-//        vd(Path::createDataPath('/home/godar/public_html/Projects/tk8base/data/test/test1.txt')->toString());
-//        vd(basename('/text2.txt'));
-//        vd(Uri::createDataUri('/data/test/data.txt')->getDataPath());
-//        vd(Uri::createTemplateUri('/html/js/data.js')->getRelativePath());
-//        vd(Uri::createTemplateUri('/js/data2.js')->toString());
-//        vd(Uri::createDataUri('/')->getPath());
+
 
 //        $gt = GuestToken::create([
 //            Uri::create('/login')->getPath()

@@ -68,10 +68,4 @@ return function (CollectionConfigurator $routes) {
     $routes->add('component-test', '/component/test')
         ->controller([\App\Component\Test::class, 'doDefault']);
 
-
-    // API
-    $routes->add('api-notify', '/api/notify/getNotifications')
-        ->controller([\App\Api\Notify::class, 'doGetNotifications']);
-    $routes->add('api-notify-read', '/api/notify/markRead')
-        ->controller([\App\Api\Notify::class, 'doMarkRead']);
 };

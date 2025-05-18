@@ -305,6 +305,10 @@ class User extends Model implements UserInterface
             $filter->appendWhere('AND a.uid = :uid');
         }
 
+        if (!empty($filter['type'])) {
+            $filter->appendWhere('AND a.type = :type');
+        }
+
         if (!empty($filter['hash'])) {
             $filter->appendWhere('AND a.hash = :hash');
         }
