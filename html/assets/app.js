@@ -14,7 +14,6 @@ jQuery(function ($) {
     tkbase.initHtmxConfirmDialog();
 
     // app.initHtmxToasts();
-    app.initNotifications();
 });
 
 let app = function () {
@@ -29,23 +28,9 @@ let app = function () {
     //   });
     // };
 
-    let initNotifications = function () {
-        if (typeof Notification === 'undefined') return;
-
-        if (Notification.permission !== 'granted') {
-            let promise = Notification.requestPermission();
-            promise.then(function () {
-                if (Notification.permission === 'granted') {
-                    $(document).trigger('notify:reload');
-                }
-            });
-        }
-    };
-
 
     return {
         // initHtmxToasts: initHtmxToasts,
-        initNotifications: initNotifications,
     }
 
 }();
