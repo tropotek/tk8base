@@ -37,8 +37,8 @@ class Dashboard extends ControllerAdmin
                 User::getAuthUser()->userId,
                 'Test notify message',
                 Date::create()->format(Date::FORMAT_ISO_DATETIME) . ' - This is a test with some HTML',
-                Uri::create()->reset()->toString(),
-                User::getAuthUser()->getImageUrl(),
+                Uri::create()->reset()->toRelativeString(),
+                User::getAuthUser()->getImageUrl()->toRelativeString(),
                 5
             );
             Alert::addInfo("Notification Message Set");

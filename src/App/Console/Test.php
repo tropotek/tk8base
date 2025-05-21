@@ -5,7 +5,9 @@ use App\External\Moodle;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Bs\Console\Console;
+use Tk\Cache\Cache;
 use Tk\Config;
+use Tk\Uri;
 
 class Test extends Console
 {
@@ -23,7 +25,14 @@ class Test extends Console
             return self::FAILURE;
         }
 
-        $moodle = Moodle::create();
+
+//        $uri = Uri::create('/test');
+//        vd($uri, $uri->toString());
+
+        //Cache::instance()->purge();
+
+
+        //$moodle = Moodle::create();
         //$result = $moodle->getCourseCategories();
         //$result = $moodle->getMoodleSiteInfo();
         //$result = $moodle->getAllUsers();
@@ -40,9 +49,6 @@ class Test extends Console
         //$result = $moodle->set_course_dates(2, $start->format('Y-m-d H:i:s'));
 
         //$result = $moodle->get_all_recent_quizzes(90);
-
-
-
 
 
 //        $gt = GuestToken::create([

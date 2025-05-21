@@ -2,7 +2,7 @@
 /**
  * application configuration parameters
  *
- * DO NOT ADD PRIVATE DATA TO THIS FILE!!!
+ * DO NOT ADD SENSITIVE PRIVATE DATA TO THIS FILE!!!
  */
 use Tk\Config;
 
@@ -16,26 +16,6 @@ return function (Config $config) {
     $config->set('path.template.user', $config->get('path.template.admin'));
 
     /**
-     * mail template path
-     */
-    $config['system.mail.template'] = '/html/templates/mail.default.html';
-
-    /**
-     * Enable DB sessions
-     */
-    $config['session.db_enable'] = true;
-
-    /**
-     * Set the site timezone for PHP and MySQL
-     */
-    $config['php.date.timezone'] = 'Australia/Melbourne';
-
-    /**
-     * The default log level
-     */
-    $config['log.logLevel'] = \Psr\Log\LogLevel::ERROR;
-
-    /**
      * Can users update their password from their profile page
      * (default: false)
      */
@@ -47,29 +27,10 @@ return function (Config $config) {
      */
     $config['auth.registration.enable'] = false;
 
+
     /**
-     * Validate user passwords on input
-     * - Must include at least one number
-     * - Must include at least one letter
-     * - Must include at least one capital
-     * - Must include at least one symbol
-     * - must >= 8 characters
+     * SSI/SSO oAuth portal configs
      *
-     * Note: validation disabled in dev environments
-     * (default: true)
-     */
-    //$config['auth.password.strict'] = false;
-
-    /**
-     * The site developer information
-     * Use this for online support contact forms and copyright
-     */
-    $config['developer.name']  = 'Tropotek';
-    $config['developer.web']   = 'https://tropotek.com.au/';
-    $config['developer.email'] = 'apd-support@tropotek.com.au';
-
-
-    /**
      * Whitelist URLS:
      *   - https://domain.com/_ssi  <- main oauth uri
      *   - https://domain.com/login
@@ -124,7 +85,6 @@ return function (Config $config) {
      *
      * Researching:
      * - login to https://developers.facebook.com/
-     * -
      *
      * @see https://codeshack.io/implement-facebook-login-php/
      * @see https://www.cloudways.com/blog/add-facebook-login-in-php/
