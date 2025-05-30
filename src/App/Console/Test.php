@@ -32,14 +32,17 @@ class Test extends Console
         //Cache::instance()->purge();
 
 
-        //$moodle = Moodle::create();
-        //$result = $moodle->getCourseCategories();
+        $moodle = Moodle::create();
+        //$result = $moodle->get_all_recent_quizzes(90, [12, 13, 154, 34, 23]);
+        //$result = $moodle->get_all_examsoft_eor([12, 13, 154, 34, 23]);
+
+
         //$result = $moodle->getMoodleSiteInfo();
         //$result = $moodle->getAllUsers();
 
         //$result = $moodle->getCategoryByIdnumber('CAT 1');
-        //$result = $moodle->setCategoryVisible(1, false);
-        //$result = $moodle->setCategoryVisible(1, true);
+        $result = $moodle->setCategoryVisible(3, false);
+        //$result = $moodle->setCategoryVisible(3, true);
         //$result = $moodle->get_curriculum_managers(1);
 
 //        $start = (new \DateTime())->add(new \DateInterval('P1W'));
@@ -50,6 +53,7 @@ class Test extends Console
 
         //$result = $moodle->get_all_recent_quizzes(90);
 
+        vd($result);
 
 //        $gt = GuestToken::create([
 //            Uri::create('/login')->getPath()

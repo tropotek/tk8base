@@ -143,18 +143,23 @@ class Moodle
 
 	public function setCategoryVisible(int $id, bool $visible): bool
 	{
-		$this->post('local_oumcategory_set_visible', compact('id', 'visible'));
+		$this->post('local_sisapi_set_category_visible', compact('id', 'visible'));
         return true;
 	}
 
-	public function get_all_recent_quizzes(int $lookback): array
+	public function get_all_recent_quizzes(int $lookback, array $clinical_ids = []): array
 	{
-		return $this->post('local_oumquizzes_get_recent', compact('lookback'));
+		return $this->post('local_oumquizzes_get_recent', compact('lookback', 'clinical_ids'));
 	}
 
 	public function get_curriculum_managers(int $category_id): array
 	{
 		return $this->post('local_oumuser_get_curriculum_managers', compact('category_id')) ?: [];
+	}
+
+	public function get_all_examsoft_eor(array $course_ids = []): array
+	{
+		return $this->post('local_oumgrades_get_examsoft_eor', compact('course_ids'));
 	}
 
     /**
