@@ -41,7 +41,7 @@ class Test extends Console
         //$result = $moodle->getAllUsers();
 
         //$result = $moodle->getCategoryByIdnumber('CAT 1');
-        $result = $moodle->setCategoryVisible(3, false);
+        //$result = $moodle->setCategoryVisible(3, false);
         //$result = $moodle->setCategoryVisible(3, true);
         //$result = $moodle->get_curriculum_managers(1);
 
@@ -53,7 +53,7 @@ class Test extends Console
 
         //$result = $moodle->get_all_recent_quizzes(90);
 
-        vd($result);
+        //vd($result);
 
 //        $gt = GuestToken::create([
 //            Uri::create('/login')->getPath()

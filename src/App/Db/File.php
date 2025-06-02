@@ -127,26 +127,26 @@ class File extends Model
         return $errors;
     }
 
-    public static function find(int $fileId): ?self
-    {
-        return Db::queryOne("
-            SELECT *
-            FROM v_file
-            WHERE file_id = :fileId",
-            compact('fileId'),
-            self::class
-        );
-    }
+//    public static function find(int $fileId): ?static
+//    {
+//        return Db::queryOne("
+//            SELECT *
+//            FROM v_file
+//            WHERE file_id = :fileId",
+//            compact('fileId'),
+//            self::class
+//        );
+//    }
 
-    public static function findAll(): array
-    {
-        return Db::query("
-            SELECT *
-            FROM v_file",
-            [],
-            self::class
-        );
-    }
+//    public static function findAll(): array
+//    {
+//        return Db::query("
+//            SELECT *
+//            FROM v_file",
+//            [],
+//            self::class
+//        );
+//    }
 
     public static function findByHash(string $hash): ?self
     {

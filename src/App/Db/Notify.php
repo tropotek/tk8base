@@ -114,30 +114,6 @@ class Notify extends Model
             );
     }
 
-    public static function find(int $notifyId): ?self
-    {
-        return Db::queryOne("
-            SELECT *
-            FROM v_notify
-            WHERE notify_id = :notifyId",
-            compact('notifyId'),
-            self::class
-        );
-    }
-
-    /**
-     * @return array<int,Notify>
-     */
-    public static function findAll(): array
-    {
-        return Db::query("
-            SELECT *
-            FROM v_notify",
-            [],
-            self::class
-        );
-    }
-
     public static function markAllRead(int $userId): bool
     {
         return false !== Db::execute("
