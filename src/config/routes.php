@@ -68,4 +68,8 @@ return function (CollectionConfigurator $routes) {
     $routes->add('component-test', '/component/test')
         ->controller([\App\Component\Test::class, 'doDefault']);
 
+
+    // test moodle API
+    $routes->add('api-moodle-course-viewed', '/api/moodle/courseViewed')
+        ->controller([\App\Api\Moodle::class, 'doCourseViewed']);
 };
