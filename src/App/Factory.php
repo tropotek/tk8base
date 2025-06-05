@@ -22,7 +22,7 @@ class Factory extends \Bs\Factory
 
     public function createDomPage(string $templatePath = ''): PageDomInterface
     {
-        // So we can change the mintion template from the settings page
+        // So we can change the minton template from the settings page
         if (str_contains($templatePath, '/minton/')) {
             $selected = Registry::getValue('minton.template', 'sn-admin');
             if (User::getAuthUser()->template) {
