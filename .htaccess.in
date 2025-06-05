@@ -74,10 +74,11 @@
 </IfModule>
 
 # Deny access to /data/private folder
-<IfModule mod_rewrite.c>
-    RewriteCond %{REQUEST_URI} /data/private/?(.*) [NC]
-    RewriteRule ^ %{RewriteBase} [R=301,L]
-</IfModule>
+#alternativly once the folder exists place a .htaccess file in there (copy from `/src/.htaccess`)
+#<IfModule mod_rewrite.c>
+#    RewriteCond %{REQUEST_URI} /data/private/?(.*) [NC]
+#    RewriteRule ^ %{RewriteBase} [R=301,L]
+#</IfModule>
 
 # ----------------------------------------------------------------------
 # | Forcing `https://`                                                 |

@@ -9,8 +9,8 @@
 $composer = include __DIR__ . '/vendor/autoload.php';
 
 // Init Tk System Objects
-// Update these calls here if you want to override them...
 $config  = \Tk\Config::instance();
 $factory = \App\Factory::instance();
+
 $factory->set('composerLoader', $composer);
 \Bs\Factory::instance()->getBootstrap()->init();
