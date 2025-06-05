@@ -15,7 +15,7 @@ class Home extends ControllerPublic
     public function doDefault(): void
     {
         Breadcrumbs::reset();
-        $this->getPage()->setTitle('Home');
+        $this->getPage()->setTitle('Home', 'fas fa-home');
 
         if (isset($_GET['e'])){
             throw new Exception('This is a test exception...', 500);
@@ -28,13 +28,13 @@ class Home extends ControllerPublic
             Uri::create()->remove('a')->redirect();
         }
 
-
     }
 
     public function show(): ?Template
     {
         $template = $this->getTemplate();
-        $template->setText('title', $this->getPage()->getTitle());
+        $template->appendText('title', $this->getPage()->getTitle());
+        $template->addCss('icon', $this->getPage()->getIcon());
 
         $template->setAttr('eurl', 'href', Uri::create()->set('e', true));
         $template->setAttr('aurl', 'href', Uri::create()->set('a', true));
@@ -53,7 +53,7 @@ class Home extends ControllerPublic
         $html = <<<HTML
 <div>
     <div class="card mb-3">
-        <div class="card-header" var="title"><i class="fa fa-envelope"></i> </div>
+        <div class="card-header"><i var="icon"></i> <span var="title"></span></div>
         <div class="card-body" var="content">
             <div>
                 <h3 var="title">Welcome Home</h3>

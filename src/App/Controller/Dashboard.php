@@ -18,8 +18,9 @@ class Dashboard extends ControllerAdmin
     public function doDefault(): void
     {
         Breadcrumbs::reset();
-        $this->getPage()->setTitle('Dashboard');
+        $this->getPage()->setTitle('Dashboard', 'fas fa-cogs');
 
+        // Check for a logged-in user, redirect if none
         $this->setUserAccess();
 
         if (isset($_GET['e'])){
@@ -50,7 +51,8 @@ class Dashboard extends ControllerAdmin
     public function show(): ?Template
     {
         $template = $this->getTemplate();
-        $template->setText('title', $this->getPage()->getTitle());
+        $template->appendText('title', $this->getPage()->getTitle());
+        $template->addCss('icon', $this->getPage()->getIcon());
 
         if (Auth::getAuthUser()) {
             $username = Auth::getAuthUser()->username;
@@ -73,9 +75,9 @@ class Dashboard extends ControllerAdmin
         $html = <<<HTML
 <div>
   <div class="card mb-3">
-    <div class="card-header"><i class="fas fa-cogs"></i> <span var="title"></span></div>
+    <div class="card-header"><i var="icon"></i> <span var="title"></span></div>
     <div class="card-body" var="content">
-        <p><img src="#" var="img" /></p>
+        <p><img alt="" src="#" var="img" /></p>
 
         <p>
           <a href="#?e" class="btn btn-outline-dark" var="eurl">Test Exception</a>
