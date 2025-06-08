@@ -20,6 +20,11 @@ class Nav
                 'url' => '/dashboard',
             ],
 
+            'Public Site' => [
+                'icon' => 'fas fa-home',
+                'url' => '/home',
+            ],
+
             'Teams' => [
                 'icon' => 'fas fa-users',
                 'url' => '/teamManager',

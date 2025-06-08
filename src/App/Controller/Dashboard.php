@@ -18,7 +18,7 @@ class Dashboard extends ControllerAdmin
     public function doDefault(): void
     {
         Breadcrumbs::reset();
-        $this->getPage()->setTitle('Dashboard', 'fas fa-cogs');
+        $this->getPage()->setTitle('User Dashboard', 'fas fa-cogs');
 
         // Check for a logged-in user, redirect if none
         $this->setUserAccess();
@@ -54,14 +54,11 @@ class Dashboard extends ControllerAdmin
         $template->appendText('title', $this->getPage()->getTitle());
         $template->addCss('icon', $this->getPage()->getIcon());
 
-        if (Auth::getAuthUser()) {
-            $username = Auth::getAuthUser()->username;
-            $template->appendHtml('content', "<p><b>My Username:</b> {$username}</p>");
-        }
 
         $user = User::getAuthUser();
         $template->setAttr('img', 'src', $user->getImageUrl());
-        $template->setText('user-name', $user->nameShort);
+        $template->setText('username', $user->username);
+        $template->setText('name', $user->nameShort);
 
         $template->setAttr('eurl', 'href', Uri::create()->set('e', true));
         $template->setAttr('aurl', 'href', Uri::create()->set('a', true));
@@ -74,29 +71,141 @@ class Dashboard extends ControllerAdmin
     {
         $html = <<<HTML
 <div>
-  <div class="card mb-3">
-    <div class="card-header"><i var="icon"></i> <span var="title"></span></div>
-    <div class="card-body" var="content">
-        <p><img alt="" src="#" var="img" /></p>
 
-        <p>
-          <a href="#?e" class="btn btn-outline-dark" var="eurl">Test Exception</a>
-          <a href="/info" class="btn btn-outline-dark" title="Confirmation Dialog Test" data-confirm="<p><em>Are you sure?</em></p>" data-cancel="Nuh!!">Confirm Test</a>
-          <a href="#?a" class="btn btn-outline-dark" var="aurl">Alert Test</a>
-          <a href="/" class="btn btn-outline-dark">Landing Page</a>
-        </p>
+    <div class="row">
+        <div class="col-xl-3 col-md-6">
+            <div class="widget-rounded-circle card">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col-auto">
+                            <div class="avatar-lg">
+                                <img src="#" class="img-fluid rounded-circle" alt="user" var="img">
+                            </div>
+                        </div>
 
-        <p>
-          <a href="#?n" class="btn btn-outline-dark" var="nurl">Test Notify Message</a>
-        </p>
+                        <div class="col">
+                            <h5 class="mt-0 mb-1">Chadengle</h5>
+                            <p class="text-muted mb-2 font-13 text-truncate">user@example.com.au</p>
+                            <small class="text-warning"><b>Admin</b></small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        <p>jquery UI Test:</p>
-        <div id="datepicker"></div>
-        <p>&nbsp;</p>
+        <div class="col-xl-3 col-md-6">
+            <div class="widget-rounded-circle card">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col-auto">
+                            <div class="avatar-lg">
+                                <img src="#" class="img-fluid rounded-circle" alt="user" var="img">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <h5 class="mt-0 mb-1">Tomaslau</h5>
+                            <p class="text-muted mb-2 font-13 text-truncate">user@example.com.au</p>
+                            <small class="text-success"><b>User</b></small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        <p><b>Name:</b> <span var="user-name"></span></p>
+        <div class="col-xl-3 col-md-6">
+            <div class="widget-rounded-circle card">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col-auto">
+                            <div class="avatar-lg">
+                                <img src="#" class="img-fluid rounded-circle" alt="user" var="img">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <h5 class="mt-0 mb-1">Stillnotdavid</h5>
+                            <p class="text-muted mb-2 font-13 text-truncate">user@example.com.au</p>
+                            <small class="text-pink"><b>Admin</b></small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6">
+            <div class="widget-rounded-circle card">
+                <div class="card-body">
+                    <div class="row align-items-center">
+                        <div class="col-auto">
+                            <div class="avatar-lg">
+                                <img src="#" class="img-fluid rounded-circle" alt="user" var="img">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <h5 class="mt-0 mb-1">Arashasghari</h5>
+                            <p class="text-muted mb-2 font-13 text-truncate">user@example.com.au</p>
+                            <small class="text-info"><b>User</b></small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
+    <!-- end row -->
+
+
+    <div class="card mb-3">
+        <div class="card-header"><i var="icon"></i> <span var="title"></span></div>
+        <div class="card-body" var="content">
+
+            <p>
+                This is an example of the logged-in user template. This admin template can be customized to meet your
+                business requirements.
+            </p>
+            <p>
+                We have added a 'Teams' example accessible via the menu. This example highlights the listing and edit pages
+                that will allow you to manage your datasets.
+            </p>
+            <p>
+                <a href="/contact" target="_blank">Contact Us</a> today and enquire how we
+                can create your next online buisines solution to centralise a streamline your business data and workflows.
+            </p>
+            <p>&nbsp;</p>
+
+            <hr>
+
+            <p>User Details:</p>
+            <p>
+                <b>Username:</b> <span var="username"></span><br>
+                <b>Name:</b> <span var="name"></span>
+            </p>
+
+            <p>Test Exception Error:</p>
+            <p>
+                <a href="#?e" class="btn btn-outline-dark" var="eurl">Test Exception</a>
+            </p>
+
+            <p>Test Confirmation dialog:</p>
+            <p>
+                <a href="/dashboard" class="btn btn-outline-dark" title="Confirmation Dialog Test" data-confirm="<p><em>Are you sure?</em></p>" data-cancel="Nuh!!">Confirm Test</a>
+            </p>
+
+            <p>Test Alert Notifications:</p>
+            <p>
+                <a href="#?a" class="btn btn-outline-dark" var="aurl">Alert Test</a>
+            </p>
+
+            <p>Test User Notification Messages:</p>
+            <p>
+                <a href="#?n" class="btn btn-outline-dark" var="nurl">Test Notify Message</a>
+            </p>
+
+            <p>jQuery Datepicker Test:</p>
+            <div id="datepicker"></div>
+
+            <p>&nbsp;</p>
+
+        </div>
+    </div>
 
 <script>
 jQuery(function($) {

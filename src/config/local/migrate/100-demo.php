@@ -1,6 +1,8 @@
 <?php
 
 
+\Bs\Registry::setValue('site.email', 'info@tropotek.com.au');
+\Bs\Registry::instance()->save();
 
 // Setup demo users if no users exist using `password` for login
 $users = \App\Db\User::findAll();
