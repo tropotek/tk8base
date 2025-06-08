@@ -20,15 +20,10 @@ class Nav
                 'url' => '/dashboard',
             ],
 
-            'Component Test' => [
-                'icon' => 'ri-bug-line',
-                'url' => '/componentTest',
+            'Teams' => [
+                'icon' => 'fas fa-users',
+                'url' => '/teamManager',
                 'visible' => fn($i) => (bool)$this->getUser(),
-            ],
-            'File Manager' => [
-                'icon' => 'ri-archive-drawer-line',
-                'visible' => fn($i) => $this->getUser()?->hasPermission(User::PERM_ADMIN),
-                'url' => '/fileManager'
             ],
 
             'Admin' => [

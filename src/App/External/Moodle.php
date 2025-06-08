@@ -6,6 +6,10 @@ use Tk\Exception;
 use Tk\Log;
 use Tk\Uri;
 
+/**
+ *
+ * @deprecated Testing example, remove for release
+ */
 class Moodle
 {
 

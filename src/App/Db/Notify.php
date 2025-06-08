@@ -103,6 +103,9 @@ class Notify extends Model
         return true;
     }
 
+    /**
+     * @param list<int> $notifyIds
+     */
     public static function setNotified(array $notifyIds): bool
     {
         if (!$notifyIds) return true;
@@ -124,10 +127,22 @@ class Notify extends Model
     }
 
     /**
+     * delete expired notify rows
+     */
+    public static function expire(): bool
+    {
+        return false !== Db::execute("
+            DELETE FROM notify
+            WHERE expiry < NOW();"
+        );
+    }
+
+    /**
      * @return array<int,Notify>
      */
     public static function findFiltered(array|Filter $filter): array
     {
+        self::expire();
         $filter = Filter::create($filter);
         $filter->appendFrom('v_notify a');
 

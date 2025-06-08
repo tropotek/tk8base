@@ -38,3 +38,19 @@ SELECT
     MD5(CONCAT(f.file_id, 'File')) AS hash
 FROM file f
 ;
+
+-- \App\Db\Team
+CREATE OR REPLACE VIEW v_team AS
+WITH users AS (
+    SELECT
+        team_id,
+        GROUP_CONCAT(user_id) AS members
+    FROM team_has_user
+    GROUP BY team_id
+)
+SELECT
+    t.*,
+    tu.members
+FROM team t
+LEFT JOIN users tu on (t.team_id)
+;

@@ -3,13 +3,21 @@
 namespace App\Api;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
+use Tk\Config;
 
+
+/**
+ * @deprecated Remove for release
+ */
 class Moodle
 {
 
 
     public function doCourseViewed(): JsonResponse
     {
+        if (!Config::isDev()) return new JsonResponse([], Response::HTTP_UNAUTHORIZED);
+
         vd($_GET, $_POST);
         $data = [
             'var1' => 'value one',

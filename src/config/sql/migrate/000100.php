@@ -5,7 +5,7 @@
 \Bs\Registry::setValue('site.email', 'site@email.com');
 \Bs\Registry::setValue('site.email.sig', '');
 \Bs\Registry::setValue('system.maintenance.enabled', '');
-\Bs\Registry::setValue('system.maintenance.message', 'Site is currently undergoing maintenance. PLease try again later.');
+\Bs\Registry::setValue('system.maintenance.message', 'Site is currently undergoing maintenance. Please try again later.');
 \Bs\Registry::setValue('system.global.css', '');
 \Bs\Registry::setValue('system.global.js', '');
 \Bs\Registry::setValue('system.meta.description', 'A base development project site for the TK libs');

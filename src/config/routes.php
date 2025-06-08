@@ -55,18 +55,24 @@ return function (CollectionConfigurator $routes) {
         ->controller([\App\Controller\User\Edit::class, 'doDefault'])
         ->defaults(['type' => \App\Db\User::TYPE_MEMBER]);
 
-    // Filesystem
-    $routes->add('file-manager', '/fileManager')
-        ->controller([\App\Controller\File\Manager::class, 'doDefault']);
+    // Teams
+    $routes->add('team-manager', '/teamManager')
+        ->controller([\App\Controller\Team\Manager::class, 'doDefault']);
+    $routes->add('team-edit', '/teamEdit')
+        ->controller([\App\Controller\Team\Edit::class, 'doDefault']);
 
 
-    // Component test page
+    // Components
+    $routes->add('com-files', '/component/files')
+        ->controller([\App\Component\Files::class, 'doDefault']);
     $routes->add('com-notify-nav', '/component/notify')
         ->controller([\App\Component\Notify::class, 'doDefault']);
-    $routes->add('test-component', '/componentTest')
-        ->controller([\App\Controller\Test\Component::class, 'doDefault']);
-    $routes->add('component-test', '/component/test')
-        ->controller([\App\Component\Test::class, 'doDefault']);
+
+    $routes->add('com-user-select', '/component/userSelect')
+        ->controller([\App\Component\UserSelect::class, 'doDefault']);
+    $routes->add('com-team-member-table', '/component/teamMemberTable')
+        ->controller([\App\Component\TeamMemberTable::class, 'doDefault']);
+
 
 
     // test moodle API
