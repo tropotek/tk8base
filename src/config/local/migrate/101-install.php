@@ -27,6 +27,6 @@ if (!count($users)) {
         \Tk\Log::debug($e->__toString());
     }
 
-    echo "New admin user added, to set the password call 'php ./bin/cmd pwd admin'\n";
+    echo "New admin user added, to set the password use: 'php ./bin/cmd pwd admin'\n";
 }
 
