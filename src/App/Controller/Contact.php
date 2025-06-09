@@ -13,6 +13,7 @@ use Tk\Form\Action\Submit;
 use Tk\Form\Field\Input;
 use Tk\Form\Field\Textarea;
 use Tk\Mail\Mailer;
+use Tk\Mail\Message;
 use Tk\Uri;
 
 /**
@@ -79,8 +80,11 @@ Phone: {phone}<br/>
 </p>
 HTML;
         $message = Factory::instance()->createMailMessage($content);
-        $message->addTo($form->getFieldValue('email'));
+        $message->setFrom(Message::joinEmail($form->getFieldValue('email'), $form->getFieldValue('name')));
+        $message->setReplyTo(Message::joinEmail($form->getFieldValue('email'), $form->getFieldValue('name')));
+        $message->addTo(Message::joinEmail(Registry::getSiteEmail(), Registry::getSiteName()));
         $message->setSubject(Registry::getSiteName() . ' Contact Request');
+
         $message->replace($form->getFieldValues());
         Mailer::instance()->send($message);
 

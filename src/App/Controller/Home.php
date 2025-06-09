@@ -59,6 +59,12 @@ class Home extends ControllerPublic
                     <li><a href="https://startbootstrap.com/templates" target="_blank">Start Bootstrap</a></li>
                 </ul>
                 <p>We can integrate most templates for public users on request.</p>
+                <hr>
+                <h3>Demo</h3>
+                <p>
+                    <a href="/contact" target="_blank">Contact Us</a> today for a demo.<br>
+                    See the full features of this site, and how your business could benefit with one of our online management solutions.
+                </p>
 
             </div>
         </div>

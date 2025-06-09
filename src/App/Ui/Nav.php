@@ -31,6 +31,11 @@ class Nav
                 'visible' => fn($i) => (bool)$this->getUser(),
             ],
 
+            'Contact Us' => [
+                'icon' => 'bx bx-mail-send ',
+                'url' => '/contact',
+            ],
+
             'Admin' => [
                 'icon' => 'ri-settings-2-line',
                 'visible' => fn($i) => $this->getUser()?->hasPermission(User::PERM_SYSADMIN),
