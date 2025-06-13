@@ -5,6 +5,7 @@ use App\Db\Team;
 use App\Db\User;
 use Bs\Mvc\ControllerAdmin;
 use Bs\Mvc\Table;
+use Bs\Ui\Breadcrumbs;
 use Dom\Template;
 use Tk\Form\Field\Input;
 use Tk\Table\Cell;
@@ -21,6 +22,7 @@ class Manager extends ControllerAdmin
 
     public function doDefault(): void
     {
+        Breadcrumbs::reset();
         $this->setUserAccess();
         $this->getPage()->setTitle('Team Manager', 'fa fa-cogs');
 

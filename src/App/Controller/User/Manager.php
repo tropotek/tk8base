@@ -31,6 +31,7 @@ class Manager extends ControllerAdmin
 
     public function doDefault(): void
     {
+        Breadcrumbs::reset();
         $this->getPage()->setTitle(ucwords($this->type) . ' Manager', 'fa fa-users');
 
         if ($this->type == User::TYPE_STAFF) {

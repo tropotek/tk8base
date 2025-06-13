@@ -6,6 +6,7 @@ use App\Ui\Customizer;
 use App\Ui\Nav;
 use App\Ui\Notify;
 use Bs\Auth;
+use Bs\Menu\MintonRenderer;
 use Bs\Registry;
 use Bs\Ui\Breadcrumbs;
 use Dom\Template;
@@ -33,7 +34,7 @@ class Page extends \Bs\Mvc\Page
         $template->appendCss(Registry::getValue('system.global.css', ''));
 
         if (str_contains($this->getTemplatePath(), '/minton/')) {
-            $this->showMintonParams($template);
+            $this->showMintonMarkup($template);
         }
 
         $template->setAttr('home', 'href', Uri::create('/')->toString());
@@ -129,17 +130,17 @@ JS;
         $this->getTemplate()->prependTemplate('content', $template);
     }
 
-    protected function showMintonParams(Template $template): void
+    protected function showMintonMarkup(Template $template): void
     {
-        $nav = new Nav();
+        $renderer = new MintonRenderer(Nav::getNavMenu());
         if (basename($this->getTemplatePath()) == 'sn-admin.html') {
-            $nav->setAttr('id', 'side-nav');
-            $template->replaceHtml('side-nav', $nav->getSideNav());
+            $template->replaceTemplate('side-nav', $renderer->showSideNav());
         } else {
-            $nav->setAttr('id', 'top-nav');
-            $template->replaceHtml('top-nav', $nav->getTopNav());
+            $template->replaceTemplate('top-nav', $renderer->showTopNav());
         }
-        $template->replaceTemplate('profile-nav', $nav->getProfileNav());
+        $prof = new MintonRenderer(Nav::getProfileMenu());
+        $template->replaceTemplate('profile-nav', $prof->showProfileNav());
+
         $template->replaceHtml('right-sidebar', Customizer::getHtml());
     }
 

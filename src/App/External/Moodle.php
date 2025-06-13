@@ -224,5 +224,59 @@ class Moodle
         return is_object($result) ? ($result->users ?? []) : [];
     }
 
+    public function getCohorts(string $idnumber = ''): array
+    {
+        $params = array(
+            'query' => $idnumber,
+            'context' => [
+                'contextid' => 10,
+                'contextlevel' => 'system',
+                'instanceid' => 0,
+            ],
+            //'limitnum' => 100,
+        );
+        // I think the error here is caused by not having a valid SSL cert locally
+        $result = $this->get('core_cohort_search_cohorts', $params);
+        //$result = $this->get('tool_lp_search_cohorts', $params);
 
+        return is_object($result) ? $result : [];
+    }
+
+	public function getAllCohorts(): array
+	{
+		$result = $this->post('core_cohort_get_cohorts', []);
+		return is_array($result) ? $result : [];
+	}
+
+
+    /**
+     * get all available role information from moodle
+     *
+     * @return array<string, \stdClass>
+     */
+	public function getRoles(): array
+	{
+		$rows = $this->post('local_oumrole_get_roles');
+        if (!is_array($rows)) return [];
+		return array_column($rows, null, 'shortname');
+	}
+
+    /**
+     * get role information from moodle using its shortname
+     */
+	public function getRole(string $shortname): ?\stdClass
+	{
+		$rows = $this->getRoles();
+		return $rows[$shortname] ?? null;
+	}
+
+    public function getForums(): array
+    {
+
+        $result = $this->post('mod_forum_get_forums_by_courses', [
+            'courseids'   => [1]
+        ]);
+
+        return $result;
+    }
 }

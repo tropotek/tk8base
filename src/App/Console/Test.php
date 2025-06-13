@@ -26,43 +26,35 @@ class Test extends Console
         }
 
 
-//        $uri = Uri::create('/test');
-//        vd($uri, $uri->toString());
-
-        //Cache::instance()->purge();
-
-
         $moodle = Moodle::create();
+        //$result = $moodle->getAllUsers();
+        //$result = $moodle->getAllCohorts();
+
+//        $result = $moodle->getRoles();
+//        vd($result);
+//        $result = $moodle->getRole('api_role');
+//        vd($result);
+//        $result = $moodle->getRole('-----');
+//        vd($result);
+        $result = $moodle->getForums();
+        vd($result);
+
+
         //$result = $moodle->get_all_recent_quizzes(90, [12, 13, 154, 34, 23]);
         //$result = $moodle->get_all_examsoft_eor([12, 13, 154, 34, 23]);
-
-
         //$result = $moodle->getMoodleSiteInfo();
-        //$result = $moodle->getAllUsers();
-
         //$result = $moodle->getCategoryByIdnumber('CAT 1');
         //$result = $moodle->setCategoryVisible(3, false);
         //$result = $moodle->setCategoryVisible(3, true);
         //$result = $moodle->get_curriculum_managers(1);
-
 //        $start = (new \DateTime())->add(new \DateInterval('P1W'));
 //        $end = (new \DateTime())->add(new \DateInterval('P2M'));
 //        vd($start->format('Y-m-d H:i:s'), $end->format('Y-m-d H:i:s'));
         //$result = $moodle->set_course_dates(2, $start->format('Y-m-d H:i:s'), $end->format('Y-m-d H:i:s'));
         //$result = $moodle->set_course_dates(2, $start->format('Y-m-d H:i:s'));
-
         //$result = $moodle->get_all_recent_quizzes(90);
 
-        //vd($result);
 
-//        $gt = GuestToken::create([
-//            Uri::create('/login')->getPath()
-//        ],
-//        [
-//            'hash' => md5('test'),
-//            'fooId' => 22,
-//            'text' => 'Just a blank message'
-//        ], 15);
 
         return self::SUCCESS;
     }
