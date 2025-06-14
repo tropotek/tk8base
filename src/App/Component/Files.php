@@ -3,6 +3,7 @@ namespace App\Component;
 
 use App\Db\File;
 use App\Db\User;
+use Bs\Mvc\ComponentInterface;
 use Bs\Mvc\Table;
 use Bs\Traits\ForeignModelTrait;
 use Dom\Template;
@@ -14,7 +15,7 @@ use Tk\Path;
 use Tk\Table\Cell;
 use Tk\Uri;
 
-class Files extends \Dom\Renderer\Renderer
+class Files extends \Dom\Renderer\Renderer implements ComponentInterface
 {
     const string CONTAINER_ID = 'comp-files';
 

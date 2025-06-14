@@ -2,13 +2,14 @@
 namespace App\Component;
 
 use App\Db\User;
+use Bs\Mvc\ComponentInterface;
 use Bs\Mvc\Table;
 use Dom\Template;
 use Tk\Db;
 use Tk\Form\Field\Input;
 use Tk\Table\Cell;
 
-class UserSelect extends \Dom\Renderer\Renderer
+class UserSelect extends \Dom\Renderer\Renderer implements ComponentInterface
 {
     const string CONTAINER_ID = 'user-select';
 

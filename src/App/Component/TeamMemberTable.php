@@ -3,6 +3,7 @@ namespace App\Component;
 
 use App\Db\Team;
 use App\Db\User;
+use Bs\Mvc\ComponentInterface;
 use Bs\Mvc\Table;
 use Dom\Template;
 use Tk\Db;
@@ -11,7 +12,7 @@ use Tk\Table\Action;
 use Tk\Table\Cell;
 use Tk\Uri;
 
-class TeamMemberTable extends \Dom\Renderer\Renderer
+class TeamMemberTable extends \Dom\Renderer\Renderer implements ComponentInterface
 {
     protected Table $table;
     protected ?Team $team = null;
