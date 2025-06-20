@@ -279,4 +279,45 @@ class Moodle
 
         return $result;
     }
+
+
+    // get a list of competencies for a course
+	public function get_course_competencies(int $courseid): array
+	{
+		$courseid = 3;
+
+		$rows = $this->post('core_competency_list_course_competencies', ['id' => $courseid]);
+
+		$competencies = [];
+		foreach ($rows as $row) {
+			$competencies[] = (object)[
+				'id' => $row->competency->id,
+				'shortname' => trim($row->competency->shortname),
+				'idnumber' => $row->competency->idnumber,
+				'description' => $row->competency->description,
+				'sortorder' => $row->competency->sortorder,
+				'parentid' => $row->competency->parentid,
+			];
+		}
+
+		return $competencies;
+	}
+
+
+    // Get a student's competency progress in a course (not enough details, will want all enrolled students progress)
+	//public static function get_course_competencies(int $courseid, int $userid): array
+	public function get_student_competency_progress(): mixed
+	{
+		$courseid = 4;
+		$userid = 99;
+
+		//$rows = $this->post('core_completion_get_activities_completion_status', ['courseid' => $courseid, 'userid' => $userid]);
+		$rows = $this->post('core_completion_get_course_completion_status', ['courseid' => $courseid, 'userid' => $userid]);
+
+		return $rows;
+
+	}
+
+
+
 }

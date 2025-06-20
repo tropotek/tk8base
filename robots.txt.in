@@ -1,0 +1,12 @@
+# Disallow all
+# User-agent: *
+# Disallow: /
+
+# Disallow project protected
+User-agent: *
+Disallow: /bin/
+Disallow: /data/
+Disallow: /html/
+Disallow: /src/
+Disallow: /vendor/
+Disallow: /admin/
