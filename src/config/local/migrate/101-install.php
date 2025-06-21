@@ -1,7 +1,9 @@
 <?php
 
+// deprecated: Use the CLI command `cmd adm {userename}` to create an admin user
 
-// default install to add an admin user, customize this to your own requirements
+
+// install to add an admin user, customize this to your own requirements
 $users = \App\Db\User::findAll();
 if (!count($users)) {
 

@@ -45,6 +45,7 @@ class Factory extends \Bs\Factory
             $app = parent::getConsole();
 
             $app->add(new \App\Console\Cron());
+            $app->add(new \App\Console\CreateAdmin());
             if (Config::isDev()) {
                 $app->add(new \App\Console\Test());
             }

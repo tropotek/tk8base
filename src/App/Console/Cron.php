@@ -21,7 +21,9 @@ class Cron extends Console
     {
         $path = getcwd();
         $this->setName('cron')
-            ->setDescription('The site cron script. crontab line: */1 *  * * *   ' . $path . '/bin/cmd cron > /dev/null 2>&1');
+            ->setDescription('Site cron script.')
+            ->setHelp('The site cron script. crontab line: */1 *  * * *   ' . $path . '/bin/cmd cron > /dev/null 2>&1')
+        ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int

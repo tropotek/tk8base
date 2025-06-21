@@ -3,28 +3,32 @@
 __Web:__ <https://github.com/tropotek/tk8base>  
 __Authors:__ Tropotek <http://www.tropotek.com/>
 
-A veterinary anatomical database for use to manage necropsy and biopsy cases and clients.
+A base Tropotek Tk framework example site.
+Use this as a base site implementing the Tropotek Tk Framework libraries.
 
 ## Contents
 
 - [Installation](#installation)
-- [Introduction](#introduction)
 
 ## Installation
 
-1. First set up a database for the site and keep the login details handy.
-2. Make sure you have the latest version of composer [https://getcomposer.org/download/] installed.
-3. Use the following commands:
-    ```bash
-    $ git clone https://github.com/tropotek/tkapd.git
-    $ cd tkapd
-    $ composer install
-    ````
-4. You will be asked a number of questions to set up the environment settings.
-5. Edit the `/config.php` file to your required settings.
-6. You may have to change the permissions of the `/data/` folder so PHP can read and write to it.
-7. To enable debug mode and logging edit the `/config.php` file to suit your server.
-8. Browse to the site location URL to see if it all worked.
+- Set up a database for the site and keep the login details handy.
+- Make sure you have the latest version of composer [https://getcomposer.org/download/] installed.
+- Use the following commands:
+```bash
+$ git clone https://github.com/tropotek/tk8base.git
+$ cd tk8base
+$ composer install
+```
+- You will be asked a number of questions to set up the environment settings.
+- Create a new admin user to access the site:
+```bash
+$ ./bin/cmd adm {username}
+```
+- Edit the `/config.php` file if you require custom settings.
+- Change the permissions of the `/data/` folder to be writable by your server.
+- Browse to the site URL and login with the admin user credentials.
+
 
 ## Upgrading
 
@@ -44,8 +48,6 @@ $ composer update
 __Warning:__ Upgrading could potentially break the site. Be sure to backup all DBa and
 site `/data` files before running these commands.
 
-
-## Introduction
 
 
 
