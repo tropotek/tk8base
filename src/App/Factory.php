@@ -57,11 +57,11 @@ class Factory extends \Bs\Factory
     /**
      *
      */
-    public function createNewUser(string $username, string $email, string $password, int $perms = 0, string $type = 'staff'): ?UserInterface
+    public function createNewUser(string $username, string $email, string $password, int $perms = 0, string $type = ''): ?UserInterface
     {
         $user = new User();
         $user->givenName = ucfirst($username);
-        $user->type = $type;
+        $user->type = $type ?: User::TYPE_STAFF;
         $user->country = 'AU';
         $user->save();
 
