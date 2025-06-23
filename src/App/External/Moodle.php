@@ -304,19 +304,49 @@ class Moodle
 	}
 
 
-    // Get a student's competency progress in a course (not enough details, will want all enrolled students progress)
-	//public static function get_course_competencies(int $courseid, int $userid): array
-	public function get_student_competency_progress(): mixed
-	{
-		$courseid = 4;
-		$userid = 99;
+    // Get a student's course completion progress in a course (does not relate to competencies)
+    public function get_course_completion_status(): mixed
+    {
+        $courseid = 4;
+        $userid = 99;
 
-		//$rows = $this->post('core_completion_get_activities_completion_status', ['courseid' => $courseid, 'userid' => $userid]);
-		$rows = $this->post('core_completion_get_course_completion_status', ['courseid' => $courseid, 'userid' => $userid]);
+        //$rows = $this->post('core_completion_get_activities_completion_status', ['courseid' => $courseid, 'userid' => $userid]);
+        $rows = $this->post('core_completion_get_course_completion_status', [
+            'courseid' => $courseid,
+            'userid' => $userid
+        ]);
 
-		return $rows;
+        return $rows;
+    }
 
-	}
+    // Get a student's course completion progress in a course (does not relate to competencies)
+    public function read_user_evidence(): mixed
+    {
+        $courseid = 4;
+        $userid = 99;
+
+        $rows = $this->post('core_competency_read_user_evidence', [
+            //'courseid' => $courseid,
+            'id' => $userid
+        ]);
+
+        return $rows;
+    }
+
+    // Get a student's course completion progress in a course (does not relate to competencies)
+    public function get_user_competencies(): mixed
+    {
+        $idnumber = 'com-fram-1';
+        $courseid = 4;
+        $userid = 81;
+
+        $rows = $this->post('local_siscompetency_get_user_competencies', [
+            'userid' => $userid,
+            'idnumber' => $idnumber
+        ]);
+
+        return $rows;
+    }
 
 
 

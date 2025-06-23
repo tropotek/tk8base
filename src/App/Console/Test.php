@@ -30,7 +30,8 @@ class Test extends Console
         //$result = $moodle->getAllUsers();
         //$result = $moodle->getAllCohorts();
         //$result = $moodle->get_course_competencies(1);
-        $result = $moodle->get_student_competency_progress();
+        //$result = $moodle->get_course_completion_status();
+        $result = $moodle->get_user_competencies();
 
         vd($result);
 
