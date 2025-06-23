@@ -323,7 +323,7 @@ class Moodle
     public function read_user_evidence(): mixed
     {
         $courseid = 4;
-        $userid = 99;
+        $userid = 81;
 
         $rows = $this->post('core_competency_read_user_evidence', [
             //'courseid' => $courseid,
@@ -336,9 +336,11 @@ class Moodle
     // Get a student's course completion progress in a course (does not relate to competencies)
     public function get_user_competencies(): mixed
     {
-        $idnumber = 'com-fram-1';
         $courseid = 4;
-        $userid = 81;
+
+        $idnumber = 'com-fram-1';
+        // $userid = 81;        // completed
+        $userid = 63;
 
         $rows = $this->post('local_siscompetency_get_user_competencies', [
             'userid' => $userid,
