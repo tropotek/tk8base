@@ -16,6 +16,9 @@ class User extends Model implements UserInterface
 {
     use AuthTrait;
 
+    const string USER_GUEST  = 'guest';
+    const string USER_SYSTEM = 'system';
+
     /**
      * permission values
      * permissions are bit masks that can include on or more bits

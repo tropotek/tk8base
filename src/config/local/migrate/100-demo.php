@@ -4,18 +4,14 @@
 \Bs\Registry::setValue('site.email', 'info@tropotek.com.au');
 \Bs\Registry::instance()->save();
 
-// Setup demo users if no users exist using `password` for login
-$users = \App\Db\User::findAll();
-if (!count($users)) {
+// Setup demo users if none exist
+$user = \App\Db\User::findByUsername('dev');
+if (!$user) {
 
     \Tk\Log::debug("Adding new users to site.");
     $sql = <<<SQL
         SET FOREIGN_KEY_CHECKS = 0;
         SET SQL_SAFE_UPDATES = 0;
-
-        TRUNCATE TABLE user;
-        TRUNCATE TABLE auth;
-        TRUNCATE TABLE auth_remember;
 
         INSERT INTO user (type, given_name) VALUES ('staff', 'Developer');
         INSERT INTO auth (fkey, fid, permissions, username, email, timezone) VALUES
@@ -42,9 +38,35 @@ if (!count($users)) {
         \Tk\Log::debug($e->__toString());
     }
 
-    // Update user passwords
+    // Update user passwords with 'ttek-2025'
     foreach (\Bs\Auth::findAll() as $auth) {
-        $auth->password = \Bs\Auth::hashPassword('password');
+        $auth->password = \Bs\Auth::hashPassword('ttek-2025');
         $auth->save();
     }
+
+    // setup demo team data
+    $sql = <<<SQL
+INSERT INTO team (team_id, name, description, active, modified, created) VALUES
+    (1, 'Read Team', 'This is a description', 1, NOW(), NOW()),
+    (2, 'Blue Team', '', 1, NOW(), NOW()),
+    (3, 'Out Team', '', 0, NOW(), NOW())
+SQL;
+    try {
+        \Tk\Db::execute($sql);
+    } catch (\Exception $e) {
+        \Tk\Log::debug($e->__toString());
+    }
+
+    $sql = <<<SQL
+INSERT INTO team_has_user (team_id, user_id) VALUES
+    (1, 3),
+    (1, 4),
+    (1, 5);
+SQL;
+    try {
+        \Tk\Db::execute($sql);
+    } catch (\Exception $e) {
+        \Tk\Log::debug($e->__toString());
+    }
+
 }

@@ -84,10 +84,12 @@ CREATE TABLE IF NOT EXISTS team_has_user
 -- Guest
 INSERT INTO user (type, given_name, family_name) VALUES ('member', 'Guest', 'Access');
 INSERT INTO auth (fkey, fid, permissions, username, email, timezone, active) VALUES
-    ('App\\Db\\User', LAST_INSERT_ID(), 0, 'guest', 'guest@localhost', 'Australia/Melbourne', true);
+    ('App\\Db\\User', LAST_INSERT_ID(), 0, 'guest', 'guest@localhost', 'Australia/Melbourne', false);
 
 -- System
 INSERT INTO user (type, given_name, family_name) VALUES ('member', 'System', 'Access');
 INSERT INTO auth (fkey, fid, permissions, username, email, timezone, active) VALUES
-    ('App\\Db\\User', LAST_INSERT_ID(), 0, 'system', 'system@localhost', 'Australia/Melbourne', true);
+    ('App\\Db\\User', LAST_INSERT_ID(), 0, 'system', 'system@localhost', 'Australia/Melbourne', false);
 
+ALTER TABLE user AUTO_INCREMENT=100;
+ALTER TABLE auth AUTO_INCREMENT=100;

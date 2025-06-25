@@ -1,6 +1,7 @@
 <?php
 namespace App\Console;
 
+use App\Db\User;
 use App\External\Moodle;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -37,10 +38,10 @@ class Test extends Console
         //$result = $moodle->get_course_competencies(1);
         //$result = $moodle->get_course_completion_status();
         //$result = $moodle->get_competency_frameworks();
-        $result = $moodle->get_user_competencies($userid, $idnumber);
+//        $result = $moodle->get_user_competencies($userid, $idnumber);
+//        vd($result);
 
-        vd($result);
-
+        vd(User::findByUsername(User::USER_SYSTEM));
 
         return self::SUCCESS;
     }
