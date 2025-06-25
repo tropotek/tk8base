@@ -280,73 +280,84 @@ class Moodle
         return $result;
     }
 
+//
+//    // get a list of competencies for a course
+//	public function get_course_competencies(int $courseid): array
+//	{
+//		$courseid = 3;
+//
+//		$rows = $this->post('core_competency_list_course_competencies', ['id' => $courseid]);
+//
+//		$competencies = [];
+//		foreach ($rows as $row) {
+//			$competencies[] = (object)[
+//				'id' => $row->competency->id,
+//				'shortname' => trim($row->competency->shortname),
+//				'idnumber' => $row->competency->idnumber,
+//				'description' => $row->competency->description,
+//				'sortorder' => $row->competency->sortorder,
+//				'parentid' => $row->competency->parentid,
+//			];
+//		}
+//
+//		return $competencies;
+//	}
+//
+//
+//    // Get a student's course completion progress in a course (does not relate to competencies)
+//    public function get_course_completion_status(): mixed
+//    {
+//        $courseid = 4;
+//        $userid = 99;
+//
+//        //$rows = $this->post('core_completion_get_activities_completion_status', ['courseid' => $courseid, 'userid' => $userid]);
+//        $rows = $this->post('core_completion_get_course_completion_status', [
+//            'courseid' => $courseid,
+//            'userid' => $userid
+//        ]);
+//
+//        return $rows;
+//    }
+//
+//    public function read_user_evidence(): mixed
+//    {
+//        $courseid = 4;
+//        $userid = 81;
+//
+//        $rows = $this->post('core_competency_read_user_evidence', [
+//            //'courseid' => $courseid,
+//            'id' => $userid
+//        ]);
+//
+//        return $rows;
+//    }
+//
+//
 
-    // get a list of competencies for a course
-	public function get_course_competencies(int $courseid): array
-	{
-		$courseid = 3;
 
-		$rows = $this->post('core_competency_list_course_competencies', ['id' => $courseid]);
-
-		$competencies = [];
-		foreach ($rows as $row) {
-			$competencies[] = (object)[
-				'id' => $row->competency->id,
-				'shortname' => trim($row->competency->shortname),
-				'idnumber' => $row->competency->idnumber,
-				'description' => $row->competency->description,
-				'sortorder' => $row->competency->sortorder,
-				'parentid' => $row->competency->parentid,
-			];
-		}
-
-		return $competencies;
-	}
-
-
-    // Get a student's course completion progress in a course (does not relate to competencies)
-    public function get_course_completion_status(): mixed
+    /**
+     * @return array<string, \stdClass>
+     */
+    public function get_competency_frameworks(): array
     {
-        $courseid = 4;
-        $userid = 99;
-
-        //$rows = $this->post('core_completion_get_activities_completion_status', ['courseid' => $courseid, 'userid' => $userid]);
-        $rows = $this->post('core_completion_get_course_completion_status', [
-            'courseid' => $courseid,
-            'userid' => $userid
+        $rows = $this->post('core_competency_list_competency_frameworks', [
+            'context' => [
+                'contextid' => 0,
+                'contextlevel' => 'system',
+                'instanceid' => 0,
+            ]
         ]);
-
-        return $rows;
+        return array_column($rows, null, 'idnumber');
     }
 
-    // Get a student's course completion progress in a course (does not relate to competencies)
-    public function read_user_evidence(): mixed
+    /**
+     * return competency progress for a single student
+     */
+    public function get_user_competencies(int $userid, string $idnumber): \stdClass
     {
-        $courseid = 4;
-        $userid = 81;
-
-        $rows = $this->post('core_competency_read_user_evidence', [
-            //'courseid' => $courseid,
-            'id' => $userid
-        ]);
-
-        return $rows;
-    }
-
-    // Get a student's course completion progress in a course (does not relate to competencies)
-    public function get_user_competencies(): mixed
-    {
-        $courseid = 4;
-
-        $idnumber = 'com-fram-1';
-        // $userid = 81;        // completed
-        $userid = 63;
-
-        $rows = $this->post('local_siscompetency_get_user_competencies', [
-            'userid' => $userid,
-            'idnumber' => $idnumber
-        ]);
-
+        $rows = $this->post('local_siscompetency_get_user_competencies',
+            compact('userid', 'idnumber')
+        );
         return $rows;
     }
 

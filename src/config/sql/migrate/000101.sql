@@ -76,3 +76,18 @@ CREATE TABLE IF NOT EXISTS team_has_user
 );
 
 
+
+
+-- Setup a default system and guest account to use internally
+-- These accounts will not have any login access
+--
+-- Guest
+INSERT INTO user (type, given_name, family_name) VALUES ('member', 'Guest', 'Access');
+INSERT INTO auth (fkey, fid, permissions, username, email, timezone, active) VALUES
+    ('App\\Db\\User', LAST_INSERT_ID(), 0, 'guest', 'guest@localhost', 'Australia/Melbourne', true);
+
+-- System
+INSERT INTO user (type, given_name, family_name) VALUES ('member', 'System', 'Access');
+INSERT INTO auth (fkey, fid, permissions, username, email, timezone, active) VALUES
+    ('App\\Db\\User', LAST_INSERT_ID(), 0, 'system', 'system@localhost', 'Australia/Melbourne', true);
+
