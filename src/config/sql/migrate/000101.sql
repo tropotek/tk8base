@@ -91,5 +91,6 @@ INSERT INTO user (type, given_name, family_name) VALUES ('member', 'System', 'Ac
 INSERT INTO auth (fkey, fid, permissions, username, email, timezone, active) VALUES
     ('App\\Db\\User', LAST_INSERT_ID(), 0, 'system', 'system@localhost', 'Australia/Melbourne', false);
 
-ALTER TABLE user AUTO_INCREMENT=100;
-ALTER TABLE auth AUTO_INCREMENT=100;
+-- first 100 user_id's reserved for system features
+ALTER TABLE user AUTO_INCREMENT=101;
+ALTER TABLE auth AUTO_INCREMENT=101;

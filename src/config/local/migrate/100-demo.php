@@ -59,9 +59,9 @@ SQL;
 
     $sql = <<<SQL
 INSERT INTO team_has_user (team_id, user_id) VALUES
-    (1, 3),
-    (1, 4),
-    (1, 5);
+    (1, 101),
+    (1, 102),
+    (1, 103);
 SQL;
     try {
         \Tk\Db::execute($sql);
