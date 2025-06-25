@@ -41,8 +41,6 @@ class Test extends Console
 //        $result = $moodle->get_user_competencies($userid, $idnumber);
 //        vd($result);
 
-        vd(User::findByUsername(User::USER_SYSTEM));
-
         return self::SUCCESS;
     }
 

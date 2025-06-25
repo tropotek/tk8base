@@ -75,22 +75,3 @@ CREATE TABLE IF NOT EXISTS team_has_user
   CONSTRAINT team_has_user__user_id FOREIGN KEY (user_id) REFERENCES user (user_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
-
-
-
--- Setup a default system and guest account to use internally
--- These accounts will not have any login access
---
--- Guest
-INSERT INTO user (type, given_name, family_name) VALUES ('member', 'Guest', 'Access');
-INSERT INTO auth (fkey, fid, permissions, username, email, timezone, active) VALUES
-    ('App\\Db\\User', LAST_INSERT_ID(), 0, 'guest', 'guest@localhost', 'Australia/Melbourne', false);
-
--- System
-INSERT INTO user (type, given_name, family_name) VALUES ('member', 'System', 'Access');
-INSERT INTO auth (fkey, fid, permissions, username, email, timezone, active) VALUES
-    ('App\\Db\\User', LAST_INSERT_ID(), 0, 'system', 'system@localhost', 'Australia/Melbourne', false);
-
--- first 100 user_id's reserved for system features
-ALTER TABLE user AUTO_INCREMENT=101;
-ALTER TABLE auth AUTO_INCREMENT=101;

@@ -189,7 +189,7 @@ class Register extends ControllerDomInterface
 
         if (!$form->getFieldValue('password')  || $form->getFieldValue('password') != $form->getFieldValue('confPassword')) {
             $form->addFieldError('password', 'Invalid password');
-            $form->addFieldError('confPassword', 'Check passwords match');
+            $form->addFieldError('confPassword', 'Passwords do not match');
         } else {
             $errors = Auth::validatePassword($form->getFieldValue('password'));
             if (count($errors)) {

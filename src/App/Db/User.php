@@ -16,16 +16,11 @@ class User extends Model implements UserInterface
 {
     use AuthTrait;
 
-    const string USER_GUEST  = 'guest';
-    const string USER_SYSTEM = 'system';
-
     /**
      * permission values
      * permissions are bit masks that can include on or more bits
      * requests for permission are ANDed with the user's permissions
      * if the result is non-zero the user has permission.
-     *
-     * @todo move all permission functions to app level
      */
     const int PERM_ADMIN            = 0x1; // Admin
     const int PERM_SYSADMIN         = 0x2; // Change system settings
