@@ -27,7 +27,7 @@ class Factory extends \Bs\Factory
         // So we can change the minton template from the settings page
         if (str_contains($templatePath, '/minton/')) {
             $selected = Registry::getValue('minton.template', 'sn-admin');
-            if (User::getAuthUser()->template) {
+            if (User::getAuthUser()?->template) {
                 $selected = User::getAuthUser()->template;
             }
             $cleanName = preg_replace('|[^0-9a-z_-]|i', '', $selected);
