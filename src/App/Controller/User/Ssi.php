@@ -47,8 +47,12 @@ class Ssi extends ControllerAdmin
                 Alert::addError("SSI authentication error");
                 Uri::create('/login')->redirect();
             }
-            $email = $response->{$params['emailIdentifier']} ?? '';
 
+            $email = $oauthUser->{$params['emailIdentifier']} ?? '';
+            if (empty($email)) {
+                Alert::addError("SSI email authentication error");
+                Uri::create('/login')->redirect();
+            }
             // Find/create system user
             $user = User::findByEmail($email);
             if (!$user) {
@@ -70,7 +74,7 @@ class Ssi extends ControllerAdmin
                     $auth->save();
                     $user->save();
 
-                    // TODO: send welcome email to new user
+                    \App\Email\User::sendWelcome($user, true);
                 } else {
                     Alert::addWarning("User account not found, please contact site administrator to setup your account containing the email $email");
                     Uri::create('/')->redirect();

@@ -208,7 +208,11 @@ class Register extends ControllerDomInterface
 
         $this->token->delete();
 
-        // TODO: send welcome email to new user
+        /** @var User $user */
+        $user = $this->auth->getDbModel();
+        if ($user) {
+            \App\Email\User::sendWelcome($user);
+        }
 
         Alert::addSuccess('You account has been successfully activated, please login.');
         Uri::create('/login')->redirect();

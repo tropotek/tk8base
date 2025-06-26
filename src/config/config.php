@@ -48,6 +48,7 @@ return function (Config $config) {
      * - Click the "Certificated & secrets" Create a new Client Secret and not the secret "Value"
      */
     $config['auth.microsoft.enabled']         = false;
+    // auto create an account if none exists
     $config['auth.microsoft.createUser']      = false;
     $config['auth.microsoft.userType']        = \App\Db\User::TYPE_MEMBER;
     $config['auth.microsoft.scope']           = 'User.Read';
@@ -68,6 +69,7 @@ return function (Config $config) {
      * - Create a new "OAuth 2.0" Client ID (setup the OAuth Consent page if redirected)
      */
     $config['auth.google.enabled']         = false;
+    // auto create an account if none exists
     $config['auth.google.createUser']      = false;
     $config['auth.google.userType']        = \App\Db\User::TYPE_MEMBER;
     $config['auth.google.scope']           = 'https://www.googleapis.com/auth/userinfo.email';
@@ -90,6 +92,7 @@ return function (Config $config) {
      * @see https://www.cloudways.com/blog/add-facebook-login-in-php/
      */
     $config['auth.facebook.enabled']         = false;
+    // auto create an account if none exists
     $config['auth.facebook.createUser']      = false;
     $config['auth.facebook.userType']        = \App\Db\User::TYPE_MEMBER;
     $config['auth.facebook.scope']           = 'email';
