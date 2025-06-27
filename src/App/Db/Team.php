@@ -11,14 +11,15 @@ class Team extends Model
     public string     $name        = '';
     public ?string    $description = null;
     public bool       $active      = true;
+    public ?\DateTime $confirmedAt = null;
+    public \DateTime  $completedOn;
     public ?\DateTime $modified    = null;
     public ?\DateTime $created     = null;
 
 
     public function __construct()
     {
-        $this->modified = new \DateTime();
-        $this->created = new \DateTime();
+        $this->completedOn = new \DateTime();
     }
 
     public function save(): void

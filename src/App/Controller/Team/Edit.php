@@ -51,6 +51,18 @@ class Edit extends ControllerAdmin
             ->addFieldCss('col-4')
             ->setSwitch(true));
 
+        // Date and datetime tests
+        $this->form->appendField((new Input('completedOn'))
+            ->setType('date')
+            ->setRequired()
+            ->addFieldCss('col-6')
+        );
+
+        $this->form->appendField((new Input('confirmedAt'))
+            ->setType('datetime-local')
+            ->addFieldCss('col-6')
+        );
+
         $this->form->appendField(new Textarea('description'));
 
         $this->form->appendField(new SubmitExit('save', [$this, 'onSubmit']));
