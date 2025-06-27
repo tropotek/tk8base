@@ -32,7 +32,7 @@ class Test extends Console
         $userid = 73;
         $userid = 11;
 
-        $moodle = Moodle::create();
+        //$moodle = Moodle::create();
         //$result = $moodle->getAllUsers();
         //$result = $moodle->getAllCohorts();
         //$result = $moodle->get_course_competencies(1);
@@ -40,6 +40,9 @@ class Test extends Console
         //$result = $moodle->get_competency_frameworks();
 //        $result = $moodle->get_user_competencies($userid, $idnumber);
 //        vd($result);
+
+
+
 
         return self::SUCCESS;
     }

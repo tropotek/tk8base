@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller\User;
 
+use App\Factory;
 use Bs\Auth;
 use Bs\Mvc\ControllerDomInterface;
 use App\Db\User;
@@ -112,8 +113,8 @@ class Register extends ControllerDomInterface
         [$user->givenName, $user->familyName] = explode(' ', $form->getFieldValue('name'));
         $user->save();
 
-        $auth = $user->getAuth();
-        $user->mapForm($form->getFieldValues());
+        $auth = Auth::create($user);
+        $auth->mapForm($form->getFieldValues());
         $auth->active = false;
         $auth->save();
 
@@ -212,9 +213,13 @@ class Register extends ControllerDomInterface
         $user = $this->auth->getDbModel();
         if ($user) {
             \App\Email\User::sendWelcome($user);
+
+            // log user in and redirect to user home
+            Alert::addSuccess('You account has been successfully activated.');
+            Factory::instance()->getAuthController()->getStorage()->write($user->username);
+            $user->getHomeUrl()->redirect();
         }
 
-        Alert::addSuccess('You account has been successfully activated, please login.');
         Uri::create('/login')->redirect();
     }
 
