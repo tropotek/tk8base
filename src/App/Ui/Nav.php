@@ -55,7 +55,7 @@ class Nav
         }
 
         $menu->addLink('My Account', Uri::create('/profile'), 'fe-user', true);
-        $menu->addLink('Settings', Uri::create('/settings'), 'fe-settings', (bool)$user?->hasPermission(User::PERM_SYSADMIN));
+        $menu->addLink('Settings', Uri::create('/settings'), 'fe-settings', $user->hasPermission(User::PERM_SYSADMIN));
         $menu->addSeparator(($user instanceof User));
         $menu->addLink('Customizer', null, 'ri-palette-line', true,
             [
