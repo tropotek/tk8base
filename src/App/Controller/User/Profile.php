@@ -90,14 +90,6 @@ class Profile extends ControllerAdmin
             );
         }
 
-        if ($this->user->isType(User::TYPE_STAFF)) {
-            $list = User::PERMISSION_LIST;
-            $this->form->appendField(new Checkbox('perm', $list))
-                ->setGroup('Permissions')
-                ->setDisabled()
-                ->setReadonly();
-        }
-
         if (Config::getValue('auth.profile.password')) {
             $tab = 'Password';
             $this->form->appendField(new Password('currentPass'))
@@ -119,13 +111,6 @@ class Profile extends ControllerAdmin
 
         // Load form with object values
         $load = $this->user->unmapForm();
-        $load['perm'] = array_keys(
-            array_filter(
-                User::PERMISSION_LIST,
-                fn($k) => ($k & $this->user->getAuth()->permissions) != 0,
-                ARRAY_FILTER_USE_KEY
-            )
-        );
         $this->form->setFieldValues($load);
 
         $this->form->execute($_POST);
@@ -187,6 +172,14 @@ class Profile extends ControllerAdmin
             $template->setVisible('edit');
             $template->setText('modified', $this->user->modified->format(Date::FORMAT_LONG_DATETIME));
             $template->setText('created', $this->user->created->format(Date::FORMAT_LONG_DATETIME));
+            if ($this->user->type == User::TYPE_STAFF) {
+                $template->setVisible('edit');
+                $url = Uri::create('/component/userPermissions', [
+                    'userId' => $this->user->userId,
+                    'canEdit' => false,
+                ]);
+                $template->setAttr('comp-perms', 'hx-get', $url);
+            }
         }
 
         $this->form->getRenderer()->addFieldCss('mb-3');
@@ -198,18 +191,28 @@ class Profile extends ControllerAdmin
     public function __makeTemplate(): ?Template
     {
         $html = <<<HTML
-<div class="card mb-3">
-  <div class="card-header">
-    <div class="info-dropdown dropdown float-end" title="Details" choice="edit">
-      <a href="#" class="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown" aria-expanded="false"><i class="mdi mdi-dots-vertical"></i></a>
-      <div class="dropdown-menu dropdown-menu-end">
-        <p class="dropdown-item"><span class="d-inline-block">Modified:</span> <span var="modified">...</span></p>
-        <p class="dropdown-item"><span class="d-inline-block">Created:</span> <span var="created">...</span></p>
-      </div>
+<div class="row">
+    <div class="col">
+        <div class="card mb-3">
+            <div class="card-header">
+                <div class="info-dropdown dropdown float-end" title="Details" choice="edit">
+                    <a href="#" class="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown" aria-expanded="false"><i class="mdi mdi-dots-vertical"></i></a>
+                    <div class="dropdown-menu dropdown-menu-end">
+                        <p class="dropdown-item"><span class="d-inline-block">Modified:</span> <span var="modified">...</span></p>
+                        <p class="dropdown-item"><span class="d-inline-block">Created:</span> <span var="created">...</span></p>
+                    </div>
+                </div>
+                <i var="icon"></i> <span var="title"></span>
+            </div>
+            <div class="card-body" var="content"></div>
+        </div>
     </div>
-    <i var="icon"></i> <span var="title"></span>
-  </div>
-  <div class="card-body" var="content"></div>
+
+    <div class="col-4">
+        <div hx-get="/component/userPermissions" hx-trigger="load" hx-swap="outerHTML" var="comp-perms">
+          <p class="text-center mt-4"><i class="fa fa-fw fa-spin fa-spinner fa-3x"></i><br>Loading...</p>
+        </div>
+    </div>
 </div>
 HTML;
         return $this->loadTemplate($html);

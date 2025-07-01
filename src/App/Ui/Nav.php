@@ -25,7 +25,7 @@ class Nav
         $menu->addLink('Preview Site', Uri::create('/home'), 'fas fa-home', true, ['attrs' => ['target' => '_blank']]);
 
         $menu->addSeparator();
-        $menu->addLink('Teams', Uri::create('/teamManager'), 'fas fa-users');
+        $menu->addLink('Teams', Uri::create('/teamManager'), 'fas fa-layer-group');
         $menu->addLink('Members', Uri::create('/user/memberManager'), 'fas fa-users', $user->hasPermission(User::CHANGE_USERS));
         $menu->addSeparator();
 

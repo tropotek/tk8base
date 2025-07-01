@@ -306,7 +306,6 @@ class Edit extends ControllerAdmin
             <div hx-get="/component/userPermissions" hx-trigger="load" hx-swap="outerHTML" var="comp-perms">
               <p class="text-center mt-4"><i class="fa fa-fw fa-spin fa-spinner fa-3x"></i><br>Loading...</p>
             </div>
-
         </div>
 
     </div>

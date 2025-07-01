@@ -66,6 +66,10 @@ class UserPermissions extends \Dom\Renderer\Renderer implements ComponentInterfa
                 $row->addCss('row', 'disabled');
                 $row->setAttr('cb', 'disabled', 'disabled');
             }
+            if (User::PERMISSION_DESCRIPTION_LIST[$perm] ?? false) {
+                $row->setText('notes', User::PERMISSION_DESCRIPTION_LIST[$perm]);
+                $row->setVisible('notes');
+            }
             $row->appendRepeat();
         }
         if ($this->canEdit) {
@@ -89,9 +93,10 @@ class UserPermissions extends \Dom\Renderer\Renderer implements ComponentInterfa
 				hx-trigger="change delay:1s from:.form-check-input">
 				<input type="hidden" name="action" value="perms">
 
-                <div class="form-check" repeat="row">
+                <div class="form-check form-switch mt-2" repeat="row">
                     <input class="form-check-input" type="checkbox" value="" id="" var="cb">
                     <label class="form-check-label" for="" var="descr"></label>
+                    <p class="m-0 cb-notes text-muted" choice="notes"></p>
                 </div>
             </form>
 
