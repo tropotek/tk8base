@@ -67,6 +67,7 @@ class User extends Model implements UserInterface
     public string     $postcode      = '';
     public string     $country       = '';
     public string     $template      = '';
+    public string     $image         = '';
     public string     $dataPath      = '';
 
     public int        $permissions   = 0;
@@ -123,12 +124,16 @@ class User extends Model implements UserInterface
 
     public function getImageUrl(): ?Uri
     {
-        $color = Color::createRandom($this->userId);
-        $initials = strtoupper($this->givenName[0] ?? '').strtolower($this->familyName[0] ?? '');
-        $initials = $initials ?: strtoupper($this->username[0] ?? 'A');
-        $img = Image::createAvatar($initials, $color);
-        $b64 = base64_encode($img->getContents());
-        return Uri::create('data:image/png;base64,' . $b64);
+        if ($this->image) {
+            return Uri::createDataUri($this->image);
+        } else {
+            $color = Color::createRandom($this->userId);
+            $initials = strtoupper($this->givenName[0] ?? '') . strtolower($this->familyName[0] ?? '');
+            $initials = $initials ?: strtoupper($this->username[0] ?? 'A');
+            $img = Image::createAvatar($initials, $color);
+            $b64 = base64_encode($img->getContents());
+            return Uri::create('data:image/png;base64,' . $b64);
+        }
     }
 
     public static function getHomeUrl(string $type = ''): Uri

@@ -69,6 +69,8 @@ return function (CollectionConfigurator $routes) {
         ->controller([\App\Component\Notify::class, 'doDefault']);
 
 
+    $routes->add('com-user-photo', '/component/userPhoto')
+        ->controller([\App\Component\UserPhoto::class, 'doDefault']);
     $routes->add('com-user-permissions', '/component/userPermissions')
         ->controller([\App\Component\UserPermissions::class, 'doDefault']);
     $routes->add('com-user-select', '/component/userSelect')

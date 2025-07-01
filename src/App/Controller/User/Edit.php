@@ -202,9 +202,21 @@ class Edit extends ControllerAdmin
         $template->addCss('icon', $this->getPage()->getIcon());
 
         if ($this->user->userId) {
+            $template->setVisible('new-user');
             $template->setVisible('edit');
             $template->setText('modified', $this->user->modified->format(Date::FORMAT_LONG_DATETIME));
             $template->setText('created', $this->user->created->format(Date::FORMAT_LONG_DATETIME));
+
+            $url = Uri::create()->set('r');
+            $template->setAttr('reset', 'href', $url);
+            $template->setVisible('reset');
+
+            if (Masquerade::canMasqueradeAs(Auth::getAuthUser(), $this->user->getAuth())) {
+                $msqUrl = Uri::create()->set(Masquerade::QUERY_MSQ, $this->user->userId);
+                $template->setAttr('msq', 'href', $msqUrl);
+                $template->setVisible('msq');
+            }
+
             if ($this->type == User::TYPE_STAFF) {
                 $url = Uri::create('/component/userPermissions', [
                     'userId' => $this->user->userId,
@@ -213,6 +225,10 @@ class Edit extends ControllerAdmin
                 $template->setAttr('comp-perms', 'hx-get', $url);
                 $template->setVisible('comp-perms');
             }
+
+            $url = Uri::create('/component/userPhoto', ['userId' => $this->user->userId]);
+            $template->setAttr('comp-photo', 'hx-get', $url);
+
         }
 
         if ($this->user->hasPermission(User::PERM_ADMIN)) {
@@ -225,21 +241,6 @@ class Edit extends ControllerAdmin
                 $template->setAttr('to-member', 'href', $url);
                 $template->setVisible('to-member');
             }
-        }
-
-        if (!$this->user->userId) {
-            $template->setVisible('new-user');
-        }
-        if ($this->user->userId && Masquerade::canMasqueradeAs(Auth::getAuthUser(), $this->user->getAuth())) {
-            $msqUrl = Uri::create()->set(Masquerade::QUERY_MSQ, $this->user->userId);
-            $template->setAttr('msq', 'href', $msqUrl);
-            $template->setVisible('msq');
-        }
-
-        if ($this->user->userId) {
-            $url = Uri::create()->set('r');
-            $template->setAttr('reset', 'href', $url);
-            $template->setVisible('reset');
         }
 
         $renderer = $this->form->getRenderer();
@@ -294,8 +295,11 @@ class Edit extends ControllerAdmin
             </div>
         </div>
 
-        <div class="col-4" choice="edit">
+        <div class="col-3" choice="edit">
             <div hx-get="/component/userPermissions" hx-trigger="load" hx-swap="outerHTML" choice="comp-perms">
+              <p class="text-center mt-4"><i class="fa fa-fw fa-spin fa-spinner fa-3x"></i><br>Loading...</p>
+            </div>
+            <div hx-get="/component/userPhoto" hx-trigger="load" hx-swap="outerHTML" var="comp-photo">
               <p class="text-center mt-4"><i class="fa fa-fw fa-spin fa-spinner fa-3x"></i><br>Loading...</p>
             </div>
         </div>
