@@ -202,7 +202,6 @@ class Edit extends ControllerAdmin
         $template->addCss('icon', $this->getPage()->getIcon());
 
         if ($this->user->userId) {
-            $template->setVisible('new-user');
             $template->setVisible('edit');
             $template->setText('modified', $this->user->modified->format(Date::FORMAT_LONG_DATETIME));
             $template->setText('created', $this->user->created->format(Date::FORMAT_LONG_DATETIME));
@@ -229,6 +228,8 @@ class Edit extends ControllerAdmin
             $url = Uri::create('/component/userPhoto', ['userId' => $this->user->userId]);
             $template->setAttr('comp-photo', 'hx-get', $url);
 
+        } else {
+            $template->setVisible('new-user');
         }
 
         if ($this->user->hasPermission(User::PERM_ADMIN)) {

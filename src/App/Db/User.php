@@ -139,6 +139,7 @@ class User extends Model implements UserInterface
 
     public function deleteImage(): bool
     {
+        if (!$this->image) return true;
         $filename = Path::createDataPath($this->image);
         if (is_file($filename)) {
             unlink($filename);
