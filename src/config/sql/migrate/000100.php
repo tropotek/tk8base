@@ -1,4 +1,7 @@
 <?php
+/**
+ * @version install
+ */
 
 \Bs\Registry::setValue('site.name', 'Tk Base Site - Tropotek');
 \Bs\Registry::setValue('site.name.short', 'TkBase');

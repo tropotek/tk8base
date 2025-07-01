@@ -1,5 +1,5 @@
 -- --------------------------------------------
--- @version 1.0.0
+-- @version install
 -- --------------------------------------------
 
 CREATE TABLE IF NOT EXISTS user
@@ -58,6 +58,8 @@ CREATE TABLE IF NOT EXISTS file
     CONSTRAINT fk_file__user_id FOREIGN KEY (user_id) REFERENCES user (user_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
+-- --------------------------------------------------------------
+
 CREATE TABLE IF NOT EXISTS team
 (
     team_id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -67,6 +69,7 @@ CREATE TABLE IF NOT EXISTS team
     modified TIMESTAMP ON UPDATE CURRENT_TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     created TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
 CREATE TABLE IF NOT EXISTS team_has_user
 (
   team_id INT UNSIGNED NOT NULL DEFAULT 0,
