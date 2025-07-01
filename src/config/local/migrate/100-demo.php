@@ -23,7 +23,7 @@ if (!$user) {
 
         INSERT INTO user (type, given_name) VALUES ('staff', 'Staff');
         INSERT INTO auth (fkey, fid, permissions, username, email, timezone) VALUES
-          ('App\\\\Db\\\\User', LAST_INSERT_ID(), 14, 'staff', 'staff@example.com', 'Australia/Melbourne');
+          ('App\\\\Db\\\\User', LAST_INSERT_ID(), 4, 'staff', 'staff@example.com', 'Australia/Melbourne');
 
         INSERT INTO user (type, given_name) VALUES ('member', 'Member');
         INSERT INTO auth (fkey, fid, username, email, timezone) VALUES

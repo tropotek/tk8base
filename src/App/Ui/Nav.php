@@ -26,11 +26,12 @@ class Nav
 
         $menu->addSeparator();
         $menu->addLink('Teams', Uri::create('/teamManager'), 'fas fa-users');
+        $menu->addLink('Members', Uri::create('/user/memberManager'), 'fas fa-users', $user->hasPermission(User::CHANGE_USERS));
         $menu->addSeparator();
 
         $admin = $menu->addSubmenu('Admin', 'ri-settings-2-line', $user->hasPermission(User::PERM_SYSADMIN));
-        $admin->addLink('Staff', Uri::create('/user/staffManager'), 'fas fa-users', $user->hasPermission(User::PERM_MANAGE_STAFF));
-        $admin->addLink('Members', Uri::create('/user/memberManager'), 'fas fa-users', $user->hasPermission(User::PERM_MANAGE_MEMBERS));
+        $admin->addLink('Staff', Uri::create('/user/staffManager'), 'fas fa-users', $user->hasPermission(User::PERM_SYSADMIN));
+
 
         $dev = $menu->addSubmenu('Dev', 'ri-bug-line', (Config::isDev() && $user->hasPermission(User::PERM_ADMIN)));
         $dev->addLink('PHP Info', Uri::create('/info'), 'ri-information-line');

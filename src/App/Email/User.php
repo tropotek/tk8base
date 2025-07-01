@@ -88,7 +88,6 @@ class User
         $message->addTo($user->email);
         $message->set('name', $user->nameShort);
         $message->set('username', $user->username);
-        vd($user);
 
         $gt = GuestToken::create([
             Uri::create('/recoverUpdate')->getPath(),

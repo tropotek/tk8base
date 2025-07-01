@@ -161,8 +161,8 @@ class Settings extends ControllerAdmin
         $template->appendText('title', $this->getPage()->getTitle());
         $template->addCss('icon', $this->getPage()->getIcon());
 
-        $template->setVisible('staff', Auth::getAuthUser()->hasPermission(User::PERM_MANAGE_STAFF));
-        $template->setVisible('member', Auth::getAuthUser()->hasPermission(User::PERM_MANAGE_MEMBERS));
+        $template->setVisible('staff', Auth::getAuthUser()->hasPermission(User::PERM_SYSADMIN));
+        $template->setVisible('member', Auth::getAuthUser()->hasPermission(User::CHANGE_USERS));
         $template->setVisible('admin', Auth::getAuthUser()->hasPermission(User::PERM_ADMIN));
 
         $this->form->getField('site.name')->addFieldCss('col-6');

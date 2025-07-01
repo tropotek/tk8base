@@ -13,6 +13,7 @@ use Tk\Collection;
 use Tk\Date;
 use Tk\Exception;
 use Tk\Form\Action\Link;
+use Tk\Form\Action\Submit;
 use Tk\Form\Action\SubmitExit;
 use Tk\Form\Field\Checkbox;
 use Tk\Form\Field\Hidden;
@@ -34,7 +35,7 @@ class Edit extends ControllerAdmin
 
     public function doDefault(mixed $request, string $type): void
     {
-        $this->getPage()->setTitle('Edit ' . ucfirst($type), 'fa fa-users');
+        $this->getPage()->setTitle('Edit ' . ucfirst($type), 'fa fa-user-edit');
 
         $userId  = intval($_GET['userId'] ?? 0);
         $newType = trim($_GET['cv'] ?? '');
@@ -56,10 +57,10 @@ class Edit extends ControllerAdmin
         $this->auth = $this->user->getAuth();
 
         if ($this->type == User::TYPE_STAFF) {
-            $this->setUserAccess(User::PERM_MANAGE_STAFF);
+            $this->setUserAccess(User::PERM_SYSADMIN);
         }
         if ($this->type == User::TYPE_MEMBER) {
-            $this->setUserAccess(User::PERM_MANAGE_MEMBERS);
+            $this->setUserAccess(User::CHANGE_USERS);
         }
 
         // Request user to reset their password
@@ -125,32 +126,16 @@ class Edit extends ControllerAdmin
             );
         }
 
-        if ($this->type == User::TYPE_STAFF) {
-            $list = User::PERMISSION_LIST;
-            $field = $this->form->appendField(new Checkbox('perm', $list))
-                ->setLabel('Permissions')
-                ->setGroup('Permissions');
-
-            if (!Auth::getAuthUser()->hasPermission(User::PERM_MANAGE_STAFF)) {
-                $field->setNotes('You require "Manage Staff" to modify permissions');
-                $field->setDisabled();
-            }
+        // Form Actions
+        if (!$this->user->userId && $this->type == User::TYPE_STAFF) {
+            $this->form->appendField(new Submit('save', [$this, 'onSubmit']));
+        } else {
+            $this->form->appendField(new SubmitExit('save', [$this, 'onSubmit']));
         }
 
-        // Form Actions
-        $this->form->appendField(new SubmitExit('save', [$this, 'onSubmit']));
         $this->form->appendField(new Link('cancel', Breadcrumbs::getBackUrl()));
 
         $load = $this->user->unmapForm();
-        if ($this->type == User::TYPE_STAFF) {
-            $load['perm'] = array_keys(
-                array_filter(
-                    User::PERMISSION_LIST,
-                    fn($k) => ($k & $this->auth->permissions) != 0,
-                    ARRAY_FILTER_USE_KEY
-                )
-            );
-        }
         $this->form->setFieldValues($load);
 
         $this->form->execute($_POST);
@@ -169,7 +154,7 @@ class Edit extends ControllerAdmin
 
     }
 
-    public function onSubmit(Form $form, SubmitExit $action): void
+    public function onSubmit(Form $form, Submit $action): void
     {
         // non admin cannot change permissions
         if (!User::getAuthUser()->canChangePermissions($this->type)) {
@@ -226,9 +211,16 @@ class Edit extends ControllerAdmin
         $template->addCss('icon', $this->getPage()->getIcon());
 
         if ($this->user->userId) {
-            $template->setVisible('edit');
             $template->setText('modified', $this->user->modified->format(Date::FORMAT_LONG_DATETIME));
             $template->setText('created', $this->user->created->format(Date::FORMAT_LONG_DATETIME));
+            if ($this->type == User::TYPE_STAFF) {
+                $template->setVisible('edit');
+                $url = Uri::create('/component/userPermissions', [
+                    'userId' => $this->user->userId,
+                    'canEdit' => User::getAuthUser()->hasPermission(User::PERM_SYSADMIN),
+                ]);
+                $template->setAttr('comp-perms', 'hx-get', $url);
+            }
         }
 
         if ($this->user->hasPermission(User::PERM_ADMIN)) {
@@ -278,38 +270,46 @@ class Edit extends ControllerAdmin
         Uri::create()->remove(Masquerade::QUERY_MSQ)->redirect();
     }
 
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
     public function __makeTemplate(): ?Template
     {
         $html = <<<HTML
 <div>
-  <div class="page-actions card mb-3" choice="edit">
-    <div class="card-body" var="actions">
-      <a href="/" title="Masquerade" data-confirm="Masquerade as this user" class="btn btn-outline-secondary" choice="msq"><i class="fa fa-user-secret"></i> Masquerade</a>
-      <a href="/" title="Convert user to staff" data-confirm="Convert this user to staff" class="btn btn-outline-secondary" choice="to-staff"><i class="fa fa-retweet"></i> Convert To Staff</a>
-      <a href="/" title="Convert user to member" data-confirm="Convert this user to member" class="btn btn-outline-secondary" choice="to-member"><i class="fa fa-retweet"></i> Convert To Member</a>
-      <a href="/" title="Request Password Reset Email" data-confirm="Send an email to request user to reset their password?<br>Note: This will activate any inactive account." class="btn btn-outline-secondary" choice="reset"><i class="fa fa-fw fa-envelope"></i> Send Password Reset Email</a>
-    </div>
-  </div>
-  <div class="card mb-3">
-    <div class="card-header">
-      <div class="info-dropdown dropdown float-end" title="Details" choice="edit">
-        <a href="#" class="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown" aria-expanded="false"><i class="mdi mdi-dots-vertical"></i></a>
-        <div class="dropdown-menu dropdown-menu-end">
-          <p class="dropdown-item"><span class="d-inline-block">Modified:</span> <span var="modified">...</span></p>
-          <p class="dropdown-item"><span class="d-inline-block">Created:</span> <span var="created">...</span></p>
+    <div class="page-actions card mb-3" choice="edit">
+        <div class="card-body" var="actions">
+            <a href="/" title="Masquerade" data-confirm="Masquerade as this user" class="btn btn-outline-secondary" choice="msq"><i class="fa fa-user-secret"></i> Masquerade</a>
+            <a href="/" title="Convert user to staff" data-confirm="Convert this user to staff" class="btn btn-outline-secondary" choice="to-staff"><i class="fa fa-retweet"></i> Convert To Staff</a>
+            <a href="/" title="Convert user to member" data-confirm="Convert this user to member" class="btn btn-outline-secondary" choice="to-member"><i class="fa fa-retweet"></i> Convert To Member</a>
+            <a href="/" title="Request Password Reset Email" data-confirm="Send an email to request user to reset their password?<br>Note: This will activate any inactive account." class="btn btn-outline-secondary" choice="reset"><i class="fa fa-fw fa-envelope"></i> Send Password Reset Email</a>
         </div>
-      </div>
-      <i var="icon"></i> <span var="title"></span>
     </div>
-    <div class="card-body" var="content">
-      <p choice="new-user"><b>NOTE:</b> New users will be sent an email requesting them to activate their account and create a new password.</p>
+    <div class="row">
+
+        <div class="col">
+            <div class="card mb-3">
+                <div class="card-header">
+                    <div class="info-dropdown dropdown float-end" title="Details" choice="edit">
+                        <a href="#" class="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown" aria-expanded="false"><i class="mdi mdi-dots-vertical"></i></a>
+                        <div class="dropdown-menu dropdown-menu-end">
+                            <p class="dropdown-item"><span class="d-inline-block">Modified:</span> <span var="modified">...</span></p>
+                            <p class="dropdown-item"><span class="d-inline-block">Created:</span> <span var="created">...</span></p>
+                        </div>
+                    </div>
+                    <i var="icon"></i> <span var="title"></span>
+                </div>
+                <div class="card-body" var="content">
+                    <p choice="new-user"><b>NOTE:</b> New users will be sent an email requesting them to activate their account and create a new password.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-4" choice="edit">
+            <div hx-get="/component/userPermissions" hx-trigger="load" hx-swap="outerHTML" var="comp-perms">
+              <p class="text-center mt-4"><i class="fa fa-fw fa-spin fa-spinner fa-3x"></i><br>Loading...</p>
+            </div>
+
+        </div>
+
     </div>
-  </div>
 </div>
 HTML;
         return $this->loadTemplate($html);

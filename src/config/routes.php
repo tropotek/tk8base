@@ -73,6 +73,9 @@ return function (CollectionConfigurator $routes) {
     $routes->add('com-team-member-table', '/component/teamMemberTable')
         ->controller([\App\Component\TeamMemberTable::class, 'doDefault']);
 
+    $routes->add('com-user-permissions', '/component/userPermissions')
+        ->controller([\App\Component\UserPermissions::class, 'doDefault']);
+
 
 
     // test moodle API
