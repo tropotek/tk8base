@@ -83,7 +83,7 @@ class Edit extends ControllerAdmin
         $this->form->appendField((new Select('title', $list))
             ->setGroup($group)
             ->prependOption('', '')
-            ->addFieldCss('col-md-1')
+            ->addFieldCss('col-md-2')
         );
 
         $this->form->appendField(new Input('givenName'))
@@ -93,7 +93,7 @@ class Edit extends ControllerAdmin
 
         $this->form->appendField(new Input('familyName'))
             ->setGroup($group)
-            ->addFieldCss('col-md-6');
+            ->addFieldCss('col-md-5');
 
         $l1 = $this->form->appendField(new Input('username'))
             ->setGroup($group)
@@ -156,19 +156,10 @@ class Edit extends ControllerAdmin
 
     public function onSubmit(Form $form, Submit $action): void
     {
-        // non admin cannot change permissions
-        if (!User::getAuthUser()->canChangePermissions($this->type)) {
-            $form->removeField('perm');
-        }
-
         // set object values from fields
         $values = $form->getFieldValues();
         $this->user->mapForm($values);
         $this->auth->mapForm($values);
-
-        if ($form->getField('perm')) {
-            $this->auth->permissions = array_sum($form->getFieldValue('perm') ?? []);
-        }
 
         $form->addFieldErrors($this->user->validate());
         $form->addFieldErrors($this->auth->validate());
@@ -283,8 +274,8 @@ class Edit extends ControllerAdmin
         </div>
     </div>
     <div class="row">
-
         <div class="col">
+
             <div class="card mb-3">
                 <div class="card-header">
                     <div class="info-dropdown dropdown float-end" title="Details" choice="edit">

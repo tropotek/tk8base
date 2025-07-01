@@ -68,13 +68,13 @@ return function (CollectionConfigurator $routes) {
     $routes->add('com-notify-nav', '/component/notify')
         ->controller([\App\Component\Notify::class, 'doDefault']);
 
+
+    $routes->add('com-user-permissions', '/component/userPermissions')
+        ->controller([\App\Component\UserPermissions::class, 'doDefault']);
     $routes->add('com-user-select', '/component/userSelect')
         ->controller([\App\Component\UserSelect::class, 'doDefault']);
     $routes->add('com-team-member-table', '/component/teamMemberTable')
         ->controller([\App\Component\TeamMemberTable::class, 'doDefault']);
-
-    $routes->add('com-user-permissions', '/component/userPermissions')
-        ->controller([\App\Component\UserPermissions::class, 'doDefault']);
 
 
 

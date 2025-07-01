@@ -55,7 +55,7 @@ class Profile extends ControllerAdmin
         $this->form->appendField((new Select('title', $list))->prependOption('', ''))
             ->setGroup($tab)
             ->setLabel('Title')
-            ->addFieldCss('col-md-1');
+            ->addFieldCss('col-md-2');
 
         $this->form->appendField(new Input('givenName'))
             ->setGroup($tab)
@@ -64,7 +64,7 @@ class Profile extends ControllerAdmin
 
         $this->form->appendField(new Input('familyName'))
             ->setGroup($tab)
-            ->addFieldCss('col-md-6');
+            ->addFieldCss('col-md-5');
 
         $this->form->appendField(new Input('username'))
             ->setGroup($tab)
