@@ -202,15 +202,16 @@ class Edit extends ControllerAdmin
         $template->addCss('icon', $this->getPage()->getIcon());
 
         if ($this->user->userId) {
+            $template->setVisible('edit');
             $template->setText('modified', $this->user->modified->format(Date::FORMAT_LONG_DATETIME));
             $template->setText('created', $this->user->created->format(Date::FORMAT_LONG_DATETIME));
             if ($this->type == User::TYPE_STAFF) {
-                $template->setVisible('edit');
                 $url = Uri::create('/component/userPermissions', [
                     'userId' => $this->user->userId,
                     'canEdit' => User::getAuthUser()->hasPermission(User::PERM_SYSADMIN),
                 ]);
                 $template->setAttr('comp-perms', 'hx-get', $url);
+                $template->setVisible('comp-perms');
             }
         }
 
@@ -294,7 +295,7 @@ class Edit extends ControllerAdmin
         </div>
 
         <div class="col-4" choice="edit">
-            <div hx-get="/component/userPermissions" hx-trigger="load" hx-swap="outerHTML" var="comp-perms">
+            <div hx-get="/component/userPermissions" hx-trigger="load" hx-swap="outerHTML" choice="comp-perms">
               <p class="text-center mt-4"><i class="fa fa-fw fa-spin fa-spinner fa-3x"></i><br>Loading...</p>
             </div>
         </div>

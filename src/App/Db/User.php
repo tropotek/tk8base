@@ -37,9 +37,9 @@ class User extends Model implements UserInterface
     ];
 
     const array PERMISSION_DESCRIPTION_LIST = [
-        self::PERM_ADMIN          => "Access to all features and settings.",
-        self::PERM_SYSADMIN       => "Change system settings, manage staff users.",
-        self::PERM_MANAGE_MEMBERS => "Manage site member users.",
+        self::PERM_ADMIN          => "Access to all features and settings",
+        self::PERM_SYSADMIN       => "Change system settings, manage staff users",
+        self::PERM_MANAGE_MEMBERS => "Manage site member users",
     ];
 
     const string TYPE_STAFF = 'staff';
