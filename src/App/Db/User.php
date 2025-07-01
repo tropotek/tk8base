@@ -7,6 +7,7 @@ use Bs\Db\UserInterface;
 use Tk\Color;
 use Tk\Config;
 use Tk\Image;
+use Tk\Path;
 use Tk\Uri;
 use Tk\Db;
 use Tk\Db\Filter;
@@ -134,6 +135,16 @@ class User extends Model implements UserInterface
             $b64 = base64_encode($img->getContents());
             return Uri::create('data:image/png;base64,' . $b64);
         }
+    }
+
+    public function deleteImage(): bool
+    {
+        $filename = Path::createDataPath($this->image);
+        if (is_file($filename)) {
+            unlink($filename);
+        }
+        $this->image = '';
+        return true;
     }
 
     public static function getHomeUrl(string $type = ''): Uri

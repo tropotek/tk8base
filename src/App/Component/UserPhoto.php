@@ -3,14 +3,11 @@ namespace App\Component;
 
 use App\Db\User;
 use Bs\Mvc\ComponentInterface;
-use Bs\Mvc\Table;
 use Dom\Template;
-use Tk\Db;
 use Tk\FileUtil;
-use Tk\Form\Field\Input;
+use Tk\Image;
 use Tk\Log;
 use Tk\Path;
-use Tk\Table\Cell;
 use Tk\Uri;
 
 class UserPhoto extends \Dom\Renderer\Renderer implements ComponentInterface
@@ -38,13 +35,12 @@ class UserPhoto extends \Dom\Renderer\Renderer implements ComponentInterface
             if ($f != null) {
                 $dataPath = $this->user->getDataPath() . '/' . $f['full_path'] ?? '';
                 $filename = Path::createDataPath($dataPath);
-                vd($dataPath, $filename);
 
                 if (empty($f['error'])) {
                     FileUtil::mkdir(dirname($filename));
-
                     // overwrite an existing file without creating a new file record
                     move_uploaded_file($f['tmp_name'] ?? '', $filename);
+                    $this->user->deleteImage();
                     $this->user->image = $dataPath;
                     $this->user->save();
                 } else {
@@ -52,6 +48,15 @@ class UserPhoto extends \Dom\Renderer\Renderer implements ComponentInterface
                     Log::error($this->uploadError);
                 }
             }
+        } elseif ($action == 'delete') {
+            $this->user->deleteImage();
+            $this->user->save();
+        } elseif ($action == 'rotate-cw') {
+            $filename = Path::createDataPath($this->user->image);
+            Image::create($filename)->rotate(-90)->save($filename, 100);
+        } elseif ($action == 'rotate-ccw') {
+            $filename = Path::createDataPath($this->user->image);
+            Image::create($filename)->rotate(90)->save($filename, 100);
         }
 
         return $this->show();
@@ -68,8 +73,11 @@ class UserPhoto extends \Dom\Renderer\Renderer implements ComponentInterface
         }
 
         if ($this->user->getImageUrl()) {
-            $template->setAttr('img', 'src', $this->user->getImageUrl());
+            $template->setAttr('img', 'src', $this->user->getImageUrl()->set('t', time()));
             $template->setVisible('image');
+        }
+        if ($this->user->image) {
+            $template->setVisible('has-file');
         }
 
         $maxBytes = min(
@@ -81,6 +89,15 @@ class UserPhoto extends \Dom\Renderer\Renderer implements ComponentInterface
 
         $url = Uri::create();
         $template->setAttr('form', 'hx-post', $url);
+
+        $url = Uri::create()->set('action', 'delete');
+        $template->setAttr('delete', 'hx-post', $url);
+
+        $url = Uri::create()->set('action', 'rotate-ccw');
+        $template->setAttr('rotate-ccw', 'hx-post', $url);
+
+        $url = Uri::create()->set('action', 'rotate-cw');;
+        $template->setAttr('rotate-cw', 'hx-post', $url);
 
         return $template;
     }
@@ -107,12 +124,32 @@ class UserPhoto extends \Dom\Renderer\Renderer implements ComponentInterface
                     <img src="#" class="img-thumbnail" style="min-width: 100%" var="img" />
                 </div>
 
-                <div class="col">
+                <div class="col mb-2">
                     <input type="file" name="file" id="file-upload" class="form-control" accept="image/*" placeholder="Click to upload photo" var="file">
                     <div class="invalid-feedback text-danger" id="file-invalid-feedback" choice="error">This is an error</div>
                     <small class="text-muted" style="font-weight: normal;">Max upload size: <span var="max-bytes"></span></small>
                 </div>
             </form>
+
+            <div class="row" choice="has-file">
+                <div class="col-6">
+                    <button type="button" class="btn btn-sm btn-outline-field btn-light" var="delete"
+                        hx-post=""
+                        hx-swap="outerHTML"
+                        hx-target="#{$containerId}"
+                        hx-confirm="Are you sure you want to delete this photo?">Remove Photo</button>
+                </div>
+                <div class="col-6">
+                    <button type="button" class="btn btn-sm btn-outline-field btn-light float-end" var="rotate-cw"
+                        hx-post=""
+                        hx-swap="outerHTML"
+                        hx-target="#{$containerId}"><i class="bx bx-rotate-right"></i></button>
+                    <button type="button" class="btn btn-sm btn-outline-field btn-light float-end me-2" var="rotate-ccw"
+                        hx-post=""
+                        hx-swap="outerHTML"
+                        hx-target="#{$containerId}"><i class="bx bx-rotate-left"></i></button>
+                </div>
+            </div>
 
         </div>
     </div>
