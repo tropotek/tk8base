@@ -3,7 +3,6 @@ namespace App\Controller;
 
 use App\Db\Notify;
 use App\Db\User;
-use Bs\Auth;
 use Bs\Mvc\ControllerAdmin;
 use Bs\Ui\Breadcrumbs;
 use Dom\Template;

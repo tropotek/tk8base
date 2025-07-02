@@ -1,7 +1,6 @@
 <?php
 namespace App\Controller;
 
-use Bs\Auth;
 use Bs\Mvc\ControllerPublic;
 use Bs\Ui\Breadcrumbs;
 use Dom\Template;
@@ -65,11 +64,9 @@ class Home extends ControllerPublic
                     <a href="/contact" target="_blank">Contact Us</a> today for a demo.<br>
                     See the full features of this site, and how your business could benefit with one of our online management solutions.
                 </p>
-
             </div>
         </div>
     </div>
-
 </div>
 HTML;
         return $this->loadTemplate($html);
