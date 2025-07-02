@@ -39,6 +39,9 @@ class UserSelect extends \Dom\Renderer\Renderer implements ComponentInterface
                 );
             });
 
+        $this->table->appendCell('type')
+            ->setSortable(true);
+
         // Add Filter Fields
         $this->table->getForm()->appendField(new Input('search'))
             ->setAttr('placeholder', 'Search');
