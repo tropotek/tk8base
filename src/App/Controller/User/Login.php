@@ -72,10 +72,20 @@ class Login extends ControllerAdmin
     public function onSubmit(Form $form, Submit $action): void
     {
         $values = $form->getFieldValues();
+        $username = trim($values['username'] ?? '');
+        $password = trim($values['password'] ?? '');
+        if (filter_var($username, FILTER_VALIDATE_EMAIL)) {
+            $auth = Auth::findByEmail($username);
+            if ($auth instanceof Auth) {
+                $username = $auth->username;
+            } else {
+                $form->addFieldError('username', 'Invalid user account.');
+                return;
+            }
+        }
 
-        $result = Factory::instance()->getAuthController()->authenticate(Factory::instance()->getAuthAdapter());
+        $result = Factory::instance()->getAuthController()->authenticate(Factory::instance()->getAuthAdapter(), $username, $password);
         if ($result->getCode() != Result::SUCCESS) {
-            Log::debug($result->getMessage());
             $form->addError('Invalid login details.');
             return;
         }
