@@ -79,7 +79,7 @@ class Dashboard extends ControllerAdmin
                     <div class="row align-items-center">
                         <div class="col-auto">
                             <div class="avatar-lg">
-                                <img src="#" class="img-fluid rounded-circle" alt="user" var="img">
+                                <img src="#" class="img-fluid rounded-circle img-thumbnail" alt="user" var="img">
                             </div>
                         </div>
 
@@ -99,7 +99,7 @@ class Dashboard extends ControllerAdmin
                     <div class="row align-items-center">
                         <div class="col-auto">
                             <div class="avatar-lg">
-                                <img src="#" class="img-fluid rounded-circle" alt="user" var="img">
+                                <img src="#" class="img-fluid rounded-circle img-thumbnail" alt="user" var="img">
                             </div>
                         </div>
                         <div class="col">
@@ -118,7 +118,7 @@ class Dashboard extends ControllerAdmin
                     <div class="row align-items-center">
                         <div class="col-auto">
                             <div class="avatar-lg">
-                                <img src="#" class="img-fluid rounded-circle" alt="user" var="img">
+                                <img src="#" class="img-fluid rounded-circle img-thumbnail" alt="user" var="img">
                             </div>
                         </div>
                         <div class="col">
@@ -137,7 +137,7 @@ class Dashboard extends ControllerAdmin
                     <div class="row align-items-center">
                         <div class="col-auto">
                             <div class="avatar-lg">
-                                <img src="#" class="img-fluid rounded-circle" alt="user" var="img">
+                                <img src="#" class="img-fluid rounded-circle img-thumbnail" alt="user" var="img">
                             </div>
                         </div>
                         <div class="col">
