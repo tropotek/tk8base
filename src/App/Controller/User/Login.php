@@ -72,6 +72,7 @@ class Login extends ControllerAdmin
     public function onSubmit(Form $form, Submit $action): void
     {
         $values = $form->getFieldValues();
+
         $username = trim($values['username'] ?? '');
         $password = trim($values['password'] ?? '');
         if (filter_var($username, FILTER_VALIDATE_EMAIL)) {
@@ -84,7 +85,7 @@ class Login extends ControllerAdmin
             }
         }
 
-        $result = Factory::instance()->getAuthController()->authenticate(Factory::instance()->getAuthAdapter(), $username, $password);
+        $result = Factory::instance()->getAuthController()->authenticate($username, $password);
         if ($result->getCode() != Result::SUCCESS) {
             $form->addError('Invalid login details.');
             return;
