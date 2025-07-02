@@ -199,21 +199,11 @@ class Dashboard extends ControllerAdmin
                 <a href="#?n" class="btn btn-outline-dark" var="nurl">Test Notify Message</a>
             </p>
 
-            <p>jQuery Datepicker Test:</p>
-            <div id="datepicker"></div>
-
             <p>&nbsp;</p>
 
         </div>
     </div>
 
-<script>
-jQuery(function($) {
-    $( "#datepicker" ).datepicker({
-        inline: true
-    });
-});
-</script>
 </div>
 HTML;
         return $this->loadTemplate($html);

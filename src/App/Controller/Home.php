@@ -70,13 +70,6 @@ class Home extends ControllerPublic
         </div>
     </div>
 
-<script>
-jQuery(function($) {
-    $( "#datepicker" ).datepicker({
-        inline: true
-    });
-});
-</script>
 </div>
 HTML;
         return $this->loadTemplate($html);
