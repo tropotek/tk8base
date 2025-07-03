@@ -8,6 +8,7 @@ use Bs\Mvc\Table;
 use Bs\Ui\Breadcrumbs;
 use Dom\Template;
 use Tk\Form\Field\Input;
+use Tk\Table\Action\ColumnSelect;
 use Tk\Table\Cell;
 use Tk\Table\Cell\RowSelect;
 use Tk\Table\Action\Csv;
@@ -60,6 +61,7 @@ class Manager extends ControllerAdmin
         $this->table->appendCell('modified')
             ->addCss('text-nowrap')
             ->setSortable(true)
+            ->setAttr(ColumnSelect::ATTR_HIDE, true)
             ->addOnValue('\Tk\Table\Type\DateFmt::onValue');
 
         $this->table->appendCell('created')
@@ -77,6 +79,8 @@ class Manager extends ControllerAdmin
 
 
         // Add Table actions
+        $this->table->appendAction(ColumnSelect::create());
+
         $this->table->appendAction(Delete::create()
             ->addOnGetSelected([$rowSelect, 'getSelected'])
             ->addOnDelete(function(Delete $action, array $selected) {
