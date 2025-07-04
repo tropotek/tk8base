@@ -40,9 +40,10 @@ class Test extends Console
         //$result = $moodle->get_course_completion_status();
         //$result = $moodle->get_competency_frameworks();
         //$result = $moodle->get_user_competencies($userid, $idnumber);
+        //$result = $moodle->getRoles();
 
         $result = $moodle->get_enrolled_competencies($shortname, $idnumber);
-        vd($result);
+        //vd($result);
 
 
 

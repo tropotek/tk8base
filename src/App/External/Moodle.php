@@ -256,7 +256,7 @@ class Moodle
      */
 	public function getRoles(): array
 	{
-		$rows = $this->post('local_oumrole_get_roles');
+		$rows = $this->post('local_sisrole_get_roles');
         if (!is_array($rows)) return [];
 		return array_column($rows, null, 'shortname');
 	}
@@ -364,14 +364,12 @@ class Moodle
     /**
      * return competency progress for a single student
      */
-    public function get_enrolled_competencies(int $shortname, string $idnumber): \stdClass
+    public function get_enrolled_competencies(string $shortname, string $idnumber): array
     {
         $rows = $this->post('local_siscompetency_get_enrolled_competencies',
             compact('shortname', 'idnumber')
         );
         return $rows;
     }
-
-
 
 }
