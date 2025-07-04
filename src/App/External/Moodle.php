@@ -361,6 +361,17 @@ class Moodle
         return $rows;
     }
 
+    /**
+     * return competency progress for a single student
+     */
+    public function get_enrolled_competencies(int $shortname, string $idnumber): \stdClass
+    {
+        $rows = $this->post('local_siscompetency_get_enrolled_competencies',
+            compact('shortname', 'idnumber')
+        );
+        return $rows;
+    }
+
 
 
 }

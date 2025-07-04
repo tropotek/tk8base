@@ -28,18 +28,21 @@ class Test extends Console
 
 
         $idnumber = 'com-fram-1';
+        $shortname = 'comp-course-1';
         //$userid = 81;        // completed
         $userid = 73;
         $userid = 11;
+        $moodle = Moodle::create();
 
-        //$moodle = Moodle::create();
         //$result = $moodle->getAllUsers();
         //$result = $moodle->getAllCohorts();
         //$result = $moodle->get_course_competencies(1);
         //$result = $moodle->get_course_completion_status();
         //$result = $moodle->get_competency_frameworks();
-//        $result = $moodle->get_user_competencies($userid, $idnumber);
-//        vd($result);
+        //$result = $moodle->get_user_competencies($userid, $idnumber);
+
+        $result = $moodle->get_enrolled_competencies($shortname, $idnumber);
+        vd($result);
 
 
 
