@@ -16,6 +16,9 @@ class Team extends Model
     public ?\DateTime $modified    = null;
     public ?\DateTime $created     = null;
 
+    public int        $memberTotal  = 0;
+    public array      $members      = [];
+
 
     public function __construct()
     {
@@ -45,7 +48,7 @@ class Team extends Model
     public static function findFiltered(array|Filter $filter): array
     {
         $filter = Filter::create($filter);
-        $filter->appendFrom('team a');
+        $filter->appendFrom('v_team a');
 
         if (!empty($filter['search'])) {
             $filter['lSearch'] = '%' . strtolower($filter['search']) . '%';

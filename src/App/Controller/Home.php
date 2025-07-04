@@ -54,7 +54,7 @@ class Home extends ControllerPublic
                     business needs check out the following template sites:
                 </p>
                 <ul>
-                    <li><a href="https://wrapbootstrap.com/" target="_blank">{w}WrapBootstrap</a></li>
+                    <li><a href="https://wrapmarket.com/" target="_blank">Wrapmarket</a></li>
                     <li><a href="https://startbootstrap.com/templates" target="_blank">Start Bootstrap</a></li>
                 </ul>
                 <p>We can integrate most templates for public users on request.</p>

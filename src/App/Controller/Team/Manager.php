@@ -53,6 +53,12 @@ class Manager extends ControllerAdmin
                 return sprintf('<a href="%s">%s</a>', $url, $obj->name);
             });
 
+        $this->table->appendCell('memberTotal')
+            ->setHeader('Members')
+            ->addCss('text-nowrap text-center')
+            ->addHeaderCss('text-center')
+            ->setSortable(true);
+
         $this->table->appendCell('active')
             ->addCss('text-nowrap')
             ->setSortable(true)

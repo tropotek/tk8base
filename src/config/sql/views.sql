@@ -41,16 +41,18 @@ FROM file f
 
 -- \App\Db\Team
 CREATE OR REPLACE VIEW v_team AS
-WITH users AS (
+WITH user_tots AS (
     SELECT
         team_id,
+        COUNT(team_id) AS member_total,
         GROUP_CONCAT(user_id) AS members
     FROM team_has_user
     GROUP BY team_id
 )
 SELECT
     t.*,
+    tu.member_total,
     tu.members
 FROM team t
-LEFT JOIN users tu on (t.team_id)
+LEFT JOIN user_tots tu USING(team_id)
 ;
