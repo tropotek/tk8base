@@ -7,6 +7,7 @@ use Tk\Db\Filter;
 
 class Team extends Model
 {
+
     public int        $teamId      = 0;
     public string     $name        = '';
     public ?string    $description = null;
@@ -48,7 +49,7 @@ class Team extends Model
     public static function findFiltered(array|Filter $filter): array
     {
         $filter = Filter::create($filter);
-        $filter->appendFrom('v_team a');
+        $filter->appendFrom(static::getPrimaryTable() . ' a');
 
         if (!empty($filter['search'])) {
             $filter['lSearch'] = '%' . strtolower($filter['search']) . '%';
@@ -117,7 +118,7 @@ class Team extends Model
 
     public static function addMember(int $teamId, int $userId): bool
     {
-        return Db::insertIgnore('team_has_user', ['team_id' => $teamId, 'user_id' => $userId]);
+        return (false !== Db::insertIgnore('team_has_user', ['team_id' => $teamId, 'user_id' => $userId]));
     }
 
     public static function removeMember(?int $teamId = null, ?int $userId = null): bool

@@ -142,7 +142,7 @@ class Notify extends Model
     {
         self::expire();
         $filter = Filter::create($filter);
-        $filter->appendFrom('v_notify a');
+        $filter->appendFrom(static::getPrimaryTable() . ' a');
 
         if (!empty($filter['search'])) {
             $filter['lSearch'] = '%' . strtolower($filter['search']) . '%';
