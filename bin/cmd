@@ -1,7 +1,7 @@
 #!/usr/bin/env php
 <?php
-define('TKAPP', true);
 include(dirname(__DIR__) . '/_prepend.php');
+defined('TKAPP') || die();
 
 use Symfony\Component\Console\Input\ArgvInput;
 use Symfony\Component\Console\Output\ConsoleOutput;
