@@ -3,6 +3,7 @@ namespace App\Console;
 
 use App\Db\User;
 use App\External\Moodle;
+use App\External\OpenAi;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Bs\Console\Console;
@@ -42,9 +43,23 @@ class Test extends Console
         //$result = $moodle->get_user_competencies($userid, $idnumber);
         //$result = $moodle->getRoles();
 
-        $result = $moodle->get_enrolled_competencies($shortname, $idnumber);
+        //$result = $moodle->get_enrolled_competencies($shortname, $idnumber);
         //vd($result);
 
+
+//        $openai = OpenAi::create('http://192.168.0.42:1234/v1', 'mistralai/devstral-small-2505');
+//        $models = $openai->getModels();
+//        if (!$models) {
+//            $this->writeError('Error: No models found.');
+//            return self::FAILURE;
+//        }
+//        $models = array_column($models, 'id');
+//        $model = $models[0];
+//
+//        $q = 'What is the capital of Australia?';
+//        $this->writeInfo($q);
+//        $a = $openai->askQuestion($model, $q);
+//        $this->write($a);
 
 
 

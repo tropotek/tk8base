@@ -42,7 +42,7 @@ class Moodle
 	 * returns object, array, or null depending on Moodle return
 	 * on error returns false and error description in self::$error
 	 */
-	protected function request(string $httpMethod, string $wsFunction, ?array $wsParams = null): mixed
+	protected function request(string $httpMethod, string $endpoint, ?array $wsParams = null): mixed
 	{
 		$httpMethod = strtoupper($httpMethod);
 		assert($httpMethod == 'GET' || $httpMethod == 'POST', "unsupported HTTP method {$httpMethod}");
@@ -55,7 +55,7 @@ class Moodle
 		}
 		$params['wstoken']            = $this->token;
 		$params['moodlewsrestformat'] = 'json';
-		$params['wsfunction']         = $wsFunction;
+		$params['wsfunction']         = $endpoint;
 
         $url = Uri::create($this->apiUrl . '/webservice/rest/server.php', $params);
 		$ch = curl_init($url->toString());
@@ -118,14 +118,14 @@ class Moodle
 		return $result;
 	}
 
-	protected function get(string $wsFunction, ?array $wsParams = null): mixed
+	protected function get(string $endpoint, ?array $wsParams = null): mixed
 	{
-		return $this->request("GET", $wsFunction, $wsParams);
+		return $this->request("GET", $endpoint, $wsParams);
 	}
 
-	protected function post(string $wsFunction, ?array $wsParams = null): mixed
+	protected function post(string $endpoint, ?array $wsParams = null): mixed
 	{
-		return $this->request("POST", $wsFunction, $wsParams);
+		return $this->request("POST", $endpoint, $wsParams);
 	}
 
 
