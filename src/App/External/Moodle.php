@@ -372,4 +372,26 @@ class Moodle
         return $rows;
     }
 
+    /**
+     * return competency progress for a single student
+     */
+    public function get_recent_quizzes_assignments(string $lookback, array $course_ids = []): mixed
+    {
+        $rows = $this->post('local_sisquizzes_get_recent_quizzes_assignments',
+            compact('lookback', 'course_ids')
+        );
+        return $rows;
+    }
+
+    /**
+     * return competency progress for a single student
+     */
+    public function get_examsoft_eor(array $course_ids = []): mixed
+    {
+        $rows = $this->post('local_sisgrades_get_examsoft_eor',
+            compact('course_ids')
+        );
+        return $rows;
+    }
+
 }
