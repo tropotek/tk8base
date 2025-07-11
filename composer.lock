@@ -2034,12 +2034,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/tropotek/tk-domtemplate.git",
-                "reference": "3ea279ad8859053259cfa1be24a68be7d7a81389"
+                "reference": "92ef8c50ee04fe7010f7eba5f99c6a8565e53168"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tropotek/tk-domtemplate/zipball/3ea279ad8859053259cfa1be24a68be7d7a81389",
-                "reference": "3ea279ad8859053259cfa1be24a68be7d7a81389",
+                "url": "https://api.github.com/repos/tropotek/tk-domtemplate/zipball/92ef8c50ee04fe7010f7eba5f99c6a8565e53168",
+                "reference": "92ef8c50ee04fe7010f7eba5f99c6a8565e53168",
                 "shasum": ""
             },
             "require": {

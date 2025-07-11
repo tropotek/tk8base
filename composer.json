@@ -58,12 +58,6 @@
     ],
     "require": {
         "php": "^8.3",
-        "ext-curl": "*",
-        "ext-pdo": "*",
-        "ext-dom": "*",
-        "ext-libxml": "*",
-        "ext-mbstring": "*",
-        "ext-gd": "*",
         "ttek/tk-base": "~8.0.0",
         "htmx/htmx": "2.0.4",
         "jquery/jquery": "3.7.1",
