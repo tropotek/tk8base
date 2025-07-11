@@ -21,19 +21,20 @@ class Notify extends Model
 
     const int DEFAULT_TTL = 60*12;
 
-    public int        $notifyId      = 0;
-    public ?int       $userId        = null;
-    public string     $title         = '';
-    public string     $message       = '';
-    public string     $url           = '';  // note: popup blockers will request permission
-    public string     $icon          = '';
-    public ?\DateTime $readAt        = null;
-    public ?\DateTime $notifiedAt    = null;
-    public bool       $isRead        = false;
-    public bool       $isNotified    = false;
-    public int        $ttlMins       = 0;
-    public ?\DateTime $expiry        = null;
-    public ?\DateTime $created       = null;
+    public int        $notifyId   = 0;
+    public ?int       $userId     = null;
+    public string     $title      = '';
+    public string     $message    = '';
+    public string     $url        = '';  // note: popup blockers will request permission
+    public string     $reference  = '';
+    public string     $icon       = '';
+    public ?\DateTime $readAt     = null;
+    public ?\DateTime $notifiedAt = null;
+    public bool       $isRead     = false;
+    public bool       $isNotified = false;
+    public int        $ttlMins    = 0;
+    public ?\DateTime $expiry     = null;
+    public ?\DateTime $created    = null;
 
 
     public function __construct()
@@ -66,6 +67,7 @@ class Notify extends Model
         string $message,
         string $url = '',
         string $icon = '',
+        string $reference = '',
         int $ttlMins = self::DEFAULT_TTL
     ): self
     {
@@ -78,11 +80,28 @@ class Notify extends Model
         $obj->title = $title;
         $obj->message = $message;
         $obj->url = $url;
+        $obj->reference = $reference;
         $obj->icon = $icon;
         $obj->ttlMins = $ttlMins;
         $obj->save();
 
         return $obj;
+    }
+
+    public static function notifyUsers(
+        array $userIds,
+        string $title,
+        string $message,
+        string $url = '',
+        string $icon = '',
+        string $reference = '',
+        int $ttlMins = self::DEFAULT_TTL
+    ): bool
+    {
+        foreach ($userIds as $userId) {
+            self::create($userId, $title, $message, $url, $icon, $reference, $ttlMins);
+        }
+        return true;
     }
 
     public static function notifyByPermission(
@@ -91,12 +110,13 @@ class Notify extends Model
         string $message,
         string $url = '',
         string $icon = '',
+        string $reference = '',
         int $ttlMins = self::DEFAULT_TTL
     ): bool
     {
         $users = User::findFiltered(['permission' => $permission, 'active' => true]);
         foreach ($users as $user) {
-            self::create($user->userId, $title, $message, $url, $icon, $ttlMins)->save();
+            self::create($user->userId, $title, $message, $url, $icon, $reference, $ttlMins)->save();
         }
         return true;
     }
@@ -166,6 +186,10 @@ class Notify extends Model
 
         if (!empty($filter['userId'])) {
             $filter->appendWhere('AND a.user_id = :userId');
+        }
+
+        if (!empty($filter['reference'])) {
+            $filter->appendWhere('AND a.reference = :reference');
         }
 
         if (is_bool(truefalse($filter['isRead'] ?? null))) {
