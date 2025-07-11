@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9354542f8fbf8d73b70a6fa5eb48bfda",
+    "content-hash": "871d90f01f3b5732ca4709858c632d85",
     "packages": [
         {
             "name": "htmx/htmx",
@@ -1973,12 +1973,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/tropotek/tk-base.git",
-                "reference": "6e8fdab21ab7b27a35da0d4b3f536d0d0a6ac761"
+                "reference": "084e3b0b1d0847c64cf419812b808f14609553f8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tropotek/tk-base/zipball/6e8fdab21ab7b27a35da0d4b3f536d0d0a6ac761",
-                "reference": "6e8fdab21ab7b27a35da0d4b3f536d0d0a6ac761",
+                "url": "https://api.github.com/repos/tropotek/tk-base/zipball/084e3b0b1d0847c64cf419812b808f14609553f8",
+                "reference": "084e3b0b1d0847c64cf419812b808f14609553f8",
                 "shasum": ""
             },
             "require": {
@@ -2147,18 +2147,20 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/tropotek/tk-framework.git",
-                "reference": "0091fba9d8c1c0d3db98996766ffe30ea4082674"
+                "reference": "f64f7f716f1824d4e16cfc954b667559d2cae471"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tropotek/tk-framework/zipball/0091fba9d8c1c0d3db98996766ffe30ea4082674",
-                "reference": "0091fba9d8c1c0d3db98996766ffe30ea4082674",
+                "url": "https://api.github.com/repos/tropotek/tk-framework/zipball/f64f7f716f1824d4e16cfc954b667559d2cae471",
+                "reference": "f64f7f716f1824d4e16cfc954b667559d2cae471",
                 "shasum": ""
             },
             "require": {
                 "ext-curl": "*",
                 "ext-fileinfo": "*",
+                "ext-gd": "*",
                 "ext-json": "*",
+                "ext-mbstring": "*",
                 "ext-pdo": "*",
                 "php": "^8.3",
                 "phpmailer/phpmailer": "~6.0-@stable",
@@ -3848,13 +3850,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": "^8.3",
-        "ext-curl": "*",
-        "ext-pdo": "*",
-        "ext-dom": "*",
-        "ext-libxml": "*",
-        "ext-mbstring": "*",
-        "ext-gd": "*"
+        "php": "^8.3"
     },
     "platform-dev": {},
     "plugin-api-version": "2.6.0"
