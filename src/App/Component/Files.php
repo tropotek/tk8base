@@ -199,7 +199,7 @@ class Files extends \Dom\Renderer\Renderer implements ComponentInterface
 
         $html = <<<HTML
 <div var="container">
-    <div var="content">
+    <div>
         <p><small>Use the checkbox to select any files to be included in the email report.</small></p>
     </div>
     <div class="file-upload-form">
