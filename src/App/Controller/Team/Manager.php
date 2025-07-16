@@ -31,13 +31,14 @@ class Manager extends ControllerAdmin
         $this->table = new Table('team');
         $this->table->setOrderBy('team_id');
         $this->table->setLimit(25);
+        $this->table->resetTableSession();
 
         $rowSelect = RowSelect::create('id', 'teamId');
         $this->table->appendCell($rowSelect);
 
         $this->table->appendCell('actions')
             ->addCss('text-nowrap text-center')
-            ->addOnValue(function(Team $obj, Cell $cell) {
+            ->addOnHtml(function(Team $obj, Cell $cell) {
                 $url = Uri::create('/teamEdit')->set('teamId', $obj->teamId);
                 return <<<HTML
                     <a class="btn btn-outline-success" href="$url" title="Edit"><i class="fa fa-fw fa-edit"></i></a>
@@ -48,9 +49,9 @@ class Manager extends ControllerAdmin
             ->addCss('text-nowrap')
             ->setSortable(true)
             ->addHeaderCss('max-width')
-            ->addOnValue(function(\App\Db\Team $obj, Cell $cell) {
+            ->addOnHtml(function(\App\Db\Team $obj, Cell $cell) {
                 $url = Uri::create('/teamEdit', ['teamId' => $obj->teamId]);
-                return sprintf('<a href="%s">%s</a>', $url, $obj->name);
+                return sprintf('<a href="%s">%s</a>', $url, $cell->getValue($obj));
             });
 
         $this->table->appendCell('memberTotal')
@@ -114,7 +115,6 @@ class Manager extends ControllerAdmin
                 if (!$this->table->getCell(Team::getPrimaryProperty())) {
                     $this->table->prependCell(Team::getPrimaryProperty())->setHeader('id');
                 }
-                $this->table->getCell('name')->getOnValue()->reset();
                 $filter = $this->table->getDbFilter()->resetLimits();
                 return Team::findFiltered($filter);
             }));

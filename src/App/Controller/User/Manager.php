@@ -55,7 +55,7 @@ class Manager extends ControllerAdmin
 
         $this->table->appendCell('actions')
             ->addCss('text-nowrap text-center')
-            ->addOnValue(function(User $user, Cell $cell) {
+            ->addOnHtml(function(User $user, Cell $cell) {
                 $msq = Uri::create()->set(Masquerade::QUERY_MSQ, strval($user->userId));
                 $disabled = !Masquerade::canMasqueradeAs(Auth::getAuthUser(), $user->getAuth()) ? 'disabled' : '';
                 return <<<HTML
@@ -67,9 +67,9 @@ class Manager extends ControllerAdmin
             ->addCss('text-nowrap')
             ->addHeaderCss('max-width')
             ->setSortable(true)
-            ->addOnValue(function(User $user, Cell $cell) {
+            ->addOnHtml(function(User $user, Cell $cell) {
                 $url = Uri::create('/user/'.$user->type.'Edit', ['userId' => $user->userId]);
-                return sprintf('<a href="%s">%s</a>', $url, $user->username);
+                return sprintf('<a href="%s">%s</a>', $url, $cell->getValue($user) );
             });
 
         $this->table->appendCell('username')
@@ -78,7 +78,7 @@ class Manager extends ControllerAdmin
 
         $this->table->appendCell('email')
             ->setSortable(true)
-            ->addOnValue(function(User $user, Cell $cell) {
+            ->addOnHtml(function(User $user, Cell $cell) {
                 return sprintf('<a href="mailto:%s">%s</a>', $user->email, $user->email);
             });
 
@@ -136,8 +136,6 @@ class Manager extends ControllerAdmin
                 if (!$this->table->getCell(User::getPrimaryProperty())) {
                     $this->table->prependCell(User::getPrimaryProperty())->setHeader('id');
                 }
-                $this->table->getCell('username')->getOnValue()->reset();
-                $this->table->getCell('email')->getOnValue()->reset();    // remove html from cell
                 $filter = $this->table->getDbFilter()->resetLimits();
                 $filter['type'] = $this->type;
                 return User::findFiltered($filter);
