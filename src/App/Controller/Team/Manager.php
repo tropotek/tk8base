@@ -69,12 +69,12 @@ class Manager extends ControllerAdmin
             ->addCss('text-nowrap')
             ->setSortable(true)
             ->setAttr(ColumnSelect::ATTR_HIDE, true)
-            ->addOnValue('\Tk\Table\Type\DateFmt::onValue');
+            ->addOnValue('\Tk\Table\Type\Date::getLongDateTime');
 
         $this->table->appendCell('created')
             ->addCss('text-nowrap')
             ->setSortable(true)
-            ->addOnValue('\Tk\Table\Type\DateFmt::onValue');
+            ->addOnValue('\Tk\Table\Type\Date::getLongDateTime');
 
 
         // Add Filter Fields
@@ -89,8 +89,8 @@ class Manager extends ControllerAdmin
         $this->table->appendAction(ColumnSelect::create());
 
         $this->table->appendAction(Delete::create()
-            ->addOnGetSelected([$rowSelect, 'getSelected'])
-            ->addOnDelete(function(Delete $action, array $selected) {
+            ->addOnExecute(function(Delete $action) use ($rowSelect) {
+                $selected = $rowSelect->getSelected();
                 foreach ($selected as $team_id) {
                     Db::delete('team', compact('team_id'));
                 }
@@ -99,19 +99,19 @@ class Manager extends ControllerAdmin
         $this->table->appendAction(Select::create('Active Status', 'fa fa-fw fa-times')
             ->setActions(['Active' => 'active', 'Disable' => 'disable'])
             ->setConfirmStr('Toggle active/disable on the selected rows?')
-            ->addOnGetSelected([$rowSelect, 'getSelected'])
-            ->addOnSelect(function(Select $action, array $selected, string $value) {
+            ->addOnExecute(function(Select $action) use ($rowSelect) {
+                if (!isset($_POST[$action->getRequestKey()])) return;
+                $active = trim(strtolower($_POST[$action->getRequestKey()] ?? 'active')) == 'active';
+                $selected = $rowSelect->getSelected();
                 foreach ($selected as $id) {
-                    $obj = Team::find($id);
-                    $obj->active = (strtolower($value) == 'active');
+                    $obj = Team::find((int)$id);
+                    $obj->active = $active;
                     $obj->save();
                 }
-            })
-        );
+            }));
 
         $this->table->appendAction(Csv::create()
-            ->addOnCsv(function(Csv $action) {
-                $action->setExcluded(['actions']);
+            ->addOnExecute(function(Csv $action) {
                 if (!$this->table->getCell(Team::getPrimaryProperty())) {
                     $this->table->prependCell(Team::getPrimaryProperty())->setHeader('id');
                 }

@@ -104,7 +104,7 @@ class Manager extends ControllerAdmin
         $this->table->appendCell('lastLogin')
             ->addCss('text-nowrap')
             ->setSortable(true)
-            ->addOnValue('\Tk\Table\Type\DateTime::onValue');
+            ->addOnValue('\Tk\Table\Type\Date::getLongDateTime');
 
 
         // Add Filter Fields
@@ -119,28 +119,27 @@ class Manager extends ControllerAdmin
         $this->table->appendAction(\Tk\Table\Action\Select::create('Active Status', 'fa fa-fw fa-times')
             ->setActions(['Active' => 'active', 'Disable' => 'disable'])
             ->setConfirmStr('Toggle active/disable on the selected rows?')
-            ->addOnGetSelected([$rowSelect, 'getSelected'])
-            ->addOnSelect(function(\Tk\Table\Action\Select $action, array $selected, string $value) {
+            ->addOnExecute(function(\Tk\Table\Action\Select $action) use ($rowSelect) {
+                if (!isset($_POST[$action->getRequestKey()])) return;
+                $active = trim(strtolower($_POST[$action->getRequestKey()] ?? 'active')) == 'active';
+                $selected = $rowSelect->getSelected();
                 foreach ($selected as $id) {
-                    $u = User::find($id);
-                    $a = $u->getAuth();
-                    $a->active = (strtolower($value) == 'active');
-                    $a->save();
+                    $obj = User::find((int)$id);
+                    $obj->active = $active;
+                    $obj->save();
                 }
-            })
-        );
+            }));
 
         $this->table->appendAction(Csv::create()
-            ->addOnCsv(function(Csv $action) {
-                $action->setExcluded(['actions', 'permissions']);
+            ->addOnExecute(function(Csv $action) {
                 if (!$this->table->getCell(User::getPrimaryProperty())) {
                     $this->table->prependCell(User::getPrimaryProperty())->setHeader('id');
                 }
                 $filter = $this->table->getDbFilter()->resetLimits();
-                $filter['type'] = $this->type;
+                $filter->set('type', $this->type);
                 return User::findFiltered($filter);
-            })
-        );
+            }));
+
 
         $this->table->execute();
 
