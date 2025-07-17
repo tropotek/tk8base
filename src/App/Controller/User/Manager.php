@@ -11,6 +11,7 @@ use Dom\Template;
 use Tk\Alert;
 use Tk\Form\Field\Input;
 use Tk\Form\Field\Select;
+use Tk\Table\Action\ColumnSelect;
 use Tk\Table\Action\Csv;
 use Tk\Table\Cell;
 use Tk\Table\Cell\RowSelect;
@@ -118,6 +119,7 @@ class Manager extends ControllerAdmin
         $this->table->getForm()->appendField(new Select('active', $list))->setValue('y');
 
         // Add Table actions
+        $this->table->appendAction(ColumnSelect::create());
         $this->table->appendAction(\Tk\Table\Action\Select::createActiveSelect(Auth::class, $rowSelect));
         $this->table->appendAction(Csv::createDefault(User::class, $rowSelect, ['type' => $this->type]));
 
