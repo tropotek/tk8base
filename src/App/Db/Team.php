@@ -17,6 +17,8 @@ class Team extends Model
     public ?\DateTime $modified    = null;
     public ?\DateTime $created     = null;
 
+    public string     $dataPath    = '';
+
     public int        $memberTotal  = 0;
     public array      $members      = [];
 

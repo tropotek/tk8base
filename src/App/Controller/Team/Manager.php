@@ -37,6 +37,7 @@ class Manager extends ControllerAdmin
         $this->table->appendCell($rowSelect);
 
         $this->table->appendCell('actions')
+            ->addHeaderCss('text-center')
             ->addCss('text-nowrap text-center')
             ->addOnHtml(function(Team $obj, Cell $cell) {
                 $url = Uri::create('/teamEdit')->set('teamId', $obj->teamId);
@@ -61,18 +62,21 @@ class Manager extends ControllerAdmin
             ->setSortable(true);
 
         $this->table->appendCell('active')
-            ->addCss('text-nowrap')
+            ->addHeaderCss('text-center')
+            ->addCss('text-center text-nowrap')
             ->setSortable(true)
             ->addOnValue('\Tk\Table\Type\Boolean::onValue');
 
         $this->table->appendCell('modified')
-            ->addCss('text-nowrap')
+            ->addHeaderCss('text-end')
+            ->addCss('text-end text-nowrap')
             ->setSortable(true)
             ->setAttr(ColumnSelect::ATTR_HIDE, true)
             ->addOnValue('\Tk\Table\Type\Date::getLongDateTime');
 
         $this->table->appendCell('created')
-            ->addCss('text-nowrap')
+            ->addHeaderCss('text-end')
+            ->addCss('text-end text-nowrap')
             ->setSortable(true)
             ->addOnValue('\Tk\Table\Type\Date::getLongDateTime');
 

@@ -97,7 +97,7 @@ class Files extends \Dom\Renderer\Renderer implements ComponentInterface
 
         $this->table->appendCell('actions')
             ->addCss('text-nowrap text-center')
-            ->addOnValue(function(File $obj, Cell $cell) {
+            ->addOnHtml(function(File $obj, Cell $cell) {
                 $del = Uri::create()->set('action', 'del')->set('fileId', $obj->fileId);
                 $wrapId = $cell->getTable()->getWrapId();
                 $disabled = $this->canEdit ? '' : 'disabled';
@@ -115,7 +115,7 @@ class Files extends \Dom\Renderer\Renderer implements ComponentInterface
 
         $this->table->appendCell('label')
             ->addHeaderCss('max-width')
-            ->addOnValue(function(File $obj, Cell $cell) {
+            ->addOnHtml(function(File $obj, Cell $cell) {
                 $uploader = User::find(intval($obj->userId));
                 $title = $obj->created->format(Date::FORMAT_AU_DATETIME);
                 if ($uploader instanceof User) {
@@ -128,7 +128,7 @@ class Files extends \Dom\Renderer\Renderer implements ComponentInterface
         $this->table->appendCell('selected')
             ->setHeader('Report')
             ->addCss('text-center')
-            ->addOnValue(function(File $obj, Cell $cell) {
+            ->addOnHtml(function(File $obj, Cell $cell) {
                 $url = Uri::create()->set('action', 'sel')->set('fileId', $obj->fileId);
                 $disabled = $this->canEdit ? '' : 'disabled';
                 return sprintf('<input type="checkbox" name="selected[]" value="%s" %s
@@ -170,7 +170,7 @@ class Files extends \Dom\Renderer\Renderer implements ComponentInterface
         $template->appendTemplate('content', $this->table->htmxShow());
 
         if ($this->uploadError) {
-            $template->addCss('file', 'is-invalid');
+            $template->addCss('file', 'test-danger is-invalid');
             $template->setText('error', $this->uploadError);
             $template->setVisible('error');
         }
@@ -203,6 +203,7 @@ class Files extends \Dom\Renderer\Renderer implements ComponentInterface
         <p><small>Use the checkbox to select any files to be included in the email report.</small></p>
     </div>
     <div class="file-upload-form">
+        <div var="content"></div>
         <form id="file-upload-form" class="form-horizontal"
             hx-encoding="multipart/form-data"
             hx-post="{$url}"

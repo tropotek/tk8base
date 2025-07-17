@@ -6,6 +6,7 @@ use Bs\Mvc\Table;
 use Dom\Template;
 use Tk\Alert;
 use Tk\FileUtil;
+use Tk\Table\Action\ColumnSelect;
 use Tk\Uri;
 use Tk\Db;
 use Tk\Table\Action\Csv;
@@ -25,8 +26,9 @@ class File extends Table
         $this->appendCell($rowSelect);
 
         $this->appendCell('actions')
+            ->addHeaderCss('text-center')
             ->addCss('text-nowrap text-center')
-            ->addOnValue(function(\App\Db\File $file, Cell $cell) {
+            ->addOnHtml(function(\App\Db\File $file, Cell $cell) {
                 $view = $file->getUrl();
                 $del  = Uri::create()->set('del', strval($file->fileId));
                 return <<<HTML
@@ -38,7 +40,7 @@ class File extends Table
         $this->appendCell('filename')
             ->addHeaderCss('text-start max-width')
             ->setSortable(true)
-            ->addOnValue(function(\App\Db\File $file, Cell $cell) {
+            ->addOnHtml(function(\App\Db\File $file, Cell $cell) {
                 return sprintf('<a href="%s" target="_blank">%s</a>', $file->getUrl(), $file->filename);
             });
 
@@ -63,32 +65,33 @@ class File extends Table
 
         $this->appendCell('selected')
             ->setSortable(true)
-            ->addCss('text-center')
+            ->addHeaderCss('text-center')
+            ->addCss('text-center text-nowrap')
             ->addOnValue('\Tk\Table\Type\Boolean::onValue');
 
         $this->appendCell('created')
             ->setSortable(true)
-            ->addCss('text-nowrap')
-            ->addOnValue('\Tk\Table\Type\DateFmt::onValue');
+            ->addHeaderCss('text-end')
+            ->addCss('text-end text-nowrap')
+            ->addOnValue('\Tk\Table\Type\Date::getLongDateTime');
 
 
         // Add Table actions
-        $this->appendAction(Delete::create()
-            ->addOnGetSelected([$rowSelect, 'getSelected'])
-            ->addOnDelete(function(Delete $action, array $selected) {
+        $this->table->appendAction(ColumnSelect::create());
+
+        $this->table->appendAction(Delete::create()
+            ->addOnExecute(function(Delete $action) use ($rowSelect) {
+                $selected = $rowSelect->getSelected();
                 foreach ($selected as $file_id) {
-                    Db::delete('file', compact('file_id'));
+                    Db::delete('team', compact('file_id'));
                 }
-            })
-        );
+            }));
 
         $this->table->appendAction(Csv::create()
-            ->addOnCsv(function(Csv $action) {
-                $action->setExcluded(['actions', 'permissions']);
+            ->addOnExecute(function(Csv $action) {
                 if (!$this->table->getCell(\App\Db\File::getPrimaryProperty())) {
                     $this->table->prependCell(\App\Db\File::getPrimaryProperty())->setHeader('id');
                 }
-                $this->table->getCell('username')->getOnValue()->reset();
                 $filter = $this->table->getDbFilter()->resetLimits();
                 return \App\Db\File::findFiltered($filter);
             }));
@@ -96,7 +99,7 @@ class File extends Table
         return $this;
     }
 
-    public function execute(): static
+    public function execute(?callable $onInit = null): static
     {
         if (isset($_GET['del'])) {
             $this->doDelete(intval($_GET['del']));

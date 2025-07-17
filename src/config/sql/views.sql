@@ -51,6 +51,7 @@ WITH user_tots AS (
 )
 SELECT
     t.*,
+    CONCAT('/app/teams/' , t.team_id) AS data_path,
     tu.member_total,
     tu.members
 FROM team t

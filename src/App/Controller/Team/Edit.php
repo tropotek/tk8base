@@ -106,7 +106,11 @@ class Edit extends ControllerAdmin
             $template->setText('created', $this->team->created->format(Date::FORMAT_LONG_DATETIME));
             $template->setVisible('edit');
 
-            $url = Uri::create('/component/files', ['fkey' => Team::class, 'fid' => $this->team->teamId]);
+            $url = Uri::create('/component/files', [
+                'fkey' => Team::class,
+                'fid' => $this->team->teamId,
+                'dataPath' => $this->team->getDataPath(),
+            ]);
             $template->setAttr('comp-files', 'hx-get', $url);
 
             $url = Uri::create('/component/teamMemberTable', ['teamId' => $this->team->teamId]);

@@ -65,7 +65,6 @@ class File extends Model
     public function save(): void
     {
         $map = static::getDataMap();
-
         $values = $map->getArray($this);
         if ($this->fileId) {
             $values['file_id'] = $this->fileId;

@@ -54,6 +54,7 @@ class Manager extends ControllerAdmin
         $this->table->appendCell($rowSelect);
 
         $this->table->appendCell('actions')
+            ->addHeaderCss('text-center')
             ->addCss('text-nowrap text-center')
             ->addOnHtml(function(User $user, Cell $cell) {
                 $msq = Uri::create()->set(Masquerade::QUERY_MSQ, strval($user->userId));
@@ -98,11 +99,14 @@ class Manager extends ControllerAdmin
         }
 
         $this->table->appendCell('active')
+            ->addHeaderCss('text-center')
+            ->addCss('text-center text-nowrap')
             ->setSortable(true)
             ->addOnValue('\Tk\Table\Type\Boolean::onValue');
 
         $this->table->appendCell('lastLogin')
-            ->addCss('text-nowrap')
+            ->addHeaderCss('text-end')
+            ->addCss('text-end text-nowrap')
             ->setSortable(true)
             ->addOnValue('\Tk\Table\Type\Date::getLongDateTime');
 

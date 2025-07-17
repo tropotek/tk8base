@@ -48,7 +48,7 @@ class TeamMemberTable extends \Dom\Renderer\Renderer implements ComponentInterfa
 
         $this->table->appendCell('actions')
             ->addCss('text-nowrap text-center')
-            ->addOnValue(function(User $obj, Cell $cell) {
+            ->addOnHtml(function(User $obj, Cell $cell) {
                 $url = Uri::create()->set('action', 'rem')->set('userId', $obj->userId);
                 return <<<HTML
                     <button class="btn btn-danger btn-xs" title="Remove Team Member"
