@@ -110,7 +110,6 @@ class Manager extends ControllerAdmin
             ->setSortable(true)
             ->addOnValue('\Tk\Table\Type\Date::getLongDateTime');
 
-
         // Add Filter Fields
         $this->table->getForm()->appendField(new Input('search'))
             ->setAttr('placeholder', 'Search: uid, name, email, username');
@@ -118,32 +117,9 @@ class Manager extends ControllerAdmin
         $list = ['' => '-- All Users --', 'y' => 'Active', 'n' => 'Disabled'];
         $this->table->getForm()->appendField(new Select('active', $list))->setValue('y');
 
-
         // Add Table actions
-        $this->table->appendAction(\Tk\Table\Action\Select::create('Active Status', 'fa fa-fw fa-times')
-            ->setActions(['Active' => 'active', 'Disable' => 'disable'])
-            ->setConfirmStr('Toggle active/disable on the selected rows?')
-            ->addOnExecute(function(\Tk\Table\Action\Select $action) use ($rowSelect) {
-                if (!isset($_POST[$action->getRequestKey()])) return;
-                $active = trim(strtolower($_POST[$action->getRequestKey()] ?? 'active')) == 'active';
-                $selected = $rowSelect->getSelected();
-                foreach ($selected as $id) {
-                    $obj = User::find((int)$id);
-                    $obj->active = $active;
-                    $obj->save();
-                }
-            }));
-
-        $this->table->appendAction(Csv::create()
-            ->addOnExecute(function(Csv $action) {
-                if (!$this->table->getCell(User::getPrimaryProperty())) {
-                    $this->table->prependCell(User::getPrimaryProperty())->setHeader('id');
-                }
-                $filter = $this->table->getDbFilter()->resetLimits();
-                $filter->set('type', $this->type);
-                return User::findFiltered($filter);
-            }));
-
+        $this->table->appendAction(\Tk\Table\Action\Select::createActiveSelect(Auth::class, $rowSelect));
+        $this->table->appendAction(Csv::createDefault(User::class, $rowSelect, ['type' => $this->type]));
 
         $this->table->execute();
 

@@ -78,23 +78,8 @@ class File extends Table
 
         // Add Table actions
         $this->table->appendAction(ColumnSelect::create());
-
-        $this->table->appendAction(Delete::create()
-            ->addOnExecute(function(Delete $action) use ($rowSelect) {
-                $selected = $rowSelect->getSelected();
-                foreach ($selected as $file_id) {
-                    Db::delete('team', compact('file_id'));
-                }
-            }));
-
-        $this->table->appendAction(Csv::create()
-            ->addOnExecute(function(Csv $action) {
-                if (!$this->table->getCell(\App\Db\File::getPrimaryProperty())) {
-                    $this->table->prependCell(\App\Db\File::getPrimaryProperty())->setHeader('id');
-                }
-                $filter = $this->table->getDbFilter()->resetLimits();
-                return \App\Db\File::findFiltered($filter);
-            }));
+        $this->table->appendAction(Delete::createDefault(\App\Db\File::class, $rowSelect));
+        $this->table->appendAction(Csv::createDefault(\App\Db\File::class, $rowSelect));
 
         return $this;
     }

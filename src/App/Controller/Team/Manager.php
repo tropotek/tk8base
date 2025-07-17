@@ -31,7 +31,6 @@ class Manager extends ControllerAdmin
         $this->table = new Table('team');
         $this->table->setOrderBy('team_id');
         $this->table->setLimit(25);
-        $this->table->resetTableSession();
 
         $rowSelect = RowSelect::create('id', 'teamId');
         $this->table->appendCell($rowSelect);
@@ -88,48 +87,14 @@ class Manager extends ControllerAdmin
         $list = ['' => '-- All --', 'y' => 'Active', 'n' => 'Disabled'];
         $this->table->getForm()->appendField(new \Tk\Form\Field\Select('active', $list))->setValue('y');
 
-
         // Add Table actions
         $this->table->appendAction(ColumnSelect::create());
-
-        $this->table->appendAction(Delete::create()
-            ->addOnExecute(function(Delete $action) use ($rowSelect) {
-                $selected = $rowSelect->getSelected();
-                foreach ($selected as $team_id) {
-                    Db::delete('team', compact('team_id'));
-                }
-            }));
-
-        $this->table->appendAction(Select::create('Active Status', 'fa fa-fw fa-times')
-            ->setActions(['Active' => 'active', 'Disable' => 'disable'])
-            ->setConfirmStr('Toggle active/disable on the selected rows?')
-            ->addOnExecute(function(Select $action) use ($rowSelect) {
-                if (!isset($_POST[$action->getRequestKey()])) return;
-                $active = trim(strtolower($_POST[$action->getRequestKey()] ?? 'active')) == 'active';
-                $selected = $rowSelect->getSelected();
-                foreach ($selected as $id) {
-                    $obj = Team::find((int)$id);
-                    $obj->active = $active;
-                    $obj->save();
-                }
-            }));
-
-        $this->table->appendAction(Csv::create()
-            ->addOnExecute(function(Csv $action) {
-                if (!$this->table->getCell(Team::getPrimaryProperty())) {
-                    $this->table->prependCell(Team::getPrimaryProperty())->setHeader('id');
-                }
-                $filter = $this->table->getDbFilter()->resetLimits();
-                return Team::findFiltered($filter);
-            }));
+        $this->table->appendAction(Delete::createDefault(Team::class, $rowSelect));
+        $this->table->appendAction(\Tk\Table\Action\Select::createActiveSelect(Team::class, $rowSelect));
+        $this->table->appendAction(Csv::createDefault(Team::class, $rowSelect));
 
         // execute table
         $this->table->execute();
-
-        // todo: remove cell orderBy validation before release
-        // if (!$this->table->validateCells(Team::getDataMap())) {
-        //     $this->table->getTableSession()->remove($this->table->makeRequestKey(Table::PARAM_ORDERBY));
-        // }
 
         // Set the table rows
         $filter = $this->table->getDbFilter();
