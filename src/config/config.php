@@ -27,6 +27,12 @@ return function (Config $config) {
      */
     $config['auth.registration.enable'] = false;
 
+    /**
+     * The number of mins to keep the remember me cookie alive
+     * (default: 30 days)
+     */
+    $config['auth.remember.duration'] = 60 * 24 * 30;
+
 
     /**
      * SSI/SSO oAuth portal configs
