@@ -40,14 +40,15 @@ class Test extends Console
         //$result = $moodle->get_course_competencies(1);
         //$result = $moodle->get_course_completion_status();
         //$result = $moodle->get_competency_frameworks();
-        //$result = $moodle->get_user_competencies($userid, $idnumber);
         //$result = $moodle->getRoles();
 
-        //$result = $moodle->get_enrolled_competencies($shortname, $idnumber);
-        $courses = [2, 3, 4];
-        //$result = $moodle->get_recent_quizzes_assignments(90, $courses);
-        $result = $moodle->get_examsoft_eor($courses);
+        //$result = $moodle->get_user_competencies($userid, $idnumber);
+        $result = $moodle->get_enrolled_competencies($shortname, $idnumber);
         vd($result);
+
+
+
+
 
 
 //        $openai = OpenAi::create('http://192.168.0.42:1234/v1', 'mistralai/devstral-small-2505');

@@ -28,4 +28,12 @@ class Moodle
         return new JsonResponse($data);
     }
 
+    public function doCompetencyGraded(): JsonResponse
+    {
+        if (!Config::isDev()) return new JsonResponse([], Response::HTTP_UNAUTHORIZED);
+
+        vd('tk8base', $_REQUEST['competency'] ?? '');
+        return new JsonResponse($data);
+    }
+
 }

@@ -353,23 +353,33 @@ class Moodle
     /**
      * return competency progress for a single student
      */
-    public function get_user_competencies(int $userid, string $idnumber): \stdClass
+    public function get_user_competencies(int $userid, string $framework_idnumber): \stdClass
     {
-        $rows = $this->post('local_siscompetency_get_user_competencies',
-            compact('userid', 'idnumber')
+        $result = $this->post('local_siscompetency_get_user_competencies',
+            [
+                'userid' => $userid,
+                'framework_idnumber' => $framework_idnumber,
+            ]
         );
-        return $rows;
+		if (!is_object($result)) return new \stdClass;
+        return $result;
     }
 
     /**
      * return competency progress for a single student
+     *
+     * @return array<int,\stdClass>
      */
-    public function get_enrolled_competencies(string $shortname, string $idnumber): array
+    public function get_enrolled_competencies(string $course_shortname, string $framework_idnumber): array
     {
         $rows = $this->post('local_siscompetency_get_enrolled_competencies',
-            compact('shortname', 'idnumber')
+            [
+                'course_shortname' => $course_shortname,
+                'framework_idnumber' => $framework_idnumber,
+            ]
         );
-        return $rows;
+		if (!is_array($rows)) return [];
+        return array_column($rows, null, 'userid');
     }
 
     /**

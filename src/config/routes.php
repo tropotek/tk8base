@@ -79,8 +79,13 @@ return function (CollectionConfigurator $routes) {
         ->controller([\App\Component\TeamMemberTable::class, 'doDefault']);
 
 
-
     // test moodle API
     $routes->add('api-moodle-course-viewed', '/api/moodle/courseViewed')
         ->controller([\App\Api\Moodle::class, 'doCourseViewed']);
+    $routes->add('api-moodle-competency-graded', '/api/moodle/competency_graded')
+        ->controller([\App\Api\Moodle::class, 'doCompetencyGraded']);
+
+
+
+
 };
