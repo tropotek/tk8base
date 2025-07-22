@@ -22,24 +22,18 @@ class Nav
 
         $menu->addLink('Dashboard', Uri::create('/dashboard'), 'ri-dashboard-line');
         $menu->addLink('Site Settings', Uri::create('/settings'), 'ri-settings-2-fill', $user->hasPermission(User::PERM_SYSADMIN));
-        $menu->addLink('Preview Site', Uri::create('/home'), 'fas fa-home', true, ['attrs' => ['target' => '_blank']]);
+        $menu->addLink('Preview Site', Uri::create('/home'), 'fas fa-home', true,
+            [
+                'attrs' => ['target' => '_blank']
+            ]
+        );
 
-        $menu->addSeparator();
+        $menu->addHeader('System');
         $menu->addLink('Teams', Uri::create('/teamManager'), 'fas fa-layer-group');
+        $menu->addLink('Staff', Uri::create('/user/staffManager'), 'fas fa-users', $user->hasPermission(User::PERM_SYSADMIN));
         $menu->addLink('Members', Uri::create('/user/memberManager'), 'fas fa-users', $user->hasPermission(User::CHANGE_USERS));
-        $menu->addSeparator();
 
-        $admin = $menu->addSubmenu('Admin', 'ri-settings-2-line', $user->hasPermission(User::PERM_SYSADMIN));
-        $admin->addLink('Staff', Uri::create('/user/staffManager'), 'fas fa-users', $user->hasPermission(User::PERM_SYSADMIN));
-
-
-        $dev = $menu->addSubmenu('Dev', 'ri-bug-line', (Config::isDev() && $user->hasPermission(User::PERM_ADMIN)));
-        $dev->addLink('PHP Info', Uri::create('/info'), 'ri-information-line');
-        $dev->addLink('Tail Log', Uri::create('/tailLog'), 'ri-terminal-box-fill');
-        $dev->addLink('Inline Image', Uri::create('/util/inlineImage'), 'fas fa-image');
-        $dev->addLink('DB Search', Uri::create('/util/dbSearch'), 'fas fa-database');
-
-        $menu->addHeader('Tropotek');
+        $menu->addHeader('Help');
         $menu->addLink('Contact Us', Uri::create('/contact'), 'bx bx-mail-send');
 
         return $menu;
@@ -57,6 +51,14 @@ class Nav
 
         $menu->addLink('My Account', Uri::create('/profile'), 'fe-user', true);
         $menu->addLink('Settings', Uri::create('/settings'), 'fe-settings', $user->hasPermission(User::PERM_SYSADMIN));
+
+        $visible = (Config::isDev() && $user->hasPermission(User::PERM_ADMIN));
+        $menu->addSeparator($visible);
+        $menu->addLink('PHP Info', Uri::create('/info'), 'ri-information-line', $visible);
+        $menu->addLink('Tail Log', Uri::create('/tailLog'), 'ri-terminal-box-fill', $visible);
+        $menu->addLink('Inline Image', Uri::create('/util/inlineImage'), 'fas fa-image', $visible);
+        $menu->addLink('DB Search', Uri::create('/util/dbSearch'), 'fas fa-database', $visible);
+
         $menu->addSeparator(($user instanceof User));
         $menu->addLink('Customizer', null, 'ri-palette-line', true,
             [
