@@ -335,6 +335,7 @@ class Moodle
 //
 
 
+
     /**
      * @return array<string, \stdClass>
      */
@@ -348,6 +349,14 @@ class Moodle
             ]
         ]);
         return array_column($rows, null, 'idnumber');
+    }
+
+    /**
+     * return a frameworks competency list
+     */
+    public function get_competency_list(string $idnumber): \stdClass
+    {
+        return $this->post('local_siscompetency_get_competency_list', compact('idnumber'));
     }
 
     /**

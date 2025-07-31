@@ -2,7 +2,6 @@
 namespace App\Controller\Team;
 
 use App\Db\Team;
-use App\Db\User;
 use Bs\Mvc\ControllerAdmin;
 use Bs\Mvc\Table;
 use Bs\Ui\Breadcrumbs;
