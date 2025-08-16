@@ -38,20 +38,21 @@ return function (Config $config) {
      * SSI/SSO oAuth portal configs
      *
      * Whitelist URLS:
-     *   - https://domain.com/_ssi  <- main oauth uri
-     *   - https://domain.com/login
-     *   - https://domain.com/logout
      *   - https://domain.com/
+     *   - https://domain.com/_ssi  <- main oauth uri
      */
 
     /**
      * Microsoft external SSI options
+     *  - Login to https://portal.azure.com go to App Registrations (or create New)
+     *  - Browse to "Microsoft Entra" page
+     *  - Click the "App Registrations" page
+     *  - Click the "New Registration" button
+     *  - Select "Accounts in any organizational directory (Any Microsoft Entra ID tenant - Multitenant)"
+     *  - Add the urls to the "Authentication" page (https://domain.com/_ssi, https://domain.com/)
+     *  - Click the "Certificated & secrets" Create a new Client Secret and note the secret "Value"
+     *  - Get the Client ID from tha "Overview" page [see Application (client) ID]
      *
-     * - Login to https://portal.azure.com go to App Registrations (or create New)
-     * - Get the Client ID from tha "Overview" page
-     * - Click the "Authentication" page
-     * - Check the "ID Tokens" and fill out the valid redirect uris and logout uri
-     * - Click the "Certificated & secrets" Create a new Client Secret and not the secret "Value"
      */
     $config['auth.microsoft.enabled']         = false;
     // auto create an account if none exists

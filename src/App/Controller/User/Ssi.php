@@ -37,6 +37,8 @@ class Ssi extends ControllerAdmin
             Alert::addError("SSI redirect error");
             Uri::create('/login')->redirect();
         }
+        $url = Uri::create('/logout', ['ssi' => 1])->toString();
+        $logoutHtml = "If this is an error please try logging out of your microsoft account <a href=\"{$url}\">here</a>.";
 
         if (isset($_GET['code'])) {
             $oAuthType = $_GET['state'] ?? '';
@@ -76,13 +78,21 @@ class Ssi extends ControllerAdmin
 
                     \App\Email\User::sendWelcome($user, true);
                 } else {
-                    Alert::addWarning("User account not found, please contact site administrator to setup your account containing the email $email");
+                    $_SESSION['_OAUTH'] = $oAuthType;
+                    Alert::addWarning(
+                        "User account not found, please contact site administrator to setup your account containing the email $email<br>" .
+                        $logoutHtml
+                    );
                     Uri::create('/')->redirect();
                 }
             }
 
             if (!$user->active) {
-                Alert::addWarning("User account disabled, please contact site administrator to activate your account containing the email $email");
+                $_SESSION['_OAUTH'] = $oAuthType;
+                Alert::addWarning(
+                    "User account disabled, please contact site administrator to activate your account containing the email $email. <br>".
+                    $logoutHtml
+                );
                 Uri::create('/')->redirect();
             }
 
@@ -102,7 +112,11 @@ class Ssi extends ControllerAdmin
                 // redirect to user home
                 $user->getHomeUrl()->redirect();
             } catch (\Exception $e) {
-                Alert::addError("SSI authentication error");
+                $_SESSION['_OAUTH'] = $oAuthType;
+                Alert::addError(
+                    "SSI authentication error.<br>".
+                    $logoutHtml
+                );
                 Uri::create('/login')->redirect();
             }
         }
