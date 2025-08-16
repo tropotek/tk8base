@@ -86,6 +86,9 @@ return function (CollectionConfigurator $routes) {
         ->controller([\App\Api\Moodle::class, 'doCompetencyGraded']);
 
 
-
+    // Example php route
+    // $routes->add('widget-test', '/widgetTest')
+    //     ->defaults(['path' => '/page/widgetManager.php'])
+    //     ->controller([\Bs\PhpController::class, 'doDefault']);
 
 };
