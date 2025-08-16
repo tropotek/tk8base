@@ -79,9 +79,6 @@
         "preferred-install": {
             "ttek/*": "source"
         },
-        "component-dir": "vendor/components",
-        "allow-plugins": {
-            "ttek/tk-installers": true
-        }
+        "component-dir": "vendor/components"
     }
 }
