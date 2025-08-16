@@ -75,6 +75,9 @@
         "select2/select2": "~4.0-@stable",
         "studio-42/elfinder": "~2.1.0-@stable"
     },
+    "require-dev": {
+        "composer/composer": "^2.0"
+    },
     "config": {
         "preferred-install": {
             "ttek/*": "source"
