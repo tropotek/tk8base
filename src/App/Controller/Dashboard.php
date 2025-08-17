@@ -32,6 +32,7 @@ class Dashboard extends ControllerAdmin
             Alert::addError('This is a error alert', '', 'fa-solid fa-circle-exclamation');
             Uri::create()->reset()->redirect();
         }
+
         if (isset($_GET['n'])) {
             Notify::create(
                 User::getAuthUser()->userId,

@@ -18,4 +18,5 @@ node_modules
 /config.php
 /.htaccess
 /robots.txt
+/error_log
 

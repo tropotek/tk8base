@@ -7,7 +7,7 @@
  */
 $composer = include __DIR__ . '/vendor/autoload.php';
 
-define('TKAPP', true);
+const TKAPP = true;
 
 // Init Tk System Objects
 $config  = \Tk\Config::instance();
