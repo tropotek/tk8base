@@ -67,6 +67,7 @@
         "ext-libxml": "*",
         "ext-dom": "*",
         "ext-tidy": "*",
+        "ext-openssl": "*",
 
         "ttek/tk-base": "~8.0.0",
         "htmx/htmx": "2.0.4",
