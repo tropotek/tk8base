@@ -27,6 +27,8 @@ return function (Config $config) {
     /**
      * System string encrypt secret
      * Do not change this after site install
+     * WARNING: Keep this key stored safely, if it is lost,
+     *          any encrypted data will be lost too!!!
      */
     $config['system.encrypt'] = '{system.encrypt}';
 
