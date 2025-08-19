@@ -58,7 +58,7 @@ class Nav
         $menu->addLink('Tail Log', Uri::create('/tailLog'), 'ri-terminal-box-fill', $visible);
         $menu->addLink('Inline Image', Uri::create('/util/inlineImage'), 'fas fa-image', $visible);
         $menu->addLink('DB Search', Uri::create('/util/dbSearch'), 'fas fa-database', $visible);
-        $menu->addLink('DB Size', Uri::create('/util/dbSize'), 'fas fa-database', $visible);
+        $menu->addLink('DB Size', Uri::create('/util/dbSize'), 'fas fa-database text-info', $visible);
 
         $menu->addSeparator(($user instanceof User));
         $menu->addLink('Customizer', null, 'ri-palette-line', true,
