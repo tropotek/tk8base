@@ -116,7 +116,7 @@ HTML;
             $i++;
         }
 
-        if ($this->getTemplate()->hasVar('crumbs')) {
+        if ($this->getTemplate()->varExists('crumbs')) {
             $this->getTemplate()->insertTemplate('crumbs', $template);
         } else {
             $this->getTemplate()->prependTemplate('container', $template);
@@ -155,7 +155,7 @@ HTML;
             }
         }
 
-        if ($this->getTemplate()->hasVar('alert')) {
+        if ($this->getTemplate()->varExists('alert')) {
             $this->getTemplate()->insertTemplate('alert', $template);
         } else {
             $this->getTemplate()->prependTemplate('content', $template);
