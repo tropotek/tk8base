@@ -28,10 +28,10 @@ return function (Config $config) {
     $config['auth.registration.enable'] = false;
 
     /**
-     * The timeout in seconds for the Auth Remember Me cookie
+     * The timeout in minutes for the Auth Remember Me cookie
      * Default: 10080 (7 days)
      */
-    $config['auth.rememberme.ttl'] = 60 * 60 * 24 * 30;
+    //$config['auth.rememberme.ttl'] = 60 * 24 * 30;
 
 
     /**
