@@ -31,7 +31,7 @@ return function (Config $config) {
      * The timeout in minutes for the Auth Remember Me cookie
      * Default: 10080 (7 days)
      */
-    //$config['auth.rememberme.ttl'] = 60 * 24 * 30;
+    $config['auth.rememberme.ttl'] = 60 * 24 * 28;
 
 
     /**
