@@ -2107,12 +2107,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/tropotek/tk-domtemplate.git",
-                "reference": "f5a96d843be1375095d650c0d5fed6fcddf0e9d9"
+                "reference": "25c21afa6f332b6f178d081bf273da38ff5c1487"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tropotek/tk-domtemplate/zipball/f5a96d843be1375095d650c0d5fed6fcddf0e9d9",
-                "reference": "f5a96d843be1375095d650c0d5fed6fcddf0e9d9",
+                "url": "https://api.github.com/repos/tropotek/tk-domtemplate/zipball/25c21afa6f332b6f178d081bf273da38ff5c1487",
+                "reference": "25c21afa6f332b6f178d081bf273da38ff5c1487",
                 "shasum": ""
             },
             "require": {
@@ -2120,7 +2120,7 @@
                 "ext-libxml": "*",
                 "ext-mbstring": "*",
                 "ext-tidy": "*",
-                "php": "^8.3",
+                "php": "^7.4 || ^8.0",
                 "psr/log": "^3.0.2"
             },
             "default-branch": true,
