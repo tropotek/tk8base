@@ -4,11 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d571a157d0d20db7e3a889f6fa991abc",
+    "content-hash": "1e0536041deae44c3da551d0d1e1acdf",
     "packages": [
         {
             "name": "htmx/htmx",
-            "version": "2.0.4",
+            "version": "2.0.7",
             "dist": {
                 "type": "file",
                 "url": "https://unpkg.com/htmx.org/dist/htmx.min.js"
@@ -26,16 +26,16 @@
         },
         {
             "name": "phpmailer/phpmailer",
-            "version": "v6.10.0",
+            "version": "v6.11.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPMailer/PHPMailer.git",
-                "reference": "bf74d75a1fde6beaa34a0ddae2ec5fce0f72a144"
+                "reference": "d9e3b36b47f04b497a0164c5a20f92acb4593284"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/bf74d75a1fde6beaa34a0ddae2ec5fce0f72a144",
-                "reference": "bf74d75a1fde6beaa34a0ddae2ec5fce0f72a144",
+                "url": "https://api.github.com/repos/PHPMailer/PHPMailer/zipball/d9e3b36b47f04b497a0164c5a20f92acb4593284",
+                "reference": "d9e3b36b47f04b497a0164c5a20f92acb4593284",
                 "shasum": ""
             },
             "require": {
@@ -56,6 +56,7 @@
             },
             "suggest": {
                 "decomplexity/SendOauth2": "Adapter for using XOAUTH2 authentication",
+                "ext-imap": "Needed to support advanced email address parsing according to RFC822",
                 "ext-mbstring": "Needed to send email in multibyte encoding charset or decode encoded addresses",
                 "ext-openssl": "Needed for secure SMTP sending and DKIM signing",
                 "greew/oauth2-azure-provider": "Needed for Microsoft Azure XOAUTH2 authentication",
@@ -95,7 +96,7 @@
             "description": "PHPMailer is a full-featured email creation and transfer class for PHP",
             "support": {
                 "issues": "https://github.com/PHPMailer/PHPMailer/issues",
-                "source": "https://github.com/PHPMailer/PHPMailer/tree/v6.10.0"
+                "source": "https://github.com/PHPMailer/PHPMailer/tree/v6.11.1"
             },
             "funding": [
                 {
@@ -103,7 +104,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-04-24T15:19:31+00:00"
+            "time": "2025-09-30T11:54:53+00:00"
         },
         {
             "name": "psr/container",
@@ -432,12 +433,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "5b692fe889b4dcd886acf9a3141ef35f0241bd3c"
+                "reference": "492de6dfd93910d7d7a729c5a04ddcd2b9e99c4f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/5b692fe889b4dcd886acf9a3141ef35f0241bd3c",
-                "reference": "5b692fe889b4dcd886acf9a3141ef35f0241bd3c",
+                "url": "https://api.github.com/repos/symfony/console/zipball/492de6dfd93910d7d7a729c5a04ddcd2b9e99c4f",
+                "reference": "492de6dfd93910d7d7a729c5a04ddcd2b9e99c4f",
                 "shasum": ""
             },
             "require": {
@@ -522,7 +523,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-09-11T03:17:31+00:00"
+            "time": "2025-09-26T12:13:46+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
@@ -930,12 +931,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-kernel.git",
-                "reference": "6b9ab1a095a3a468dda037cd4ba6d6f3110ccd8a"
+                "reference": "8545057432cdec751b9500dc673c143df9a7c91c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-kernel/zipball/6b9ab1a095a3a468dda037cd4ba6d6f3110ccd8a",
-                "reference": "6b9ab1a095a3a468dda037cd4ba6d6f3110ccd8a",
+                "url": "https://api.github.com/repos/symfony/http-kernel/zipball/8545057432cdec751b9500dc673c143df9a7c91c",
+                "reference": "8545057432cdec751b9500dc673c143df9a7c91c",
                 "shasum": ""
             },
             "require": {
@@ -1040,7 +1041,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-09-15T14:23:36+00:00"
+            "time": "2025-09-27T12:31:15+00:00"
         },
         {
             "name": "symfony/lock",
@@ -1898,12 +1899,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-dumper.git",
-                "reference": "59052532348d426af0fae6f0bbcc5d8ab598db39"
+                "reference": "0c9272cc57ad469bbcb3f881f2c9d0b1295d477d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/59052532348d426af0fae6f0bbcc5d8ab598db39",
-                "reference": "59052532348d426af0fae6f0bbcc5d8ab598db39",
+                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/0c9272cc57ad469bbcb3f881f2c9d0b1295d477d",
+                "reference": "0c9272cc57ad469bbcb3f881f2c9d0b1295d477d",
                 "shasum": ""
             },
             "require": {
@@ -1977,7 +1978,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-09-09T12:50:48+00:00"
+            "time": "2025-09-29T13:00:59+00:00"
         },
         {
             "name": "tinymce/tinymce",
@@ -2044,12 +2045,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/tropotek/tk-base.git",
-                "reference": "4b25b88a7b3c3fe6ed3c148f9517368653d4ff84"
+                "reference": "4cf6df7efa5663c1d6ba553133ca428d6cac0656"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tropotek/tk-base/zipball/4b25b88a7b3c3fe6ed3c148f9517368653d4ff84",
-                "reference": "4b25b88a7b3c3fe6ed3c148f9517368653d4ff84",
+                "url": "https://api.github.com/repos/tropotek/tk-base/zipball/4cf6df7efa5663c1d6ba553133ca428d6cac0656",
+                "reference": "4cf6df7efa5663c1d6ba553133ca428d6cac0656",
                 "shasum": ""
             },
             "require": {
@@ -2061,10 +2062,10 @@
                 "symfony/lock": "^6.2-@stable",
                 "symfony/routing": "^6.2-@stable",
                 "tinymce/tinymce": "~7.0-@stable",
-                "ttek/tk-domtemplate": "~8.0",
-                "ttek/tk-form": "~8.0",
-                "ttek/tk-framework": "~8.0",
-                "ttek/tk-table": "~8.0"
+                "ttek/tk-domtemplate": "^8.0",
+                "ttek/tk-form": "^8.0",
+                "ttek/tk-framework": "^8.0",
+                "ttek/tk-table": "^8.0"
             },
             "require-dev": {
                 "composer/composer": "^2.0"
@@ -2107,12 +2108,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/tropotek/tk-domtemplate.git",
-                "reference": "25c21afa6f332b6f178d081bf273da38ff5c1487"
+                "reference": "73431ac8264c446ba2d05df4d0e92274806b6a43"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tropotek/tk-domtemplate/zipball/25c21afa6f332b6f178d081bf273da38ff5c1487",
-                "reference": "25c21afa6f332b6f178d081bf273da38ff5c1487",
+                "url": "https://api.github.com/repos/tropotek/tk-domtemplate/zipball/73431ac8264c446ba2d05df4d0e92274806b6a43",
+                "reference": "73431ac8264c446ba2d05df4d0e92274806b6a43",
                 "shasum": ""
             },
             "require": {
@@ -2120,14 +2121,13 @@
                 "ext-libxml": "*",
                 "ext-mbstring": "*",
                 "ext-tidy": "*",
-                "php": "^7.4 || ^8.0",
-                "psr/log": "^3.0.2"
+                "php": "^8.3"
             },
             "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "8.1.x-dev"
+                    "dev-master": "8.0.x-dev"
                 }
             },
             "autoload": {
@@ -2142,7 +2142,7 @@
             "authors": [
                 {
                     "name": "Michael Mifsud",
-                    "homepage": "http://www.tropotek.com/"
+                    "homepage": "https://www.tropotek.com/"
                 }
             ],
             "description": "PHP DomTemplate library",
@@ -2172,17 +2172,21 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/tropotek/tk-form.git",
-                "reference": "db3b744dc6b75c3706c1ef4c7c52491577baf5d7"
+                "reference": "aff4d49981ceeae44ddc2c988b98d8afa0f3c17b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tropotek/tk-form/zipball/db3b744dc6b75c3706c1ef4c7c52491577baf5d7",
-                "reference": "db3b744dc6b75c3706c1ef4c7c52491577baf5d7",
+                "url": "https://api.github.com/repos/tropotek/tk-form/zipball/aff4d49981ceeae44ddc2c988b98d8afa0f3c17b",
+                "reference": "aff4d49981ceeae44ddc2c988b98d8afa0f3c17b",
                 "shasum": ""
             },
             "require": {
-                "ttek/tk-framework": "~8.0.0"
+                "ext-dom": "*",
+                "php": "^8.3",
+                "ttek/tk-domtemplate": "^8.0",
+                "ttek/tk-framework": "^8.0"
             },
+            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -2201,10 +2205,10 @@
             "authors": [
                 {
                     "name": "Michael Mifsud",
-                    "homepage": "http://www.tropotek.com/"
+                    "homepage": "https://www.tropotek.com/"
                 }
             ],
-            "description": "Tk8 Lib: Form rendering with DOM and PHP templates",
+            "description": "Tk Lib: Form render with DOM and PHP templates",
             "keywords": [
                 "form",
                 "tropotek"
@@ -2221,12 +2225,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/tropotek/tk-framework.git",
-                "reference": "d2557b3699e183945fc0dfb84202c585e0a531bb"
+                "reference": "c3902a3d3e03b54af24e940ae64b7c041629d7ba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tropotek/tk-framework/zipball/d2557b3699e183945fc0dfb84202c585e0a531bb",
-                "reference": "d2557b3699e183945fc0dfb84202c585e0a531bb",
+                "url": "https://api.github.com/repos/tropotek/tk-framework/zipball/c3902a3d3e03b54af24e940ae64b7c041629d7ba",
+                "reference": "c3902a3d3e03b54af24e940ae64b7c041629d7ba",
                 "shasum": ""
             },
             "require": {
@@ -2291,17 +2295,21 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/tropotek/tk-table.git",
-                "reference": "8cab7f304981f94f8b26078f89438ef2e979c1c5"
+                "reference": "d86490c1ed890dbbc4f6fd066ad5c8c5989f3f71"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tropotek/tk-table/zipball/8cab7f304981f94f8b26078f89438ef2e979c1c5",
-                "reference": "8cab7f304981f94f8b26078f89438ef2e979c1c5",
+                "url": "https://api.github.com/repos/tropotek/tk-table/zipball/d86490c1ed890dbbc4f6fd066ad5c8c5989f3f71",
+                "reference": "d86490c1ed890dbbc4f6fd066ad5c8c5989f3f71",
                 "shasum": ""
             },
             "require": {
-                "ttek/tk-framework": "~8.0.0"
+                "ext-dom": "*",
+                "php": "^8.3",
+                "ttek/tk-domtemplate": "^8.0",
+                "ttek/tk-framework": "^8.0"
             },
+            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
@@ -2320,7 +2328,7 @@
             "authors": [
                 {
                     "name": "Michael Mifsud",
-                    "homepage": "http://www.tropotek.com/"
+                    "homepage": "https://www.tropotek.com/"
                 }
             ],
             "description": "Tk8 Lib: Table rendering with DOM and PHP templates",
@@ -3010,12 +3018,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/jsonrainbow/json-schema.git",
-                "reference": "ac0d369c09653cf7af561f6d91a705bc617a87b8"
+                "reference": "1ed72392105ee98ce8b18c3a2b5dbe096c9af27f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jsonrainbow/json-schema/zipball/ac0d369c09653cf7af561f6d91a705bc617a87b8",
-                "reference": "ac0d369c09653cf7af561f6d91a705bc617a87b8",
+                "url": "https://api.github.com/repos/jsonrainbow/json-schema/zipball/1ed72392105ee98ce8b18c3a2b5dbe096c9af27f",
+                "reference": "1ed72392105ee98ce8b18c3a2b5dbe096c9af27f",
                 "shasum": ""
             },
             "require": {
@@ -3076,9 +3084,9 @@
             ],
             "support": {
                 "issues": "https://github.com/jsonrainbow/json-schema/issues",
-                "source": "https://github.com/jsonrainbow/json-schema/tree/6.5.2"
+                "source": "https://github.com/jsonrainbow/json-schema/tree/master"
             },
-            "time": "2025-09-09T09:42:27+00:00"
+            "time": "2025-09-20T10:54:20+00:00"
         },
         {
             "name": "marc-mabe/php-enum",

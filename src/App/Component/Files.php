@@ -126,7 +126,6 @@ class Files extends \Dom\Renderer\Renderer implements ComponentInterface
             });
 
         $this->table->appendCell('selected')
-            ->setHeader('Report')
             ->addCss('text-center')
             ->addOnHtml(function(File $obj, Cell $cell) {
                 $url = Uri::create()->set('action', 'sel')->set('fileId', $obj->fileId);
