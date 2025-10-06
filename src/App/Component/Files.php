@@ -213,7 +213,7 @@ class Files extends \Dom\Renderer\Renderer implements ComponentInterface
                 <label class="col-form-label" for="file-upload">
                     Attatch file to case:
                 </label>
-                <input type="file" class="form-control" accept=".zip,.doc,.xls,.xlsx,.csv,.pdf,image/*,audio/*,video/*" var="file" name="file" id="file-upload" aria-describedby="file-invalid-feedback">
+                <input type="file" class="form-control form-control-sm" accept=".zip,.doc,.xls,.xlsx,.csv,.pdf,image/*,audio/*,video/*" var="file" name="file" id="file-upload" aria-describedby="file-invalid-feedback">
                 <div class="invalid-feedback text-danger" id="file-invalid-feedback" choice="error">This is an error</div>
                 <small class="text-muted" style="font-weight: normal;">Max upload size: {$maxBytes}</small>
             </div>

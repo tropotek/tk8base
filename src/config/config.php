@@ -1,13 +1,12 @@
 <?php
 /**
- * application configuration parameters
+ * application default configuration parameters
  *
  * DO NOT ADD SENSITIVE PRIVATE DATA TO THIS FILE!!!
  */
 use Tk\Config;
 
 return function (Config $config) {
-
 
     /**
      * Set the default page templates
