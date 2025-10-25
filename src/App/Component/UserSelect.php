@@ -94,21 +94,24 @@ jQuery(function($) {
     const dialog = '#{$dialogId}';
     const table = '#{$tableId}';
 
+    function init() {
+        tkInit(table);
+        $(table).on('click', 'tbody tr', function() {
+            let el = $('.user-item', this);
+            $(dialog).trigger('userSelect:selected', [
+                el.data('userId'),
+                el.text()
+            ]);
+            $(dialog).modal('hide');
+        });
+    }
 
     $(document).on('htmx:afterSettle', dialog, function(e) {
-        tkInit(table);
+        init();
     });
 
     // open the dialog
-    tkInit(table);
-    $(dialog).on('click', 'tbody tr', function() {
-        let el = $('.user-item', this);
-        $(dialog).trigger('userSelect:selected', [
-            el.data('userId'),
-            el.text()
-        ]);
-        $(dialog).modal('hide');
-    });
+    init();
     $(dialog).modal('show');
 
     // remove the dialog element from the dom when it closes
