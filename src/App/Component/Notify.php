@@ -22,8 +22,8 @@ class Notify extends \Dom\Renderer\Renderer implements ComponentInterface
         $this->user = User::getAuthUser();
         if (!$this->user) return null;
 
-        $action = trim($_POST['action'] ?? $_GET['action'] ?? '');
-        $notifyId = intval($_POST['notifyId'] ?? $_GET['notifyId'] ?? 0);
+        $action = trim($_REQUEST['action'] ?? '');
+        $notifyId = intval($_REQUEST['notifyId'] ?? 0);
 
         if ($action == 'clear') {
             \App\Db\Notify::markAllRead($this->user->userId);
@@ -36,9 +36,8 @@ class Notify extends \Dom\Renderer\Renderer implements ComponentInterface
                 $notify->save();
             }
 
-            $url = trim($_POST['url'] ?? $_GET['url'] ?? '');
-            if ($url) {
-                $this->hxHeaders['HX-Redirect'] = $url;
+            if ($notify instanceof \App\Db\Notify && $notify->url) {
+                $this->hxHeaders['HX-Redirect'] = Uri::create($notify->url)->toString();
             }
         }
 
@@ -68,6 +67,7 @@ class Notify extends \Dom\Renderer\Renderer implements ComponentInterface
 
         $notices = [];
         $unread = 0;
+
         if ($this->user instanceof User) {
             $notices = \App\Db\Notify::findFiltered(Filter::create([
                 'userId' => $this->user->userId,
@@ -138,7 +138,7 @@ class Notify extends \Dom\Renderer\Renderer implements ComponentInterface
         </div>
         <div class="noti-scroll" data-simplebar="">
             <!-- item-->
-            <a href="#" class="dropdown-item notify-item notify-click" repeat="notice">
+            <a href="#" class="dropdown-item notify-item" repeat="notice">
                 <div class="notify-icon" choice="icon">
                     <img src="#" class="img-fluid rounded-circle" alt="" var="icon-src"/>
                 </div>
@@ -202,9 +202,8 @@ jQuery(function($) {
 
     // for notifications view page, mark clicked notifications as read
     $('.notify-click').on('click', function(e) {
-        let href = $(this).attr('href') ?? '';
         let notifyId = $(this).data('notifyId');
-        if (!href || !notifyId) return true;
+        if (!notifyId) return true;
 
         let url = new URL(baseUrl);
         url.searchParams.set('notifyId', notifyId);
@@ -212,9 +211,6 @@ jQuery(function($) {
         htmx.ajax('POST', url.toString(), {
             source: container,
             swap: 'none',
-            values: {
-                url: href
-            },
         });
         return false;
     });
