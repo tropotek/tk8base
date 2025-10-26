@@ -7,7 +7,9 @@ use Bs\Mvc\ControllerAdmin;
 use Bs\Ui\Breadcrumbs;
 use Dom\Template;
 use Tk\Alert;
+use Tk\DataMap\ModelMapper;
 use Tk\Date;
+use Tk\Db;
 use Tk\Exception;
 use Tk\Uri;
 
@@ -45,6 +47,24 @@ class Dashboard extends ControllerAdmin
             Alert::addInfo("Notification Message Set");
             Uri::create()->reset()->redirect();
         }
+//
+//
+//
+//        $mapper = ModelMapper::instance();
+//
+//        $map = $mapper->getDataMap(User::class);
+//
+//        $src = (array)Db::queryOne("
+//            SELECT *
+//            FROM v_user
+//            WHERE user_id = 1"
+//        );
+//
+//        $usr = new User();
+//        $map->loadObject($usr, $src);
+//        vd($usr);
+//
+
 
     }
 

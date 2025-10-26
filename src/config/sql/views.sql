@@ -19,7 +19,7 @@ SELECT
     MD5(CONCAT(a.auth_id, 'Auth')) AS hash,
     CONCAT('/app/', u.type, '/' , u.user_id) AS data_path
 FROM user u
-    LEFT JOIN auth a ON (a.fkey = 'App\\Db\\User' AND a.fid = (u.user_id))
+LEFT JOIN auth a ON (a.fkey = 'App\\Db\\User' AND a.fid = (u.user_id))
 ;
 
 -- \App\Db\Notify
