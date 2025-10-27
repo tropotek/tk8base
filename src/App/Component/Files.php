@@ -65,7 +65,7 @@ class Files extends \Dom\Renderer\Renderer implements ComponentInterface
         } else if ($action == 'upload') {
             $f = $_FILES['file'] ?? null;
             if ($f != null) {
-                $filename = Path::create($dataPath . '/' . $f['full_path'] ?? '');
+                $filename = Path::create($dataPath . '/' . $f['full_path']);
                 $file = File::create($filename, $this->model);
                 $file->mime = $f['type'] ?? '';
                 $file->bytes = $f['size'] ?? 0;
@@ -99,7 +99,10 @@ class Files extends \Dom\Renderer\Renderer implements ComponentInterface
             ->addCss('text-nowrap text-center')
             ->addOnHtml(function(File $obj, Cell $cell) {
                 $del = Uri::create()->set('action', 'del')->set('fileId', $obj->fileId);
-                $wrapId = $cell->getTable()->getWrapId();
+                $wrapId = '';
+                if ($cell->getTable() instanceof Table) {
+                    $wrapId = $cell->getTable()->getWrapId();
+                }
                 $disabled = $this->canEdit ? '' : 'disabled';
                 return <<<HTML
                     <button class="btn btn-danger btn-xs" title="Delete File"

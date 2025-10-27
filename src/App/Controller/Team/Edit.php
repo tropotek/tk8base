@@ -35,10 +35,7 @@ class Edit extends ControllerAdmin
 
         $this->team = new Team();
         if ($teamId) {
-            $this->team = Team::find($teamId);
-            if (!($this->team instanceof Team)) {
-                throw new Exception("invalid teamId $teamId");
-            }
+            $this->team = Team::mustFind($teamId);
         }
 
         // Get the form template

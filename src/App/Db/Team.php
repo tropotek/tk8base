@@ -56,7 +56,7 @@ class Team extends Model
         if (!empty($filter['search'])) {
             $filter['lSearch'] = '%' . strtolower($filter['search']) . '%';
             $w  = "a.team_id = :search ";
-            $w  = "OR LOWER(CONCAT_WS(' ', a.name)) LIKE :lSearch ";
+            $w .= "OR LOWER(CONCAT_WS(' ', a.name)) LIKE :lSearch ";
             $filter->appendWhere('AND (%s)', $w);
         }
 

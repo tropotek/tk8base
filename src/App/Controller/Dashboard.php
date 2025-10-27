@@ -42,7 +42,7 @@ class Dashboard extends ControllerAdmin
                 Date::create()->format(Date::FORMAT_ISO_DATETIME) . ' - This is a test with some HTML',
                 Uri::create()->reset()->toRelativeString(),
                 User::getAuthUser()->getImageUrl()->toRelativeString(),
-                5
+                '5'
             );
             Alert::addInfo("Notification Message Set");
             Uri::create()->reset()->redirect();

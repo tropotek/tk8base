@@ -60,7 +60,7 @@ class Nav
         $menu->addLink('DB Search', Uri::create('/util/dbSearch'), 'fas fa-database', $visible);
         $menu->addLink('DB Size', Uri::create('/util/dbSize'), 'fas fa-database text-info', $visible);
 
-        $menu->addSeparator(($user instanceof User));
+        $menu->addSeparator(true);
         $menu->addLink('Customizer', null, 'ri-palette-line', true,
             [
                 'attrs' => [

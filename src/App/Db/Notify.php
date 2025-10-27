@@ -122,7 +122,7 @@ class Notify extends Model
     }
 
     /**
-     * @param list<int> $notifyIds
+     * @param array<int, int> $notifyIds
      */
     public static function setNotified(array $notifyIds): bool
     {
@@ -168,7 +168,7 @@ class Notify extends Model
             $filter['lSearch'] = '%' . strtolower($filter['search']) . '%';
             $w  = "a.notify_id = :search ";
             $w .= "OR LOWER(CONCAT_WS(' ', a.title)) LIKE :lSearch ";
-            if ($w) $filter->appendWhere('AND (%s)', $w);
+            $filter->appendWhere('AND (%s)', $w);
         }
 
         if (!empty($filter['id'])) {

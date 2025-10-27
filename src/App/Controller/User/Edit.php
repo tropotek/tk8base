@@ -49,10 +49,7 @@ class Edit extends ControllerAdmin
         $this->user = new User();
         $this->user->type = $type;
         if ($userId) {
-            $this->user = User::find($userId);
-            if (!$this->user) {
-                throw new Exception('Invalid User ID: ' . $userId);
-            }
+            $this->user = User::mustFind($userId);
         }
         $this->auth = $this->user->getAuth();
 

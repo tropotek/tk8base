@@ -143,7 +143,7 @@ class File extends Model
             $filter['lSearch'] = '%' . strtolower($filter['search']) . '%';
             $w  = "a.file_id = :search ";
             $w .= "OR LOWER(CONCAT_WS(' ', a.filename, a.mime)) LIKE :lSearch ";
-            if ($w) $filter->appendWhere('AND (%s)', $w);
+            $filter->appendWhere('AND (%s)', $w);
         }
 
         if (!empty($filter['id'])) {
