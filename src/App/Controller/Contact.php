@@ -41,7 +41,8 @@ class Contact extends ControllerPublic
         $this->form->appendField(new Input('name'))->setRequired();
         $this->form->appendField(new Input('email'))->setRequired()->setType('email');
         $this->form->appendField(new Input('phone'));
-        $this->form->appendField(new Textarea('message'))->setRequired();
+        $this->form->appendField(new Textarea('message'))
+            ->setRequired();
 
         $this->form->appendField(new Submit('send', [$this, 'onSubmit']));
         $this->form->appendField(new Link('cancel', Uri::create()));
