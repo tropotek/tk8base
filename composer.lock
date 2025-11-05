@@ -849,12 +849,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/http-foundation.git",
-                "reference": "369241591d92bb5dfb4c6ccd6ee94378a45b1521"
+                "reference": "ee93009480be472b3201ca9fbdc2fee3871985e3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/369241591d92bb5dfb4c6ccd6ee94378a45b1521",
-                "reference": "369241591d92bb5dfb4c6ccd6ee94378a45b1521",
+                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/ee93009480be472b3201ca9fbdc2fee3871985e3",
+                "reference": "ee93009480be472b3201ca9fbdc2fee3871985e3",
                 "shasum": ""
             },
             "require": {
@@ -922,7 +922,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-09-16T08:22:30+00:00"
+            "time": "2025-10-31T13:22:31+00:00"
         },
         {
             "name": "symfony/http-kernel",
@@ -1632,12 +1632,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/routing.git",
-                "reference": "6fc4c445f22857d4b8b40a02b73f423ddab295de"
+                "reference": "ae064a6d9cf39507f9797658465a2ca702965fa8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/routing/zipball/6fc4c445f22857d4b8b40a02b73f423ddab295de",
-                "reference": "6fc4c445f22857d4b8b40a02b73f423ddab295de",
+                "url": "https://api.github.com/repos/symfony/routing/zipball/ae064a6d9cf39507f9797658465a2ca702965fa8",
+                "reference": "ae064a6d9cf39507f9797658465a2ca702965fa8",
                 "shasum": ""
             },
             "require": {
@@ -1711,7 +1711,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-09-11T09:57:09+00:00"
+            "time": "2025-10-31T16:43:05+00:00"
         },
         {
             "name": "symfony/service-contracts",
@@ -2044,12 +2044,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/tropotek/tk-base.git",
-                "reference": "a67ec83c90c370cd83aedb8cc9ad2e936b707b69"
+                "reference": "0310620d16f44a4c10a43fd1f7fd03ccd008a1f8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tropotek/tk-base/zipball/a67ec83c90c370cd83aedb8cc9ad2e936b707b69",
-                "reference": "a67ec83c90c370cd83aedb8cc9ad2e936b707b69",
+                "url": "https://api.github.com/repos/tropotek/tk-base/zipball/0310620d16f44a4c10a43fd1f7fd03ccd008a1f8",
+                "reference": "0310620d16f44a4c10a43fd1f7fd03ccd008a1f8",
                 "shasum": ""
             },
             "require": {
@@ -2224,12 +2224,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/tropotek/tk-framework.git",
-                "reference": "4ad8cd1ebfd0b3354c52ffa7adb000b277b217ad"
+                "reference": "2ab86307865323b9dde8558c8fa6ed18296be33c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tropotek/tk-framework/zipball/4ad8cd1ebfd0b3354c52ffa7adb000b277b217ad",
-                "reference": "4ad8cd1ebfd0b3354c52ffa7adb000b277b217ad",
+                "url": "https://api.github.com/repos/tropotek/tk-framework/zipball/2ab86307865323b9dde8558c8fa6ed18296be33c",
+                "reference": "2ab86307865323b9dde8558c8fa6ed18296be33c",
                 "shasum": ""
             },
             "require": {
@@ -2543,12 +2543,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/composer.git",
-                "reference": "028e057787298cc0881ecb706406802e4c1c7791"
+                "reference": "8851f9df3a9d16a38e27e33002678daaefc0cc30"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/composer/zipball/028e057787298cc0881ecb706406802e4c1c7791",
-                "reference": "028e057787298cc0881ecb706406802e4c1c7791",
+                "url": "https://api.github.com/repos/composer/composer/zipball/8851f9df3a9d16a38e27e33002678daaefc0cc30",
+                "reference": "8851f9df3a9d16a38e27e33002678daaefc0cc30",
                 "shasum": ""
             },
             "require": {
@@ -2584,9 +2584,10 @@
                 "symfony/phpunit-bridge": "^6.4.25 || ^7.3.3 || ^8.0"
             },
             "suggest": {
-                "ext-openssl": "Enabling the openssl extension allows you to access https URLs for repositories and packages",
-                "ext-zip": "Enabling the zip extension allows you to unzip archives",
-                "ext-zlib": "Allow gzip compression of HTTP requests"
+                "ext-curl": "Provides HTTP support (will fallback to PHP streams if missing)",
+                "ext-openssl": "Enables access to repositories and packages over HTTPS",
+                "ext-zip": "Allows direct extraction of ZIP archives (unzip/7z binaries will be used instead if available)",
+                "ext-zlib": "Enables gzip for HTTP requests"
             },
             "default-branch": true,
             "bin": [
@@ -2647,7 +2648,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-10-28T10:23:57+00:00"
+            "time": "2025-10-31T14:10:24+00:00"
         },
         {
             "name": "composer/metadata-minifier",
@@ -3015,7 +3016,7 @@
         },
         {
             "name": "justinrainbow/json-schema",
-            "version": "dev-master",
+            "version": "6.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jsonrainbow/json-schema.git",
@@ -3040,7 +3041,6 @@
                 "phpstan/phpstan": "^1.12",
                 "phpunit/phpunit": "^8.5"
             },
-            "default-branch": true,
             "bin": [
                 "bin/validate-json"
             ],
@@ -3085,7 +3085,7 @@
             ],
             "support": {
                 "issues": "https://github.com/jsonrainbow/json-schema/issues",
-                "source": "https://github.com/jsonrainbow/json-schema/tree/master"
+                "source": "https://github.com/jsonrainbow/json-schema/tree/6.6.0"
             },
             "time": "2025-10-10T11:34:09+00:00"
         },
