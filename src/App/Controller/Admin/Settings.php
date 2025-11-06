@@ -57,7 +57,7 @@ class Settings extends ControllerAdmin
         $this->form->appendField(new Textarea('site.email.sig'))
             ->setLabel('Email Signature')
             ->setNotes('Set the email signature to appear at the footer of all system emails.')
-            ->addCss('mce-min')
+            ->addCss('mce')
             ->setGroup($tab);
 
 
