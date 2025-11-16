@@ -71,7 +71,7 @@ class Manager extends ControllerAdmin
             ->setSortable(true)
             ->addOnHtml(function(User $user, Cell $cell) {
                 $url = Uri::create('/user/'.$user->type.'Edit', ['userId' => $user->userId]);
-                return sprintf('<a href="%s">%s</a>', $url, $cell->getValue($user) );
+                return sprintf('<a href="%s">%s</a>', $url, $cell->getValue() );
             });
 
         $this->table->appendCell('username')

@@ -8,10 +8,12 @@ parameters:
   excludePaths:
     - data
     - html
+    - _notes
     - vendor/ttek/tk-table/templates
     - vendor/ttek/tk-form/templates
     - vendor/ttek/tk-domtemplate/docs
     - vendor/ttek/tk-base/Bs/Traits/OrderByTrait.php
+    - vendor/ttek/tk-domtemplate/Dom/Modifier/Scss.php
   paths:
     - src
     - bin
@@ -24,3 +26,7 @@ parameters:
 #    - vendor/ttek/tk-table
   ignoreErrors:
     - identifier: missingType.iterableValue
+    - identifier: trait.unused
+    -
+        message: '#^Access to an undefined property DOMNameSpaceNode|DOMNode::\$firstChild\.#'
+        identifier: property.notFound

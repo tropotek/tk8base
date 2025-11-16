@@ -72,6 +72,7 @@ class Moodle
 		]);
 
         if (Config::isDev()) {
+            // @phpstan-ignore-next-line
             curl_setopt_array($ch, [
                 CURLOPT_SSL_VERIFYPEER => false,
                 CURLOPT_SSL_VERIFYHOST => false,
@@ -207,6 +208,26 @@ class Moodle
 	}
 
 
+    public function getSchedule(int $courseId): array
+    {
+        $result = $this->post('sishurdle_get_schedule', [
+            'courseid' => $courseId
+        ]);
+        if (!is_object($result)) return [];
+
+        $students = $result->students ?? [];
+        $students = array_column($students, null, 'userid');
+        $rows = [];
+
+        foreach ($students as $student) {
+
+        }
+
+        return $students;
+    }
+
+
+
 
 
     /**
@@ -242,23 +263,23 @@ class Moodle
         return is_object($result) ? ($result->users ?? []) : [];
     }
 
-    public function getCohorts(string $idnumber = ''): array
-    {
-        $params = array(
-            'query' => $idnumber,
-            'context' => [
-                'contextid' => 10,
-                'contextlevel' => 'system',
-                'instanceid' => 0,
-            ],
-            //'limitnum' => 100,
-        );
-        // I think the error here is caused by not having a valid SSL cert locally
-        $result = $this->get('core_cohort_search_cohorts', $params);
-        //$result = $this->get('tool_lp_search_cohorts', $params);
-
-        return is_object($result) ? $result : [];
-    }
+//    public function getCohorts(string $idnumber = ''): array
+//    {
+//        $params = array(
+//            'query' => $idnumber,
+//            'context' => [
+//                'contextid' => 10,
+//                'contextlevel' => 'system',
+//                'instanceid' => 0,
+//            ],
+//            //'limitnum' => 100,
+//        );
+//        // I think the error here is caused by not having a valid SSL cert locally
+//        $result = $this->get('core_cohort_search_cohorts', $params);
+//        //$result = $this->get('tool_lp_search_cohorts', $params);
+//
+//        return is_object($result) ? $result : [];
+//    }
 
 	public function getAllCohorts(): array
 	{
@@ -388,7 +409,7 @@ class Moodle
                 'framework_idnumber' => $framework_idnumber,
             ]
         );
-		if (!is_object($result)) return new \stdClass;
+		if (!($result instanceof \stdClass)) return new \stdClass;
         return $result;
     }
 

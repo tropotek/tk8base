@@ -50,7 +50,7 @@ class Manager extends ControllerAdmin
             ->addHeaderCss('max-width')
             ->addOnHtml(function(\App\Db\Team $obj, Cell $cell) {
                 $url = Uri::create('/teamEdit', ['teamId' => $obj->teamId]);
-                return sprintf('<a href="%s">%s</a>', $url, $cell->getValue($obj));
+                return sprintf('<a href="%s">%s</a>', $url, $cell->getValue());
             });
 
         $this->table->appendCell('memberTotal')
