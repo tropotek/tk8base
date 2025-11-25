@@ -125,7 +125,7 @@ class UserPhoto extends \Dom\Renderer\Renderer implements ComponentInterface
                 </div>
 
                 <div class="col mb-2">
-                    <input type="file" name="file" id="file-upload" class="form-control" accept="image/*" placeholder="Click to upload photo" var="file">
+                    <input type="file" name="file" id="file-upload" class="form-control form-control-sm" accept="image/*" placeholder="Upload profile image" var="file">
                     <div class="invalid-feedback text-danger" id="file-invalid-feedback" choice="error">This is an error</div>
                     <small class="text-muted" style="font-weight: normal;">Max upload size: <span var="max-bytes"></span></small>
                 </div>
@@ -137,7 +137,7 @@ class UserPhoto extends \Dom\Renderer\Renderer implements ComponentInterface
                         hx-post=""
                         hx-swap="outerHTML"
                         hx-target="#{$containerId}"
-                        hx-confirm="Are you sure you want to delete this photo?">Remove Photo</button>
+                        hx-confirm="Are you sure you want to delete this photo?"><i class="fa fa-trash"></i> Remove Photo</button>
                 </div>
                 <div class="col-6">
                     <button type="button" class="btn btn-sm btn-outline-field btn-light float-end" var="rotate-cw"

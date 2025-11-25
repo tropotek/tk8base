@@ -21,7 +21,6 @@ class Nav
         }
 
         $menu->addLink('Dashboard', Uri::create('/dashboard'), 'ri-dashboard-line');
-        $menu->addLink('Site Settings', Uri::create('/settings'), 'ri-settings-2-fill', $user->hasPermission(User::PERM_SYSADMIN));
         $menu->addLink('Preview Site', Uri::create('/home'), 'fas fa-home', true,
             [
                 'attrs' => ['target' => '_blank']
@@ -29,6 +28,7 @@ class Nav
         );
 
         $menu->addHeader('System');
+        $menu->addLink('Site Settings', Uri::create('/settings'), 'ri-settings-2-fill', $user->hasPermission(User::PERM_SYSADMIN));
         $menu->addLink('Teams', Uri::create('/teamManager'), 'fas fa-layer-group');
         $menu->addLink('Staff', Uri::create('/user/staffManager'), 'fas fa-users', $user->hasPermission(User::PERM_SYSADMIN));
         $menu->addLink('Members', Uri::create('/user/memberManager'), 'fas fa-users', $user->hasPermission(User::CHANGE_USERS));
