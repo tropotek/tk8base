@@ -24,19 +24,20 @@ class Factory extends \Bs\Factory
 
     public function createDomPage(string $templatePath = ''): PageDomInterface
     {
-        // So we can change the minton template from the settings page
+        // So we can change the mintion template from the settings page
         if (str_contains($templatePath, '/minton/')) {
             $selected = Registry::getValue('minton.template', 'sn-admin');
-            if (User::getAuthUser()?->template) {
+            if (User::getAuthUser() && User::getAuthUser()->template) {
                 $selected = User::getAuthUser()->template;
             }
-            $cleanName = preg_replace('|[^0-9a-z_-]|i', '', $selected);
-            $tplPath = Path::createTemplatePath(sprintf('/minton/%s.html', $cleanName));
 
-            if (!is_file($tplPath)) {
-                $tplPath = Path::createTemplatePath('/minton/sn-admin.html');
+            $templatePath = '';
+            if (!empty($selected)) {
+                $templatePath = Path::create(sprintf('/html/minton/%s.html', preg_replace('|[^0-9a-z_-]|i', '', $selected)));
             }
-            $templatePath = $tplPath->toString();
+            if (!is_file($templatePath)) {
+                $templatePath = Path::create('/html/minton/sn-admin.html');
+            }
         }
         return new Page($templatePath);
     }

@@ -9,6 +9,7 @@ use Bs\Traits\ForeignModelTrait;
 use Dom\Template;
 use Tk\Date;
 use Tk\Db;
+use Tk\Exception;
 use Tk\FileUtil;
 use Tk\Log;
 use Tk\Path;
@@ -65,25 +66,33 @@ class Files extends \Dom\Renderer\Renderer implements ComponentInterface
         } else if ($action == 'upload') {
             $f = $_FILES['file'] ?? null;
             if ($f != null) {
-                $filename = Path::create($dataPath . '/' . $f['full_path']);
-                $file = File::create($filename, $this->model);
-                $file->mime = $f['type'] ?? '';
-                $file->bytes = $f['size'] ?? 0;
+                $filename = '';
+                try {
+                    $filename = Path::create('/' . $f['full_path'], $dataPath);
+                } catch (Exception $e) {
+                    $this->uploadError = 'Invalid filename';
+                }
 
-                if (empty($f['error'])) {
-                    FileUtil::mkdir(dirname($file->getFullPath()));
-                    if (is_file($file->getFullPath())) {
-                        // overwrite existing file without creating a new file record
-                        move_uploaded_file($f['tmp_name'] ?? '', $file->getFullPath());
-                    } else {
-                        if (move_uploaded_file($f['tmp_name'] ?? '', $file->getFullPath())) {
-                            $file->save();
+                if (empty($this->uploadError)) {
+                    $file = File::create($filename, $this->model);
+                    $file->mime = $f['type'] ?? '';
+                    $file->bytes = $f['size'] ?? 0;
+
+                    if (empty($f['error'])) {
+                        FileUtil::mkdir(dirname($file->getFullPath()));
+                        if (is_file($file->getFullPath())) {
+                            // overwrite existing file without creating a new file record
+                            move_uploaded_file($f['tmp_name'] ?? '', $file->getFullPath());
+                        } else {
+                            if (move_uploaded_file($f['tmp_name'] ?? '', $file->getFullPath())) {
+                                $file->save();
+                            }
                         }
+                        Uri::create()->remove('action')->redirect();
+                    } else {
+                        $this->uploadError = \Tk\Form\Field\File::ERROR_MSG[$f['error']] ?? '';
+                        Log::error($this->uploadError);
                     }
-                    Uri::create()->remove('action')->redirect();
-                } else {
-                    $this->uploadError = \Tk\Form\Field\File::ERROR_MSG[$f['error']] ?? '';
-                    Log::error($this->uploadError);
                 }
             }
         }
