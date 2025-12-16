@@ -29,7 +29,8 @@ CREATE TABLE IF NOT EXISTS notify (
     message TEXT,
     url VARCHAR(256) NOT NULL DEFAULT '',
     reference VARCHAR(256) NOT NULL DEFAULT '',
-    icon BLOB NOT NULL DEFAULT '',
+--    icon BLOB NOT NULL DEFAULT '',
+    icon BLOB,
     read_at DATETIME NULL,                                    -- Date user read notification in browser
     notified_at DATETIME NULL,                                -- Date message was sent as browser notification
     ttl_mins INT UNSIGNED NOT NULL DEFAULT 1440,

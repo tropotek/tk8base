@@ -1,0 +1,54 @@
+services:
+  web:
+    build:
+      context: . # build context is the current directory
+      dockerfile: Dockerfile # specify the Dockerfile name
+    container_name: php_web
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/var/www/html
+    depends_on:
+      - db
+    networks:
+      - app-network
+    user: "${UID}:${GID}"
+
+  db:
+    image: mysql:8.0
+    container_name: mysql_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: dev007 # Change this!
+      MYSQL_DATABASE: dev_tk8base      # Change this!
+      MYSQL_USER: dev                # Change this!
+      MYSQL_PASSWORD: dev007        # Change this!
+    ports:
+      - "4406:3306"
+    volumes:
+      - dbdata:/var/lib/mysql
+      - ./.docker/init-db:/docker-entrypoint-initdb.d    # Mount the init scripts
+      - ./.docker/.my.cnf:/etc/mysql/conf.d/custom-config.cnf:ro
+    networks:
+      - app-network
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: phpmyadmin_gui
+    restart: always
+    environment:
+      PMA_HOST: db
+      MYSQL_ROOT_PASSWORD: dev007 # Use the same as above
+    ports:
+      - "8000:80"
+    depends_on:
+      - db
+    networks:
+      - app-network
+
+volumes:
+  dbdata:
+
+networks:
+  app-network:
+    driver: bridge
