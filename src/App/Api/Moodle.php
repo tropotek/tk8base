@@ -18,7 +18,7 @@ class Moodle
     {
         if (!Config::isDev()) return new JsonResponse([], Response::HTTP_UNAUTHORIZED);
 
-        vd($_GET, $_POST);
+        //vd($_GET, $_POST);
         $data = [
             'var1' => 'value one',
             'var2' => 'value two',
@@ -32,7 +32,7 @@ class Moodle
     {
         if (!Config::isDev()) return new JsonResponse([], Response::HTTP_UNAUTHORIZED);
         $data = $_REQUEST['competency'] ?? '';
-        vd('tk8base', $data);
+        //vd('tk8base', $data);
         return new JsonResponse($data);
     }
 

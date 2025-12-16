@@ -32,7 +32,7 @@ class Test extends Console
         $moodle = Moodle::create();
 
         $result = $moodle->getSchedule(4);
-        vd($result);
+        //vd($result);
 
 
 

@@ -156,7 +156,7 @@ class Moodle
         ];
         $rows = $this->get('core_course_get_categories', $params);
 		if (!is_array($rows)) return null;
-		vd($params, $rows);
+		//vd($params, $rows);
 
 		return is_null($rows[0]->id ?? null) ? null : intval($rows[0]->id);
 	}
