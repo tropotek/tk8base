@@ -27,11 +27,3 @@ RUN echo "[client]\nssl-verify-server-cert=FALSE" > /etc/mysql/conf.d/no-ssl-ver
 # Set the working directory inside the container
 WORKDIR /var/www/html
 
-# Install Composer
-# RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-
-# COPY composer.json ./
-# COPY composer.lock ./
-
-# RUN /usr/local/bin/composer install
-
