@@ -20,7 +20,7 @@ Use this as a base site implementing the Tropotek Tk Framework libraries.
 ```bash
 $ git clone https://github.com/tropotek/tk8base.git
 $ cd tk8base
-$ git checkout 8.0.0    // Use the latest tag version here
+$ git checkout master    // Use the latest tag version here
 $ composer install
 ```
 - You will be asked a number of questions to set up the environment settings.

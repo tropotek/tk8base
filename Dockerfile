@@ -13,7 +13,8 @@ RUN apt-get update && \
     libjpeg62-turbo-dev \
     libicu-dev \
     libxml2-dev \
-    unzip
+    unzip \
+    mariadb-client
 
 # Install required PHP extensions for Moodle
 RUN install-php-extensions \

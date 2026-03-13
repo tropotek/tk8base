@@ -19,6 +19,8 @@ services:
       - "${HTTPS_APP_PORT:-443}:443"
       - "${HTTPS_APP_PORT:-443}:443/udp"
     <<: *app_vols
+    env_file:
+      - ./.env
     environment:
       RELEASE: "dev"
       # Development
@@ -31,12 +33,32 @@ services:
 #      deploy:
 #        condition: service_completed_successfully
 
+#  db:
+#    image: mysql:8.4
+#    restart: unless-stopped
+#    tty: true
+#    ports:
+#      - '${HTTP_MYSQL_PORT:-3306}:3306'
+#    env_file:
+#      - ./.env
+#    volumes:
+#      - db:/var/lib/mysql
+#    healthcheck:
+#      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+#      interval: 10s
+#      retries: 3
+#      timeout: 5s
+#    networks:
+#      - app
+
   db:
-    image: mysql:8.4
+    image: mariadb:latest
     restart: unless-stopped
     tty: true
+    env_file:
+      - ./.env
     ports:
-      - '${HTTP_MYSQL_PORT:-3306}:3306'
+      - '${DB_MARIADB_PORT:-3306}:3306'
     volumes:
       - db:/var/lib/mysql
     healthcheck:
