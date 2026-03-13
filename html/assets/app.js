@@ -1,4 +1,4 @@
-/**
+    /**
  * Init all application specific scripts here
  */
 

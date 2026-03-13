@@ -14,6 +14,9 @@ RUN apt-get update && \
     libicu-dev \
     libxml2-dev \
     unzip \
+    vim-nox \
+    git \
+    openssh-client \
     mariadb-client
 
 # Install required PHP extensions for Moodle
@@ -40,4 +43,4 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # Clean apt cache in one layer
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
-COPY . /app
+#COPY . .
