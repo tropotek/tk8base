@@ -29,10 +29,10 @@ return function (Config $config) {
         $config['mail.smtp.enableAuth'] = (getenv('APP_AUTH') == 1);
         $config['mail.smtp.enableKeepAlive'] = (getenv('APP_KEEPALIVE') == 1);
         $config['mail.smtp.secure'] = (getenv('APP_SECURE') == 1);
-        $config['mail.smtp.host'] = getenv('APP_MAIL_HOST');
-        $config['mail.smtp.port'] = getenv('APP_MAIL_PORT');
-        $config['mail.smtp.username'] = getenv('APP_MAIL_USER');
-        $config['mail.smtp.password'] = getenv('APP_MAIL_PASS');
+        $config['mail.smtp.host'] = getenv('APP_MAILER_HOST');
+        $config['mail.smtp.port'] = getenv('APP_MAILER_PORT');
+        $config['mail.smtp.username'] = getenv('APP_MAILER_USER');
+        $config['mail.smtp.password'] = getenv('APP_MAILER_PASS');
     }
 
     /**
