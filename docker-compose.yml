@@ -1,54 +1,75 @@
+name: tk8base
+
+x-vols: &app_vols
+  volumes:
+    # production:
+#    - data:/app/data
+    # development:
+    - ./:/app
+    - ./docker/php.ini:/usr/local/etc/php/conf.d/99-moodle.ini
+
 services:
-  web:
+  app:
     build:
-      context: . # build context is the current directory
-      dockerfile: Dockerfile # specify the Dockerfile name
-    container_name: php_web
+      context: .
+    tty: true
+    restart: always
     ports:
-      - "8080:80"
-    volumes:
-      - ./:/var/www/html
+      - "${HTTP_APP_PORT:-80}:80"
+      - "${HTTPS_APP_PORT:-443}:443"
+      - "${HTTPS_APP_PORT:-443}:443/udp"
+    <<: *app_vols
+    environment:
+      RELEASE: "dev"
+      # Development
+      SERVER_NAME: :80  # disable HTTPS
+    networks:
+      - app
     depends_on:
       - db
-    networks:
-      - app-network
-    user: "${UID}:${GID}"
+#    depends_on:
+#      deploy:
+#        condition: service_completed_successfully
 
   db:
-    image: mysql:8.0
-    container_name: mysql_db
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: dev007 # Change this!
-      MYSQL_DATABASE: dev_tk8base      # Change this!
-      MYSQL_USER: dev                # Change this!
-      MYSQL_PASSWORD: dev007        # Change this!
+    image: mysql:8.4
+    restart: unless-stopped
+    tty: true
     ports:
-      - "4406:3306"
+      - '${HTTP_MYSQL_PORT:-3306}:3306'
     volumes:
-      - dbdata:/var/lib/mysql
-      - ./.docker/init-db:/docker-entrypoint-initdb.d    # Mount the init scripts
-      - ./.docker/.my.cnf:/etc/mysql/conf.d/custom-config.cnf:ro
+      - db:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      retries: 3
+      timeout: 5s
     networks:
-      - app-network
+      - app
 
-  phpmyadmin:
-    image: phpmyadmin:latest
-    container_name: phpmyadmin_gui
-    restart: always
-    environment:
-      PMA_HOST: db
-      MYSQL_ROOT_PASSWORD: dev007 # Use the same as above
+  # development only
+  mailpit:
+    image: axllent/mailpit
+    restart: unless-stopped
+    tty: true
+    volumes:
+      - ./docker/mailpit:/data
     ports:
-      - "8000:80"
-    depends_on:
-      - db
+      - "${HTTP_MAILPIT_PORT:-8025}:8025" # Web UI
+      - "${SMTP_MAILPIT_PORT:-1025}:1025" # SMTP server
+    environment:
+      MP_MAX_MESSAGES: 5000
+      MP_DATABASE: /data/mailpit.db
+      MP_SMTP_AUTH_ACCEPT_ANY: 1
+      MP_SMTP_AUTH_ALLOW_INSECURE: 1
     networks:
-      - app-network
+      - app
+
 
 volumes:
-  dbdata:
+  app:
+  db:
 
 networks:
-  app-network:
+  app:
     driver: bridge

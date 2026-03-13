@@ -13,6 +13,27 @@ return function (Config $config) {
      * System DB DSN: hostname[:port]/username/password/dbname
      */
     $config['db.mysql'] = '{db.mysql}';
+    if (getenv('DB_HOST')) {
+        $config['db.mysql'] = sprintf(
+            '%s:%s/%s/%s/%s',
+            getenv('DB_HOST') ?: 'localhost',
+            getenv('DB_PORT') ?: 3306,
+            getenv('DB_USER'),
+            getenv('DB_PASS'),
+            getenv('DB_NAME')
+        );
+    }
+
+    if (getenv('APP_MAILER') == 'smtp') {
+        $config['mail.driver'] = getenv('APP_MAILER');
+        $config['mail.smtp.enableAuth'] = (getenv('APP_AUTH') == 1);
+        $config['mail.smtp.enableKeepAlive'] = (getenv('APP_KEEPALIVE') == 1);
+        $config['mail.smtp.secure'] = (getenv('APP_SECURE') == 1);
+        $config['mail.smtp.host'] = getenv('APP_MAIL_HOST');
+        $config['mail.smtp.port'] = getenv('APP_MAIL_PORT');
+        $config['mail.smtp.username'] = getenv('APP_MAIL_USER');
+        $config['mail.smtp.password'] = getenv('APP_MAIL_PASS');
+    }
 
     /**
      * Enable error email notifications
@@ -30,12 +51,12 @@ return function (Config $config) {
      * WARNING: Keep this key stored safely, if it is lost,
      *          any encrypted data will be lost too!!!
      */
-    $config['system.encrypt'] = '{system.encrypt}';
+    $config['system.encrypt'] = getenv('APP_ENCRYPT') ?: '{system.encrypt}';
 
     /**
      * Set the site timezone for PHP and MySQL
      */
-    $config['php.date.timezone'] = 'Australia/Melbourne';
+    $config['system.encrypt'] = getenv('APP_TIMEZONE') ?: 'Australia/Melbourne';
 
     /**
      * The timeout in minutes for the Auth Remember Me cookie

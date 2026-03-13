@@ -1,7 +1,3 @@
-# System Files
-.env
-/.docker
-
 [Tt]humbs.db
 *.DS_Store
 /.idea
@@ -10,14 +6,10 @@
 .phpunit.result.cache
 /*.bak
 /*.sql
-
-# Project directories
 /_*
 /vendor
-/data
-node_modules
-
-# Project Files
+/node_modules
+/.env
 /config.php
 /.htaccess
 /robots.txt

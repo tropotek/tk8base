@@ -1,0 +1,9 @@
+# User-specific stuff
+.env
+.env.*
+.git
+.idea/
+.vscode/
+
+# Other data
+vendor/
