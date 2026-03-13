@@ -33,24 +33,6 @@ services:
 #      deploy:
 #        condition: service_completed_successfully
 
-#  db:
-#    image: mysql:8.4
-#    restart: unless-stopped
-#    tty: true
-#    ports:
-#      - '${HTTP_MYSQL_PORT:-3306}:3306'
-#    env_file:
-#      - ./.env
-#    volumes:
-#      - db:/var/lib/mysql
-#    healthcheck:
-#      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
-#      interval: 10s
-#      retries: 3
-#      timeout: 5s
-#    networks:
-#      - app
-
   db:
     image: mariadb:latest
     restart: unless-stopped
