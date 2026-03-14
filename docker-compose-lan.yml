@@ -26,7 +26,10 @@ services:
       # Development
       SERVER_NAME: :80  # disable HTTPS
     networks:
-      - lan
+      lan:
+        ipv4_address: 192.168.0.225
+#    networks:
+#      - lan
     depends_on:
       - db
 #    depends_on:
@@ -49,7 +52,10 @@ services:
       retries: 3
       timeout: 5s
     networks:
-      - lan
+      lan:
+        ipv4_address: 192.168.0.226
+#    networks:
+#      - lan
 
   # development only
   mailpit:
@@ -66,14 +72,30 @@ services:
       MP_DATABASE: /data/mailpit.db
       MP_SMTP_AUTH_ACCEPT_ANY: 1
       MP_SMTP_AUTH_ALLOW_INSECURE: 1
+
     networks:
-      - lan
+      lan:
+        ipv4_address: 192.168.0.227
+#    networks:
+#      - lan
 
 
 volumes:
   app:
   db:
 
+#networks:
+#  lan:
+#    driver: bridge
+
 networks:
   lan:
-    driver: bridge
+    driver: ipvlan
+    driver_opts:
+      ipvlan_mode: l2
+      parent: wlp1s0 # Replace with your host interface (e.g., enp0s3) (get from .env)
+    ipam:
+      config:
+        - subnet: 192.168.0.0/24
+          gateway: 192.168.0.1
+          ip_range: 192.168.0.0/24
