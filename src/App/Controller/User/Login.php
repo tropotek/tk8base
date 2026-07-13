@@ -89,7 +89,7 @@ class Login extends ControllerAdmin
                     return;
                 }
                 LoginAttempt::record($key, $ip);
-                $form->addFieldError('username', 'Invalid user account.');
+                $form->addError('Invalid login details.');
                 return;
             }
         }

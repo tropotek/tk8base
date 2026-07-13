@@ -87,27 +87,36 @@ class Register extends ControllerDomInterface
             $form->addFieldError('email', 'Please enter a valid email');
         }
 
+        $usernameTaken = false;
         if (!$form->getFieldValue('username')) {
             $form->addFieldError('username', 'Invalid field username value');
         } else {
             $dup = Auth::findByUsername($form->getFieldValue('username'));
             if ($dup instanceof Auth) {
-                $form->addFieldError('username', 'This username is unavailable');
+                $usernameTaken = true;
             }
         }
 
+        $emailTaken = false;
         if (!filter_var($form->getFieldValue('email'), FILTER_VALIDATE_EMAIL)) {
             $form->addFieldError('email', 'Please enter a valid email address');
         } else {
             $dup = Auth::findByEmail($form->getFieldValue('email'));
             if ($dup instanceof Auth) {
-                $form->addFieldError('email', 'This email is unavailable');
+                $emailTaken = true;
             }
         }
 
         $form->addFieldErrors($user->validate());
         if ($form->hasErrors()) {
             return;
+        }
+
+        if ($usernameTaken || $emailTaken) {
+            // Do not create a duplicate account, but respond identically to a
+            // successful registration so account existence cannot be enumerated.
+            Alert::addSuccess('Please check your email for instructions to activate your account.');
+            Uri::create('/')->redirect();
         }
 
         [$user->givenName, $user->familyName] = explode(' ', $form->getFieldValue('name'));

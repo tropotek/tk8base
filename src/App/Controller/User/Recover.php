@@ -15,6 +15,7 @@ use Tk\Form\Action\Submit;
 use Tk\Form\Field\Html;
 use Tk\Form\Field\Input;
 use Tk\Form\Field\Password;
+use Tk\Log;
 use Tk\System;
 use Tk\Uri;
 
@@ -75,31 +76,23 @@ class Recover extends ControllerDomInterface
         $maxAttempts = Config::getValue('auth.login.maxAttempts', 5);
         $lockoutMins = Config::getValue('auth.login.lockoutMins', 15);
 
-        if (LoginAttempt::countRecent($key, $ip, $lockoutMins) >= $maxAttempts) {
-            Alert::addError("Invalid user account");
-            Uri::create('/')->redirect();
-        }
-        LoginAttempt::record($key, $ip);
+        if (LoginAttempt::countRecent($key, $ip, $lockoutMins) < $maxAttempts) {
+            LoginAttempt::record($key, $ip);
 
-        if (!($auth && $auth->active)) {
-            Alert::addError("Invalid user account");
-            Uri::create('/')->redirect();
-        }
-
-        /** @var User $user */
-        $user = $auth->getDbModel();
-        if (!$user) {
-            $form->setFieldValue('username', '');
-            $form->addFieldError('username', 'Please enter a valid username.');
-            return;
+            if ($auth instanceof Auth && $auth->active) {
+                /** @var User $user */
+                $user = $auth->getDbModel();
+                if ($user) {
+                    try {
+                        \App\Email\User::sendRecovery($user);
+                    } catch (\Throwable $e) {
+                        Log::warning('Recovery email failed to send: ' . $e->getMessage());
+                    }
+                }
+            }
         }
 
-        if (\App\Email\User::sendRecovery($user)) {
-            Alert::addSuccess('Please check your email for instructions to recover your account.');
-        } else {
-            Alert::addWarning('Recovery email failed to send. Please <a href="/contact">contact us.</a>');
-        }
-
+        Alert::addSuccess('Please check your email for instructions to recover your account.');
         Uri::create('/')->redirect();
     }
 
