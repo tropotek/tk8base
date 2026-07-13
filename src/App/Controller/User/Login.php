@@ -2,6 +2,7 @@
 namespace App\Controller\User;
 
 use Bs\Auth;
+use Bs\Db\LoginAttempt;
 use Bs\Db\Remember;
 use Bs\Mvc\ControllerAdmin;
 use Bs\Factory;
@@ -18,6 +19,7 @@ use Tk\Form\Field\Html;
 use Tk\Form\Field\Input;
 use Tk\Form\Field\Password;
 use Tk\Log;
+use Tk\System;
 use Tk\Uri;
 
 class Login extends ControllerAdmin
@@ -71,21 +73,40 @@ class Login extends ControllerAdmin
 
         $username = trim($values['username'] ?? '');
         $password = trim($values['password'] ?? '');
+
+        $ip = System::getClientIp();
+        $maxAttempts = Config::getValue('auth.login.maxAttempts', 5);
+        $lockoutMins = Config::getValue('auth.login.lockoutMins', 15);
+
         if (filter_var($username, FILTER_VALIDATE_EMAIL)) {
             $auth = Auth::findByEmail($username);
             if ($auth instanceof Auth) {
                 $username = $auth->username;
             } else {
+                $key = 'login:' . strtolower($username);
+                if (LoginAttempt::countRecent($key, $ip, $lockoutMins) >= $maxAttempts) {
+                    $form->addError('Invalid login details.');
+                    return;
+                }
+                LoginAttempt::record($key, $ip);
                 $form->addFieldError('username', 'Invalid user account.');
                 return;
             }
         }
 
-        $result = Factory::instance()->getAuthController()->authenticate($username, $password);
-        if ($result->getCode() != Result::SUCCESS) {
+        $key = 'login:' . strtolower($username);
+        if (LoginAttempt::countRecent($key, $ip, $lockoutMins) >= $maxAttempts) {
             $form->addError('Invalid login details.');
             return;
         }
+
+        $result = Factory::instance()->getAuthController()->authenticate($username, $password);
+        if ($result->getCode() != Result::SUCCESS) {
+            LoginAttempt::record($key, $ip);
+            $form->addError('Invalid login details.');
+            return;
+        }
+        LoginAttempt::clear($key, $ip);
 
         // Login success
         $auth = Auth::getAuthUser();

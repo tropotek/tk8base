@@ -5,6 +5,7 @@ use Bs\Auth;
 use Bs\Mvc\ControllerDomInterface;
 use App\Db\User;
 use Bs\Db\GuestToken;
+use Bs\Db\LoginAttempt;
 use Bs\Mvc\Form;
 use Dom\Template;
 use Tk\Alert;
@@ -14,6 +15,7 @@ use Tk\Form\Action\Submit;
 use Tk\Form\Field\Html;
 use Tk\Form\Field\Input;
 use Tk\Form\Field\Password;
+use Tk\System;
 use Tk\Uri;
 
 class Recover extends ControllerDomInterface
@@ -62,10 +64,23 @@ class Recover extends ControllerDomInterface
             return;
         }
 
-        $auth = Auth::findByUsername(strtolower($form->getFieldValue('username')));
+        $identifier = strtolower(trim($form->getFieldValue('username')));
+        $auth = Auth::findByUsername($identifier);
         if (!$auth) {
-            $auth = Auth::findByEmail(strtolower($form->getFieldValue('username')));
+            $auth = Auth::findByEmail($identifier);
         }
+        $key = 'recover:' . ($auth instanceof Auth ? strtolower($auth->username) : $identifier);
+
+        $ip = System::getClientIp();
+        $maxAttempts = Config::getValue('auth.login.maxAttempts', 5);
+        $lockoutMins = Config::getValue('auth.login.lockoutMins', 15);
+
+        if (LoginAttempt::countRecent($key, $ip, $lockoutMins) >= $maxAttempts) {
+            Alert::addError("Invalid user account");
+            Uri::create('/')->redirect();
+        }
+        LoginAttempt::record($key, $ip);
+
         if (!($auth && $auth->active)) {
             Alert::addError("Invalid user account");
             Uri::create('/')->redirect();

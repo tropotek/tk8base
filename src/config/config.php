@@ -32,6 +32,9 @@ return function (Config $config) {
      */
     $config['auth.rememberme.ttl'] = 60 * 24 * 28;
 
+    $config['auth.login.maxAttempts'] = 5;
+    $config['auth.login.lockoutMins'] = 15;
+
 
     /**
      * SSI/SSO oAuth portal configs
