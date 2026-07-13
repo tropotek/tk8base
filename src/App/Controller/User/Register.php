@@ -216,6 +216,7 @@ class Register extends ControllerDomInterface
 
             // log user in and redirect to user home
             Alert::addSuccess('You account has been successfully activated.');
+            \Tk\Session::instance()->regenerateId();
             Factory::instance()->getAuthController()->getStorage()->write($user->username);
             $user->getHomeUrl()->redirect();
         }
