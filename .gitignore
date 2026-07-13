@@ -13,5 +13,7 @@
 /config.php
 /.htaccess
 /robots.txt
-/error_log
-
+/*.log
+.claude
+CLAUDE.md
+AGENTS.md

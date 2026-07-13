@@ -15,10 +15,10 @@ services:
       - "${HTTPS_APP_PORT:-443}:443/udp"
     tty: true
     restart: always
-    environment:
-      DB_HOST: db
-      DB_USER: '${MARIADB_USER}'
-      DB_PASS: '${MARIADB_PASSWORD}'
+#    environment:
+#      DB_HOST: db
+#      DB_USER: '${MARIADB_USER}'
+#      DB_PASS: '${MARIADB_PASSWORD}'
 #      RELEASE: "dev"
 #      SERVER_NAME: :80  # disable HTTPS
     depends_on:
