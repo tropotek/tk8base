@@ -1,4 +1,4 @@
-name: tk8base
+name: tk8base-lan
 
 x-vols: &app_vols
   volumes:
@@ -15,9 +15,9 @@ services:
     tty: true
     restart: always
     ports:
-      - "${HTTP_APP_PORT:-80}:80"
-      - "${HTTPS_APP_PORT:-443}:443"
-      - "${HTTPS_APP_PORT:-443}:443/udp"
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
     <<: *app_vols
     env_file:
       - ./.env
@@ -25,11 +25,10 @@ services:
       RELEASE: "dev"
       # Development
       SERVER_NAME: :80  # disable HTTPS
+      HOSTNAME: 192.168.0.225
     networks:
       lan:
         ipv4_address: 192.168.0.225
-#    networks:
-#      - lan
     depends_on:
       - db
 #    depends_on:
@@ -43,7 +42,7 @@ services:
     env_file:
       - ./.env
     ports:
-      - '${DB_MARIADB_PORT:-3306}:3306'
+      - '3306:3306'
     volumes:
       - db:/var/lib/mysql
     healthcheck:
@@ -54,48 +53,33 @@ services:
     networks:
       lan:
         ipv4_address: 192.168.0.226
-#    networks:
-#      - lan
-
-  # development only
-  mailpit:
-    image: axllent/mailpit
-    restart: unless-stopped
-    tty: true
-    volumes:
-      - ./docker/mailpit:/data
-    ports:
-      - "${HTTP_MAILPIT_PORT:-8025}:8025" # Web UI
-      - "${SMTP_MAILPIT_PORT:-1025}:1025" # SMTP server
-    environment:
-      MP_MAX_MESSAGES: 5000
-      MP_DATABASE: /data/mailpit.db
-      MP_SMTP_AUTH_ACCEPT_ANY: 1
-      MP_SMTP_AUTH_ALLOW_INSECURE: 1
-
-    networks:
-      lan:
-        ipv4_address: 192.168.0.227
-#    networks:
-#      - lan
-
 
 volumes:
   app:
   db:
-
-#networks:
-#  lan:
-#    driver: bridge
 
 networks:
   lan:
     driver: ipvlan
     driver_opts:
       ipvlan_mode: l2
-      parent: wlp1s0 # Replace with your host interface (e.g., enp0s3) (get from .env)
+      parent: ${PARENT_NIC}
     ipam:
       config:
         - subnet: 192.168.0.0/24
           gateway: 192.168.0.1
-          ip_range: 192.168.0.0/24
+          ip_range: 192.168.0.240/28
+
+# Note: this seems to be working for remote machines but will not work for the host machine.
+#       You need to link the ip to the host machine. Below are examples I found, but do not seem to work???
+#       It would be nice to find an easier way to handle this.
+
+# This creates a new interface ipvlan94 in the host's namespace, which acts as the gateway for the Docker network.
+# $ sudo ip link add link eth0 name ipvlan94 type ipvlan mode l3
+# $ sudo ip addr add 192.168.94.1/24 dev ipvlan94
+# $ sudo ip link set ipvlan94 up
+# Enable IP forwarding on the host (if not already enabled):
+# sudo sysctl net.ipv4.ip_forward=1
+# Add a route to your external router (essential for internet access):
+
+# ip link set eth1 promisc on

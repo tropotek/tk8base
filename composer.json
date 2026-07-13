@@ -43,6 +43,14 @@
             "App\\": "src/App/"
         }
     },
+    "scripts":  {
+        "post-install-cmd":  [
+            "Bs\\Composer\\Installer::postInstall"
+        ],
+        "post-update-cmd":  [
+            "Bs\\Composer\\Installer::postUpdate"
+        ]
+    },
     "extra": {
         "branch-alias": {
             "dev-master": "1.0.x-dev"

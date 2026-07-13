@@ -18,21 +18,25 @@ return function (Config $config) {
             '%s:%s/%s/%s/%s',
             getenv('DB_HOST') ?: 'localhost',
             getenv('DB_PORT') ?: 3306,
-            getenv('DB_USER'),
-            getenv('DB_PASS'),
-            getenv('DB_NAME')
+            getenv('DB_USER') ?: 'user',
+            getenv('DB_PASS') ?: 'password',
+            getenv('DB_NAME') ?: 'wiki'
         );
     }
 
     if (getenv('APP_MAILER') == 'smtp') {
-        $config['mail.driver'] = getenv('APP_MAILER');
-        $config['mail.smtp.enableAuth'] = (getenv('APP_AUTH') == 1);
-        $config['mail.smtp.enableKeepAlive'] = (getenv('APP_KEEPALIVE') == 1);
-        $config['mail.smtp.secure'] = (getenv('APP_SECURE') == 1);
-        $config['mail.smtp.host'] = getenv('APP_MAILER_HOST');
-        $config['mail.smtp.port'] = getenv('APP_MAILER_PORT');
-        $config['mail.smtp.username'] = getenv('APP_MAILER_USER');
-        $config['mail.smtp.password'] = getenv('APP_MAILER_PASS');
+        $config['mail.driver'] = getenv('APP_MAILER') ?: '';
+        $config['mail.smtp.enableAuth'] = ((getenv('APP_AUTH') ?: 1) == 1);
+        $config['mail.smtp.enableKeepAlive'] = ((getenv('APP_KEEPALIVE') ?: 1) == 1);
+        $config['mail.smtp.secure'] = ((getenv('APP_SECURE') ?: 1) == 1);
+        $config['mail.smtp.host'] = getenv('APP_MAILER_HOST') ?: '';
+        $config['mail.smtp.port'] = getenv('APP_MAILER_PORT') ?: '';
+        $config['mail.smtp.username'] = getenv('APP_MAILER_USER') ?: '';
+        $config['mail.smtp.password'] = getenv('APP_MAILER_PASS') ?: '';
+    }
+
+    if (getenv('HOSTNAME')) {
+        $config['hostname'] = getenv('HOSTNAME') ?: 'localhost';
     }
 
     /**
@@ -75,8 +79,8 @@ return function (Config $config) {
         $config['system.debug.email'] = 'user@example.net';
 
         // DB mirror src site (site root path)
-        $config['db.mirror.secret'] = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx';
-        $config['db.mirror.url'] = 'https://localhost/';
+        //$config['db.mirror.secret'] = '';
+        //$config['db.mirror.url'] = 'https://localhost/';
 
         $config['auth.password.strict'] = false;
 
