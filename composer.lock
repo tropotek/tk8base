@@ -2278,12 +2278,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/tropotek/tk-base.git",
-                "reference": "0cb077548d31c18da6cef5cb5b7e541d4547ad52"
+                "reference": "4c4c9e370947f94580cb76509e5dcc5062faddb5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tropotek/tk-base/zipball/0cb077548d31c18da6cef5cb5b7e541d4547ad52",
-                "reference": "0cb077548d31c18da6cef5cb5b7e541d4547ad52",
+                "url": "https://api.github.com/repos/tropotek/tk-base/zipball/4c4c9e370947f94580cb76509e5dcc5062faddb5",
+                "reference": "4c4c9e370947f94580cb76509e5dcc5062faddb5",
                 "shasum": ""
             },
             "require": {
@@ -2525,29 +2525,30 @@
         },
         {
             "name": "ttek/tk-table",
-            "version": "8.1.0",
+            "version": "dev-main",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tropotek/tk-table.git",
-                "reference": "c511a748ee1534c2837096e8c9d8f543ed0bef33"
+                "reference": "f79c54412a66107c2821ec5ca654ef7a72e2b952"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tropotek/tk-table/zipball/c511a748ee1534c2837096e8c9d8f543ed0bef33",
-                "reference": "c511a748ee1534c2837096e8c9d8f543ed0bef33",
+                "url": "https://api.github.com/repos/tropotek/tk-table/zipball/f79c54412a66107c2821ec5ca654ef7a72e2b952",
+                "reference": "f79c54412a66107c2821ec5ca654ef7a72e2b952",
                 "shasum": ""
             },
             "require": {
                 "ext-dom": "*",
                 "php": "^8.3",
                 "ttek/tk-domtemplate": "^8.0",
-                "ttek/tk-form": "^8.0",
+                "ttek/tk-form": "^8.1",
                 "ttek/tk-framework": "^8.1"
             },
+            "default-branch": true,
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "8.1.x-dev"
+                    "dev-main": "8.1.x-dev"
                 }
             },
             "autoload": {
@@ -2572,9 +2573,9 @@
             ],
             "support": {
                 "issues": "https://github.com/tropotek/tk-table/issues",
-                "source": "https://github.com/tropotek/tk-table/tree/8.1.0"
+                "source": "https://github.com/tropotek/tk-table/tree/main"
             },
-            "time": "2026-07-17T00:00:00+00:00"
+            "time": "2025-05-08T00:00:00+00:00"
         },
         {
             "name": "twbs/bootstrap",
