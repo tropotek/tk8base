@@ -14,8 +14,8 @@
 /.htaccess
 /robots.txt
 /*.log
+
 .superpowers
 .gitnexus
 .claude
-CLAUDE.md
 AGENTS.md
