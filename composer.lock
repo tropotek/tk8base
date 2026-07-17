@@ -2278,12 +2278,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/tropotek/tk-base.git",
-                "reference": "b149df461770b7e467da883b2178297e3584d790"
+                "reference": "3d844d73a6b5575ff9b75e003671429550c773e8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tropotek/tk-base/zipball/b149df461770b7e467da883b2178297e3584d790",
-                "reference": "b149df461770b7e467da883b2178297e3584d790",
+                "url": "https://api.github.com/repos/tropotek/tk-base/zipball/3d844d73a6b5575ff9b75e003671429550c773e8",
+                "reference": "3d844d73a6b5575ff9b75e003671429550c773e8",
                 "shasum": ""
             },
             "require": {
@@ -2297,7 +2297,7 @@
                 "tinymce/tinymce": "~7.0-@stable",
                 "ttek/tk-domtemplate": "^8.0",
                 "ttek/tk-form": "^8.0",
-                "ttek/tk-framework": "^8.0",
+                "ttek/tk-framework": "^8.1",
                 "ttek/tk-table": "^8.0",
                 "vlucas/phpdotenv": "^5.6-@stable"
             },
@@ -2455,16 +2455,16 @@
         },
         {
             "name": "ttek/tk-framework",
-            "version": "8.0.x-dev",
+            "version": "dev-main",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tropotek/tk-framework.git",
-                "reference": "b422a3d6468c23379e604644ed7d372aa6635452"
+                "reference": "549468d45f31c22dae11fc5e7c447e45ea1dc483"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tropotek/tk-framework/zipball/b422a3d6468c23379e604644ed7d372aa6635452",
-                "reference": "b422a3d6468c23379e604644ed7d372aa6635452",
+                "url": "https://api.github.com/repos/tropotek/tk-framework/zipball/549468d45f31c22dae11fc5e7c447e45ea1dc483",
+                "reference": "549468d45f31c22dae11fc5e7c447e45ea1dc483",
                 "shasum": ""
             },
             "require": {
@@ -2483,7 +2483,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "8.0.x-dev"
+                    "dev-main": "8.1.x-dev"
                 }
             },
             "autoload": {
@@ -2513,7 +2513,7 @@
             ],
             "support": {
                 "issues": "https://github.com/tropotek/tk-framework/issues",
-                "source": "https://github.com/tropotek/tk-framework/tree/8.0"
+                "source": "https://github.com/tropotek/tk-framework/tree/main"
             },
             "funding": [
                 {
